@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.selects {
+    display: flex;
+    gap: 1em;
+}
+
+.difficulty {
+    display: flex;
+    gap: 1em;
+
+    &_button {
+        min-width: 7em;
+        padding: 0.25em 0;
+        background-color: var(--grayblack-color);
+        border: 1px solid var(--gray-color);
+        color: var(--fontsecond-color);
+        background-color: #a5a5a510;
+        border-radius: 1em;
+        filter: sepia(1) contrast(0);
+        transition: all 0.3s ease-in-out;
+
+        &:not(.difficulty_buttonActive) {
+            cursor: pointer;
+        }
+
+        &:hover:not(.difficulty_buttonActive) {
+            filter: sepia(0) contrast(60%);
+        }
+
+        &Easy {
+            background-color: #66d91a10;
+            color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        &Medium {
+            color: #FFEB3B;
+            border-color: #FFEB3B;
+            background-color: #ddc90e15;
+        }
+
+        &Hard {
+            color: #FF9800;
+            border-color: #FF9800;
+            background-color: #dd500e15;
+        }
+
+        &Expert {
+            color: #F44336;
+            border-color: #F44336;
+            background-color: #dd0e0e15;
+        }
+
+        &Active {
+            filter: sepia(0) contrast(100%);
+        }
+    }
+}

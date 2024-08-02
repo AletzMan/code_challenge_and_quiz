@@ -1,0 +1,30 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--black-color);
+    width: 100%;
+    max-width: 1440px;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+
+.start {
+    align-self: center;
+    width: 8em;
+    height: 8em;
+    margin: 2em 0;
+    border-radius: 5em;
+    color: var(--blue-color);
+    font-weight: 800;
+    border: 1px solid var(--blue-color);
+    background-color: #00AEEF35;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 0 3px 3px #02b6f899;
+    }
+}
