@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.selects {
+    display: flex;
+    gap: 1em;
+}
+
+.difficulty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &_label {
+        font-size: 0.8em;
+        color: var(--fontsecond-color);
+    }
+
+    &_buttons {
+        display: flex;
+        gap: 1em;
+        padding: 0.5em 1em;
+        border-radius: 0.5em;
+        background-color: var(--background-color);
+    }
+
+    &_button {
+        min-width: 7em;
+        padding: 0.25em 0;
+        background-color: var(--grayblack-color);
+        border: 1px solid var(--gray-color);
+        color: var(--fontsecond-color);
+        background-color: #a5a5a510;
+        border-radius: 1em;
+        filter: sepia(1) contrast(0);
+        transition: all 0.3s ease-in-out;
+
+        &:not(.difficulty_buttonActive) {
+            cursor: pointer;
+        }
+
+        &:hover:not(.difficulty_buttonActive) {
+            filter: sepia(0) contrast(60%);
+        }
+
+        &Easy {
+            background-color: #4fdd5420;
+            color: #3fd544;
+            border-color: #3fd544;
+        }
+
+        &Medium {
+            color: #e6d438;
+            border-color: #e6d438;
+            background-color: #ddc90e20;
+        }
+
+        &Hard {
+            color: #FF9800;
+            border-color: #FF9800;
+            background-color: #dd500e20;
+        }
+
+        &Expert {
+            color: #ff2c1d;
+            border-color: #f63325;
+            background-color: #dd0e0e20;
+        }
+
+        &Active {
+            filter: sepia(0) contrast(100%);
+        }
+    }
+}
