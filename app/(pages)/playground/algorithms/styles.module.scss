@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2em;
+    padding: 0.5em;
+    height: calc(100svh - 8em);
+    margin: 5em 0 0 0;
+
+    &_title {
+        color: var(--yellow-color);
+    }
+}

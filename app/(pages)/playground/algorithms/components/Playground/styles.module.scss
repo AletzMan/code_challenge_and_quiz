@@ -1,0 +1,10 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--grayblack-color);
+    width: 100%;
+    max-width: 1440px;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
