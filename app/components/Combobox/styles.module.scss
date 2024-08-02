@@ -1,0 +1,19 @@
+.combobox {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    border: none;
+}
+
+.label {
+    font-size: 0.8em;
+    color: var(--fontsecond-color);
+}
+
+.select {
+    padding: 0.25em 0.75em;
+    font-family: var(--font-family);
+    background-color: var(--grayblack-color);
+    color: var(--font-color);
+    border-radius: 0.25em;
+}
