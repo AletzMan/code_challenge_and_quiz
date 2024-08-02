@@ -1,0 +1,46 @@
+.header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 0.5em;
+    background: radial-gradient(circle, var(--grayblack-color), var(--black-color));
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 5em;
+    border-bottom: 1px solid var(--gray-color);
+    z-index: 2;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.title {
+    color: var(--blue-color);
+    font-size: 1.3em;
+    font-weight: 500;
+    max-width: 10em;
+    text-wrap: balance;
+    line-height: 0.85em;
+    font-family: var(--font-family);
+}
+
+.logo {
+    color: rgb(239, 232, 32);
+    width: 4em;
+    height: 4em;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    &_name {
+        color: var(--fontsecond-color);
+    }
+}
