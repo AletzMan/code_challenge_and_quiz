@@ -11,8 +11,8 @@
   --green-color: #39FF14;
   --blue-color: #00AEEF;
   --yellow-color: #efe820;
-  --font-color: #EEEEEE;
-  --fontsecond-color: #aaaaaa;
+  --font-color: #eeeeee;
+  --fontsecond-color: #9b9b9b;
   --s: 100px;
   /* control the size*/
   --c1: #343A4015;
@@ -48,6 +48,46 @@ body {
 
 
 
+}
+
+
+.scrollBarStyle {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #888;
+}
+
+.scrollBarStyle::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollBarStyle::-webkit-scrollbar-thumb {
+  background-color: var(--fontsecond-color);
+}
+
+.scrollBarStyle::-webkit-scrollbar-track {
+  background-color: var(--gray-color);
+}
+
+.scrollBarStyleX {
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-color: #888;
+  scroll-behavior: smooth;
+  scroll-snap-type: mandatory;
+}
+
+.scrollBarStyleX::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollBarStyleX::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: var(--highlightColorBasic);
+}
+
+.scrollBarStyleX::-webkit-scrollbar-track {
+  background-color: var(--terciaryColor);
 }
 
 .imageContainer {
