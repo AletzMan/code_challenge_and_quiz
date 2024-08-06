@@ -14,8 +14,8 @@
 
 ## Tecnologías Utilizadas
 
-- **Front-End:** Next.js, Tailwind CSS, HTML, CSS
-- **IA:** Google Gemini, SDK AI de Vercel
+- **Front-End:** Next.js, HTML, CSS
+- **IA:** Google Gemini, Vercel AI SDK 
 
 ## Instalación
 
@@ -72,5 +72,4 @@ Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 Para cualquier consulta o sugerencia, puedes contactar al autor del proyecto:
 
-- **Email:** [tuemail@example.com](mailto:tuemail@example.com)
-- **GitHub:** [tuusuario](https://github.com/tuusuario)
+- **Email:** [MAIL](mailto:alejandro.ga.dev@gmail.com)
