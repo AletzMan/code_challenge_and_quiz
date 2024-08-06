@@ -25,6 +25,8 @@ export function QuizBot({ quiz }: Props) {
         }
     }, [messages]) // Dependency on messages to run whenever they change
 
+    console.log(messages)
+
     useEffect(() => {
         const prevMessages: Message[] = [
             {
@@ -43,7 +45,7 @@ export function QuizBot({ quiz }: Props) {
 
 
     return (
-        <>
+        <section className={styles.section}>
             <article className={`${styles.chat} scrollBarStyle`} ref={chatContainerRef}>
                 {messages.filter((_, index) => index > 1).map(message => (
                     <div key={message.id} className={` ${styles.chat_message} ${message.role === 'user' ? styles.chat_user : styles.chat_bot}`}>
@@ -68,8 +70,8 @@ export function QuizBot({ quiz }: Props) {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <input name="prompt" value={input} onChange={handleInputChange} className={styles.form_input} placeholder="Pregunta a QuizBot" />
                 {!isLoading && <button type="submit" className={styles.form_button} disabled={isLoading}><SendIcon className={styles.form_buttonIcon} /></button>}
-                {isLoading && <button type="button" className={`${styles.form_button} ${styles.form_buttonStop}`}><StopIcon className={styles.form_buttonIcon} /></button>}
+                {isLoading && <button type="button" className={`${styles.form_button} ${styles.form_buttonStop}`} onClick={() => stop()}><StopIcon className={styles.form_buttonIcon} /></button>}
             </form>
-        </>
+        </section>
     )
 }

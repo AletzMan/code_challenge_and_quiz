@@ -6,13 +6,10 @@ import { IItemCategory } from "../../../algorithms/components/Playground/Playgro
 import { CATEGORIES } from "@/app/utils/const"
 import { useSetupQuiz } from "@/app/utils/store"
 
-interface Props {
-    setLanguage: Dispatch<SetStateAction<IItemCategory>>
-    language: IItemCategory
-}
 
-export function QuizSetup({ language, setLanguage }: Props) {
-    const { difficulty, setDifficulty, questions } = useSetupQuiz()
+export function QuizSetup() {
+    const { language, setLanguage } = useSetupQuiz()
+    const { difficulty, setDifficulty } = useSetupQuiz()
     const HandleChangeDifficulty = (value: string) => {
         if (value === "easy" || value === "medium" || value === "hard" || value === "expert") {
             setDifficulty(value)
@@ -31,34 +28,16 @@ export function QuizSetup({ language, setLanguage }: Props) {
         <div className={styles.container}>
             <div className={styles.selects}>
                 <Combobox label="Lenguaje" options={CATEGORIES.languages.items} value={language?.option} onChange={HandleChangeLanguage} />
-                <Combobox label="Número de Preguntas" options={Questions} />
             </div>
             <div className={styles.difficulty}>
-                <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("easy")}>Fácil</button>
-                <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("medium")}>Media</button>
-                <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("hard")}>Difícil</button>
-                <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("expert")}>Experto</button>
+                <label className={styles.difficulty_label}>Dificultad</label>
+                <div className={styles.difficulty_buttons}>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("easy")}>Fácil</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("medium")}>Media</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("hard")}>Difícil</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("expert")}>Experto</button>
+                </div>
             </div>
         </div>
     )
 }
-
-
-const Questions = [
-    {
-        option: "5",
-        value: "5"
-    },
-    {
-        option: "10",
-        value: "10"
-    },
-    {
-        option: "15",
-        value: "15"
-    },
-    {
-        option: "20",
-        value: "20"
-    }
-]

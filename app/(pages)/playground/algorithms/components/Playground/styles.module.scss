@@ -8,3 +8,28 @@
     padding: 0.5em;
     border-radius: 0.5em;
 }
+
+.start {
+    align-self: center;
+    width: 8em;
+    height: 4em;
+    margin: 2em 0;
+    border-radius: 0.75em;
+    color: var(--font-color);
+    font-weight: 800;
+    border: 1px solid #046a8f;
+    background: #014760;
+    text-shadow: 0 0 2px #000000;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 0 3px 3px #02b6f899;
+    }
+}
+
+.playground {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
