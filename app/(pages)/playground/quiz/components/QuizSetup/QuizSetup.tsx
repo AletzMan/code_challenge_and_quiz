@@ -24,7 +24,7 @@ export function QuizSetup() {
 
     function HandleChangeLanguage(event: ChangeEvent<HTMLSelectElement>): void {
         const value = event.currentTarget.value
-        const selectLanguage = options.find(item => item.option === value)
+        const selectLanguage: IItemCategory | undefined = options.find(item => item.option === value)
         if (selectLanguage) {
             setLanguage(selectLanguage)
         }
