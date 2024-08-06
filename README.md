@@ -1,5 +1,8 @@
 # CodeChallengeQuiz
 
+<img src="https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/code_challenge/Screenshot%202024-08-06%20033249.webp" alt="Vista Principal" width="500"/>
+<img src="https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/code_challenge/Screenshot%202024-08-06%20033503.webp" alt="Vista Principal" width="500"/>
+<img src="https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/code_challenge/Screenshot%202024-08-06%20033539.webp" alt="Vista Principal" width="500"/>
 **CodeChallengeQuiz** es una aplicación interactiva diseñada para mejorar tus habilidades de programación a través de cuestionarios y retos de algoritmos. Esta aplicación es ideal para preparar entrevistas técnicas, desafiar tus conocimientos y aprender nuevas tecnologías.
 
 ## Características
@@ -11,8 +14,8 @@
 
 ## Tecnologías Utilizadas
 
-- **Front-End:** Next.js, Tailwind CSS, HTML, CSS
-- **IA:** Google Gemini, SDK AI de Vercel
+- **Front-End:** Next.js, HTML, CSS
+- **IA:** Google Gemini, Vercel AI SDK 
 
 ## Instalación
 
@@ -69,5 +72,4 @@ Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 Para cualquier consulta o sugerencia, puedes contactar al autor del proyecto:
 
-- **Email:** [tuemail@example.com](mailto:tuemail@example.com)
-- **GitHub:** [tuusuario](https://github.com/tuusuario)
+- **Email:** [MAIL](mailto:alejandro.ga.dev@gmail.com)
