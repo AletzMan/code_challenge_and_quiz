@@ -1,5 +1,5 @@
 # CodeChallengeQuiz
-
+![Vista Principal](https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/code_challenge/Screenshot%202024-08-06%20033249.webp)
 **CodeChallengeQuiz** es una aplicación interactiva diseñada para mejorar tus habilidades de programación a través de cuestionarios y retos de algoritmos. Esta aplicación es ideal para preparar entrevistas técnicas, desafiar tus conocimientos y aprender nuevas tecnologías.
 
 ## Características
