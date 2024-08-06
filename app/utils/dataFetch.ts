@@ -12,3 +12,14 @@ export const GetNewQuiz = async (language: string, level: string) => {
         return false
     }
 }
+
+export const GetNewAlgorithm = async (language: string, level: string) => {
+    const type = (Math.random() * 10).toFixed(0)
+    const response = await fetch(`${URL}/api/algorithm?language=${language}&level=${level}`, { next: { revalidate: 10 } })
+    const data = await response.json()
+    if (response.ok) {
+        return JSON.parse(data.data)
+    } else {
+        return false
+    }
+}

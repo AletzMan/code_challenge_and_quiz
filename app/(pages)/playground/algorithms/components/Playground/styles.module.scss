@@ -4,6 +4,7 @@
     gap: 1em;
     background-color: var(--grayblack-color);
     width: 100%;
+    margin: 0 0 2.5em 0;
     max-width: 1440px;
     padding: 0.5em;
     border-radius: 0.5em;
@@ -32,4 +33,64 @@
 .playground {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+    &_title {
+        color: var(--blue-color);
+    }
+
+    &_description {
+        color: var(--font-color);
+    }
+
+    &_example {
+        display: flex;
+        gap: 1em;
+        padding: 0.5em;
+        width: max-content;
+        border-radius: 0.5em;
+        background-color: var(--gray-color);
+    }
+
+
+    &_label {
+        color: var(--font-color);
+        background-color: #FFFFFF15;
+        padding: 0.1em 0.5em;
+        width: max-content;
+        border-radius: 0.25em;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+
+    &_subtitle {
+        color: var(--fontsecond-color);
+        font-size: 0.9em;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    &_text {
+        color: var(--yellow-color);
+    }
+
+    &_input {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+
+    }
+
+    &_output {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+
+    }
+
 }

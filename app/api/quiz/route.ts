@@ -28,22 +28,22 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 //const level = "junior"
                 //const language = "javascript"
 
-                /* const { object } = await generateObject({
-                     model: google("models/gemini-1.5-pro-latest"),
-                     schema: z.object({
-                         quiz: z.object({
-                             question: z.string(),
-                             type: z.enum(["multiple choice", "true false", "blank space"]),
-                             codeSnippet: z.string().optional(), // Opcional para permitir preguntas sin código
-                             options: z.array(z.string()),
-                             correctAnswer: z.array(z.string()),
-                             explanation: z.object({
-                                 resume: z.string(),
-                                 codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
-                             })
-                         })
-                     }),
-                     prompt: `Generate a ${level} level ${language} questionnaire. 
+                const { object } = await generateObject({
+                    model: google("models/gemini-1.5-pro-latest"),
+                    schema: z.object({
+                        quiz: z.object({
+                            question: z.string(),
+                            type: z.enum(["multiple choice", "true false", "blank space"]),
+                            codeSnippet: z.string().optional(), // Opcional para permitir preguntas sin código
+                            options: z.array(z.string()),
+                            correctAnswer: z.array(z.string()),
+                            explanation: z.object({
+                                resume: z.string(),
+                                codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
+                            })
+                        })
+                    }),
+                    prompt: `Generate a ${level} level ${language} questionnaire. 
        
                              **Question Type:** ${questionType}
        
@@ -59,53 +59,55 @@ export async function GET(req: NextRequest, res: NextResponse) {
                              * Consider the target audience's knowledge level.
                              * Use clear and concise language.
                              * Provide examples if applicable.`,
-                     temperature: 1.5
-                 })*/
-                let object: IResponseQuiz = { quiz: null }
+                    temperature: 1.5
+                })
 
-                if (Number(type) <= 3) {
-                    object = {
-                        quiz: {
-                            question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                            type: 'true false',
-                            codeSnippet: null,
-                            options: ['Verdadero', 'Falso'],
-                            correctAnswer: ['Falso'],
-                            explanation: {
-                                resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                codeSnippet: null
-                            }
-                        }
-                    }
-                } else if (Number(type) > 3 && Number(type) <= 6) {
-                    object = {
-                        quiz: {
-                            question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                            type: 'true false',
-                            codeSnippet: null,
-                            options: ['Verdadero', 'Falso'],
-                            correctAnswer: ['Falso'],
-                            explanation: {
-                                resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                codeSnippet: null
-                            }
-                        }
-                    }
-                } else {
-                    object = {
-                        quiz: {
-                            question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                            type: 'true false',
-                            codeSnippet: null,
-                            options: ['Verdadero', 'Falso'],
-                            correctAnswer: ['Falso'],
-                            explanation: {
-                                resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                codeSnippet: null
-                            }
-                        }
-                    }
-                }
+                /* let object: IResponseQuiz = { quiz: null }
+ 
+                 if (Number(type) <= 3) {
+                     object = {
+                         quiz: {
+                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
+                             type: 'true false',
+                             codeSnippet: null,
+                             options: ['Verdadero', 'Falso'],
+                             correctAnswer: ['Falso'],
+                             explanation: {
+                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
+                                 codeSnippet: null
+                             }
+                         }
+                     }
+                 } else if (Number(type) > 3 && Number(type) <= 6) {
+                     object = {
+                         quiz: {
+                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
+                             type: 'true false',
+                             codeSnippet: null,
+                             options: ['Verdadero', 'Falso'],
+                             correctAnswer: ['Falso'],
+                             explanation: {
+                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
+                                 codeSnippet: null
+                             }
+                         }
+                     }
+                 } else {
+                     object = {
+                         quiz: {
+                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
+                             type: 'true false',
+                             codeSnippet: null,
+                             options: ['Verdadero', 'Falso'],
+                             correctAnswer: ['Falso'],
+                             explanation: {
+                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
+                                 codeSnippet: null
+                             }
+                         }
+                     }
+                 }
+                 */
 
                 console.log(object.quiz)
 

@@ -5,9 +5,10 @@ import Editor from '@monaco-editor/react'
 
 interface Props {
     language: IItemCategory
+    codeTemplate: string
 }
 
-export function CodeEditor({ language }: Props) {
+export function CodeEditor({ language, codeTemplate }: Props) {
 
     function HandleOnChange(value?: string): void {
         console.log(value)
@@ -18,7 +19,7 @@ export function CodeEditor({ language }: Props) {
             height="60vh"
             defaultLanguage="javascript"
             language={language.option}
-            value={language?.functionSyntax}
+            value={codeTemplate}
             theme='vs-dark'
             options={{
                 minimap: { enabled: false },
