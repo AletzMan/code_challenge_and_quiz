@@ -343,19 +343,22 @@ export const CATEGORIES =
                 option: "aws",
                 value: "AWS",
                 functionSyntax: `/* AWS uses Lambda functions */\nexports.handler = async (event) => {\n\treturn false;\n};`,
-                color: "#FF9900"
+                color: "#FF9900",
+                logo: <TerraformIcon />
             },
             {
                 option: "azure",
                 value: "Azure",
                 functionSyntax: `/* Azure uses Functions */\nmodule.exports = async function (context, req) {\n\tcontext.res = {\n\t\tbody: false\n\t};\n};`,
-                color: "#0089D6"
+                color: "#0089D6",
+                logo: <TerraformIcon />
             },
             {
                 option: "gcp",
                 value: "Google Cloud Platform",
                 functionSyntax: `/* GCP uses Cloud Functions */\nexports.myFunction = (req, res) => {\n\tres.send(false);\n};`,
-                color: "#4285F4"
+                color: "#4285F4",
+                logo: <TerraformIcon />
             }
         ]
     },
@@ -366,19 +369,22 @@ export const CATEGORIES =
                 option: "hadoop",
                 value: "Hadoop",
                 functionSyntax: `/* Hadoop does not support functions directly */`,
-                color: "#66CCFF"
+                color: "#66CCFF",
+                logo: <TerraformIcon />
             },
             {
                 option: "spark",
                 value: "Apache Spark",
                 functionSyntax: `/* Spark does not support functions directly */`,
-                color: "#E25A1C"
+                color: "#E25A1C",
+                logo: <TerraformIcon />
             },
             {
                 option: "kafka",
                 value: "Apache Kafka",
                 functionSyntax: `/* Kafka does not support functions directly */`,
-                color: "#231F20"
+                color: "#231F20",
+                logo: <TerraformIcon />
             }
         ]
     },
@@ -389,19 +395,22 @@ export const CATEGORIES =
                 option: "tensorflow",
                 value: "TensorFlow",
                 functionSyntax: `/* TensorFlow does not support functions directly */`,
-                color: "#FF6F00"
+                color: "#FF6F00",
+                logo: <TerraformIcon />
             },
             {
                 option: "pytorch",
                 value: "PyTorch",
                 functionSyntax: `/* PyTorch does not support functions directly */`,
-                color: "#EE4C2C"
+                color: "#EE4C2C",
+                logo: <TerraformIcon />
             },
             {
                 option: "ml",
                 value: "Machine Learning",
                 functionSyntax: `/* Machine Learning is a concept, not a language */`,
-                color: "#F9A825"
+                color: "#F9A825",
+                logo: <TerraformIcon />
             }
         ]
     },
@@ -412,19 +421,22 @@ export const CATEGORIES =
                 option: "webpack",
                 value: "Webpack",
                 functionSyntax: `/* Webpack does not support functions */`,
-                color: "#8DD6F9"
+                color: "#8DD6F9",
+                logo: <TerraformIcon />
             },
             {
                 option: "babel",
                 value: "Babel",
                 functionSyntax: `/* Babel does not support functions */`,
-                color: "#F9DC3E"
+                color: "#F9DC3E",
+                logo: <TerraformIcon />
             },
             {
                 option: "graphql",
                 value: "GraphQL",
                 functionSyntax: `/* GraphQL does not support functions directly */`,
-                color: "#E10098"
+                color: "#E10098",
+                logo: <TerraformIcon />
             }
         ]
     },
@@ -435,25 +447,29 @@ export const CATEGORIES =
                 option: "reactnative",
                 value: "React Native",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
-                color: "#61DAFB"
+                color: "#61DAFB",
+                logo: <TerraformIcon />
             },
             {
                 option: "flutter",
                 value: "Flutter",
                 functionSyntax: `class MyClass {\n\tbool myFunction() {\n\t\treturn false;\n\t}\n}`,
-                color: "#02569B"
+                color: "#02569B",
+                logo: <TerraformIcon />
             },
             {
                 option: "swift",
                 value: "Swift",
                 functionSyntax: `class MyClass {\n\tfunc myFunction() -> Bool {\n\t\treturn false\n\t}\n}`,
-                color: "#FA7343"
+                color: "#FA7343",
+                logo: <TerraformIcon />
             },
             {
                 option: "kotlin",
                 value: "Kotlin",
                 functionSyntax: `class MyClass {\n\tfun myFunction(): Boolean {\n\t\treturn false\n\t}\n}`,
-                color: "#0095D5"
+                color: "#0095D5",
+                logo: <TerraformIcon />
             }
         ]
     }
