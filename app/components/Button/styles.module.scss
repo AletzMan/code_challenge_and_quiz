@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 0.75em;
-    padding: 0.25em 1em;
+    padding: 0.25em 0.5em;
     border: 2px solid var(--font-color);
     border-radius: 0.25em;
     background-color: var(--grayblack-color);
@@ -13,7 +13,7 @@
     filter: brightness(75%);
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
         border-color: var(--font-color);
         color: var(--font-color);
         filter: brightness(100%);
@@ -24,7 +24,7 @@
         color: var(--green-color);
         border-color: var(--green-color);
 
-        &:hover {
+        &:hover:not(:disabled) {
             color: var(--green-color);
             border-color: var(--green-color);
             box-shadow: 0 0 3px 1px var(--green-color);
@@ -35,7 +35,7 @@
         color: var(--blue-color);
         border-color: var(--blue-color);
 
-        &:hover {
+        &:hover:not(:disabled) {
             color: var(--blue-color);
             border-color: var(--blue-color);
             box-shadow: 0 0 3px 1px var(--blue-color);
@@ -46,11 +46,22 @@
         color: var(--yellow-color);
         border-color: var(--yellow-color);
 
-        &:hover {
+        &:hover:not(:disabled) {
             color: var(--yellow-color);
             border-color: var(--yellow-color);
             box-shadow: 0 0 3px 1px var(--yellow-color);
         }
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+
+    &>svg {
+        width: 1.25em;
+        height: 1.25em;
     }
 
 }

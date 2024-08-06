@@ -20,7 +20,7 @@ export const PlaygroundQuiz = () => {
     }
 
     return (
-        <section className={styles.section}>
+        <section className={`${styles.section} scrollBarStyle`}>
             {!start && <>
                 <QuizSetup />
                 <button className={styles.start} onClick={HandleStart}>

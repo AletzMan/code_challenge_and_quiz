@@ -35,7 +35,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, i
                 strokeDashoffset={strokeDashoffset}
                 strokeLinecap="round"
                 transform="rotate(-90 40 40)"
-                style={{ transition: "all 0.95s linear" }}
+            //style={{ transition: "stroke-dashoffset 0.85s linear" }}
             />
             {isProcentage && <text x="60" y="60" textAnchor="middle" dy=".3em" fontSize="20px" fill="#000">
                 {Math.round(percentage)}%

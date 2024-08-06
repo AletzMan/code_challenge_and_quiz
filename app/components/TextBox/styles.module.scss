@@ -1,0 +1,19 @@
+.input {
+    padding: 0.25em 1em;
+    font-size: 1.1em;
+    color: var(--font-color);
+    font-family: var(--font-family);
+    border-radius: 0.25em;
+    border: 1px solid var(--grayblack-color);
+    background-color: var(--black-color);
+
+    &:focus {
+        outline: 2px solid var(--blue-color);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+}

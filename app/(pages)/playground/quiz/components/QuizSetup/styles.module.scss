@@ -23,56 +23,62 @@
     &_buttons {
         display: flex;
         gap: 1em;
-        padding: 0.5em 1em;
-        border-radius: 0.5em;
+        padding: 1em;
+        border-radius: 0.25em;
         background-color: var(--background-color);
     }
 
     &_button {
-        min-width: 7em;
+        min-width: 7.5em;
         padding: 0.25em 0;
-        background-color: var(--grayblack-color);
-        border: 1px solid var(--gray-color);
-        color: var(--fontsecond-color);
         background-color: #a5a5a510;
-        border-radius: 1em;
-        filter: sepia(1) contrast(0);
+        border-radius: 0.25em;
+        font-weight: 500;
+        border: 1px solid #FFFFFF10;
+        color: var(--fontsecond-color);
+        background: var(--gray-color);
+        font-family: var(--font-family);
+        text-transform: capitalize;
         transition: all 0.3s ease-in-out;
+        text-shadow: 0 0 2px #000000;
+        filter: brightness(80%);
 
         &:not(.difficulty_buttonActive) {
             cursor: pointer;
         }
 
         &:hover:not(.difficulty_buttonActive) {
-            filter: sepia(0) contrast(60%);
+            filter: brightness(140%);
+            box-shadow: 0 0 5px 2px #CCCCCC30;
         }
 
-        &Easy {
-            background-color: #4fdd5420;
-            color: #3fd544;
-            border-color: #3fd544;
+        &Easy:is(.difficulty_buttonActive) {
+            color: #40d940;
+            //border-color: #028207;
+            //background: linear-gradient(-15deg, #02550480, #06980b80, #06980b80, #02550480);
         }
 
-        &Medium {
-            color: #e6d438;
-            border-color: #e6d438;
-            background-color: #ddc90e20;
+        &Medium:is(.difficulty_buttonActive) {
+            color: #3399FF;
+            //border-color: #9a8b05;
+            //background: linear-gradient(-15deg, #61580280, #a3930480, #a3930480, #61580280);
         }
 
-        &Hard {
-            color: #FF9800;
-            border-color: #FF9800;
-            background-color: #dd500e20;
+        &Hard:is(.difficulty_buttonActive) {
+            color: #FF8C00;
+            //border-color: #925902;
+            //background: linear-gradient(-15deg, #5b370280, #b16c0480, #b16c0480, #5b370280);
         }
 
-        &Expert {
-            color: #ff2c1d;
-            border-color: #f63325;
-            background-color: #dd0e0e20;
+        &Expert:is(.difficulty_buttonActive) {
+            color: #FF0000;
+            //border-color: #bd1206;
+            //background: linear-gradient(-15deg, #720b0480, #c11a0e80, #c11a0e80, #720b0480);
         }
 
         &Active {
-            filter: sepia(0) contrast(100%);
+            filter: brightness(140%);
+            box-shadow: 0 0 5px 2px #CCCCCC30;
         }
     }
 }

@@ -1,8 +1,15 @@
 .quiz {
+    position: relative;
     padding: 0.5em;
     border-radius: 0.5em;
     background-color: var(--background-color);
     min-height: 31em;
+
+    &_save {
+        position: absolute;
+        top: 4em;
+        right: 0.5em;
+    }
 }
 
 .header {
@@ -18,13 +25,9 @@
         gap: 1em;
     }
 
-    &_language {
-        padding: 0.1em 1em;
-        border: 1px dashed;
-        border-radius: 0.25em;
-    }
-
     &_difficulty {
+        display: flex;
+        align-items: center;
         padding: 0.1em 1em;
         border: 1px dashed;
         border-radius: 0.25em;
@@ -53,6 +56,34 @@
             color: #ff2c1d;
             border-color: #f63325;
             background-color: #dd0e0e20;
+        }
+    }
+}
+
+.type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 12em;
+
+    &_category {
+        color: var(--font-color);
+    }
+
+    &_language {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75em;
+        padding: 0.2em 1em 0.2em 0.35em;
+        border: 3px double;
+        border-radius: 0.25em;
+        opacity: 0.7;
+
+        &>svg {
+            width: 1.5em;
+            height: 1.5em;
         }
     }
 }
@@ -106,6 +137,7 @@
 
 
 .element {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,6 +145,10 @@
     gap: 0.5em;
 
     &_question {
+        font-size: 1em;
+        max-width: 50ch;
+        text-wrap: pretty;
+        text-align: center;
         color: var(--font-color);
     }
 }
@@ -122,6 +158,7 @@
     flex-direction: column;
     width: max-content;
     min-width: 12em;
+    min-height: 10em;
     gap: 0.5em;
 }
 
@@ -156,7 +193,7 @@
         color: var(--font-color);
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: #29ece525;
         border-color: #29ece580;
 
@@ -168,16 +205,34 @@
     }
 
     &_select {
-        background-color: #29ece525;
-        border-color: #29ece580;
+        background-color: #4dec2925;
+        border-color: #29ec3680;
         transform: translateX(0.5em);
         cursor: default;
 
         & .option_letter {
-            background-color: #29ece525;
-            border-color: #29ece580;
+            background-color: #4dec2925;
+            border-color: #29ec3680;
             color: var(--font-color);
         }
+    }
+
+    &_incorrect {
+        background-color: #e63e1c25;
+        border-color: #ec292980;
+        transform: translateX(0.5em);
+        cursor: default;
+
+        & .option_letter {
+            background-color: #e63e1c25;
+            border-color: #ec292980;
+            color: var(--font-color);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 }
 
@@ -189,14 +244,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 8em;
+        width: 10em;
+        height: 2.75em;
         padding: 0.4em 1em;
-        border-radius: 2em;
+        border-radius: 0.5em;
+        font-weight: 700;
+        letter-spacing: 0.05em;
         color: var(--font-color);
-        border: 1px solid transparent;
-        text-transform: uppercase;
+        font-family: var(--font-family);
+        background-color: #212121;
+        border: 1px solid #585858bb;
+        text-shadow: 0 0 2px #000000;
         font-size: 0.75em;
-        filter: brightness(60%) contrast(0);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
 
         &True {
             border-color: #3fd544;
@@ -205,19 +266,48 @@
         }
 
         &False {
-            border-color: #f62b2b;
+            border-color: #f51717;
             background-color: #d53f3f20;
-            color: #d53f3f;
+            color: #ff1414;
         }
 
-        &:hover:not(.dichotomous_optionSelect) {
-            filter: brightness(80%);
+        &Text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25em;
+            text-transform: uppercase;
         }
 
-        &Select {
-            filter: brightness(130%);
+        &Icon {
+            width: 1.75em;
+            height: 1.75em;
+        }
+
+        &:hover:not(.dichotomous_optionTrue):not(:disabled):not(.dichotomous_optionFalse) {
+            background-color: #29ece525;
+            border-color: #29ece580;
+
+            & .option_letter {
+                background-color: #29ece525;
+                border-color: #29ece580;
+                color: var(--font-color);
+            }
+        }
+
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
         }
     }
+}
+
+.blankspace {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
 }
 
 .send {
@@ -267,5 +357,83 @@
     to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+.explanation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0em;
+    width: 100%;
+    height: 100svh;
+    border: none;
+    z-index: 6;
+    backdrop-filter: blur(5px);
+    background-color: transparent;
+
+    &_container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 0.25em;
+        gap: 0.5em;
+        padding: 1em;
+        width: 95svw;
+        max-width: 45em;
+        border: 1px solid var(--gray-color);
+        background-color: var(--black-color);
+    }
+
+    &_button {
+        position: absolute;
+        right: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2em;
+        height: 2em;
+        border-radius: 0.25em;
+        color: #e30303;
+        border: 2px solid #e30303;
+        background-color: #e3030320;
+        opacity: 0.5;
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+
+
+        &Close {
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+
+    &_icon {
+        color: var(--font-color);
+        margin: 0 0 0.5em 0;
+        width: 2.5em;
+        height: 2.5em;
+        opacity: 0.5;
+        color: var(--yellow-color);
+    }
+
+    &_question {
+        font-size: 0.9em;
+        padding: 0.2em 0.5em;
+        border-radius: 0.25em;
+        border: 1px solid var(--gray-color);
+        color: var(--font-color);
+        background-color: #FFFFFF15;
+    }
+
+    &_p {
+        text-wrap: balance;
+        width: 100%;
+        color: var(--fontsecond-color);
     }
 }

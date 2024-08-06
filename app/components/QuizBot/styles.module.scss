@@ -1,0 +1,144 @@
+.chat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25em;
+    gap: 0.5em;
+    width: 100%;
+    max-height: 22em;
+    overflow-y: auto;
+
+    &_name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 3.85em;
+        border-radius: 0.5em;
+        color: var(--font-color);
+        background-color: var(--black-color);
+        padding: 0.15em 0.3em;
+        font-size: 0.75em;
+
+        &Icon {
+            width: 2.4em;
+            height: 2.4em;
+        }
+
+        &User {
+            color: var(--blue-color);
+            grid-column: 2 / 3;
+        }
+
+        &Bot {
+            color: #d3d60ebb;
+        }
+    }
+
+    &_text {
+        padding: 0.5em;
+        overflow: hidden;
+        color: var(--fontsecond-color);
+
+        &Bot {
+            padding: 0.5em 0.5em 0.5em 1.5em;
+        }
+    }
+
+    &_message {
+        display: grid;
+        gap: 0.25em;
+        padding: 0.5em;
+
+    }
+
+    &_user {
+        grid-template-columns: 1fr 3em;
+        grid-auto-flow: dense;
+        align-self: flex-end;
+        border-radius: 0.5em 0.5em 0 0.5em;
+        background-color: var(--grayblack-color);
+    }
+
+    &_bot {
+        grid-template-columns: 3em 1fr;
+        border-radius: 0.5em 0.5em 0.5em 0;
+        background-color: var(--gray-color);
+    }
+}
+
+.form {
+    position: relative;
+    display: flex;
+    padding: 0 0 1em 0;
+    width: 100%;
+    background-color: var(--black-color);
+    backdrop-filter: blur(10px);
+
+    &_input {
+        font-size: 0.9em;
+        padding: 0.95em 1em;
+        width: 100%;
+        border-radius: 3.5em;
+        color: var(--font-color);
+        border: 1px solid var(--gray-color);
+        background-color: var(--grayblack-color);
+
+        &:focus {
+            outline: 1px solid #d3d60e85;
+        }
+    }
+
+    &_button {
+        position: absolute;
+        right: 0.5em;
+        top: 0.45em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.5em;
+        height: 2.5em;
+        border: 1px solid #494b4900;
+        border-radius: 5em;
+        color: var(--font-color);
+        background-color: #5a5f2188;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #b5b81688;
+        }
+
+        &Icon {
+            padding: 0 0 0 0.05em;
+            width: 1.25em;
+            height: 1.25em;
+        }
+
+        &Stop {
+            background-color: #167ab888;
+
+            & .form_buttonIcon {
+                animation: animationStop 2s ease-in-out infinite alternate;
+
+                @keyframes animationStop {
+                    to {
+                        transform: rotate(359deg) scale(1.2);
+                    }
+                }
+
+
+            }
+
+            &:hover {
+                background-color: #178dd588;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+}
