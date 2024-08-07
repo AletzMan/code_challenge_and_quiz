@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, MouseEvent, useEffect } from "react"
+import { useState, MouseEvent, useEffect, Dispatch, SetStateAction } from "react"
 import styles from "./styles.module.scss"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
@@ -7,31 +7,38 @@ import { Separator } from "@/app/components/Separator/Separator"
 import { CodeEditor } from "@/app/components/CodeEditor/CodeEditor"
 import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { Button } from "@/app/components/Button/Button"
-import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
+import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewAlgorithm } from "@/app/utils/dataFetch"
 import { BulbIcon, CheckedIcon, CloseIcon } from "@/app/components/Icons"
 import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
+import { useSnackbar } from "notistack"
 
 interface Props {
+    setStart: Dispatch<SetStateAction<boolean>>
 }
-export function SolutionEditor({ }: Props) {
+export function SolutionEditor({ setStart }: Props) {
+    const { apiKey } = useApiKey()
+    const { enqueueSnackbar } = useSnackbar()
     const [evaluate, setEvaluate] = useState(false)
     const { language, difficulty } = useSetupQuiz()
     const { setAlgorithmSolution } = useAlgorithm()
     const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
     const [loading, setLaoding] = useState(true)
     const [openExplanation, setOpenExplanation] = useState(false)
-
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         const GetQuiz = async () => {
             setLaoding(true)
-            const response = await GetNewAlgorithm(language.option, difficulty)
-            if (response) {
-                setAlgorithm(response)
-                setAlgorithmSolution({ solution: response.codeTemplate })
+            const response = await GetNewAlgorithm(language.option, difficulty, apiKey)
+            if (!response.error && response.data) {
+                setAlgorithm(response.data)
+                setAlgorithmSolution({ solution: response.data.codeTemplate })
+            } else {
+                setError(true)
+                enqueueSnackbar({ message: response.message, variant: "error" })
             }
             setLaoding(false)
         }
@@ -48,7 +55,7 @@ export function SolutionEditor({ }: Props) {
     return (
         <>
             <div>
-                {!loading &&
+                {(!loading && !error) &&
                     <>
                         <article className={styles.instructions}>
                             <div>
@@ -66,12 +73,12 @@ export function SolutionEditor({ }: Props) {
                                 <div className={styles.instructions_input}>
                                     <span className={styles.instructions_label}>Datos de entrada</span>
                                     <span className={styles.instructions_subtitle}>{algorithm.inputDescription}</span>
-                                    <CodeBlock language={language.option} text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "font-family": "monospace" }} />
+                                    <CodeBlock language={language.option} text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
                                 </div>
                                 <div className={styles.instructions_output}>
                                     <span className={styles.instructions_label}>Resultado esperado</span>
                                     <span className={styles.instructions_subtitle}>{algorithm.outputDescription}</span>
-                                    <CodeBlock language={language.option} text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "font-family": "monospace" }} />
+                                    <CodeBlock language={language.option} text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
                                 </div>
                             </div>
                         </article>
@@ -81,7 +88,7 @@ export function SolutionEditor({ }: Props) {
                             <div className={styles.playground_button}>
                                 <Button className="green" onClick={HandleEvaluate}>Evaluar Solución<CheckedIcon /></Button>
                                 <Button className="yellow" onClick={() => setOpenExplanation(true)}>Explicación<BulbIcon /></Button>
-                                <span className={styles.playground_logo}>{language.logo}</span>
+                                <span className={styles.playground_logo}>{language.logo && language.logo}</span>
                                 <Levels difficulty={difficulty} />
                             </div>
                             <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
@@ -89,8 +96,15 @@ export function SolutionEditor({ }: Props) {
                         </article>
                     </>
                 }
-                {loading &&
+                {(loading && !error) &&
                     <Loading title="Generando algoritmo..." />
+                }
+                {(error && !loading) &&
+                    <div className={styles.error}>
+                        <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
+                        <Button onClick={() => setStart(false)}>Reintentar</Button>
+                    </div>
+
                 }
             </div>
             {openExplanation &&

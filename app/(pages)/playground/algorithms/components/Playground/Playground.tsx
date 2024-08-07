@@ -5,7 +5,7 @@ import styles from "./styles.module.scss"
 import { useEffect, useState } from "react"
 import { QuizSetup } from "../QuizSetup/QuizSetup"
 import { JSIcon } from "@/app/components/Icons"
-import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
+import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewAlgorithm } from "@/app/utils/dataFetch"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
@@ -14,6 +14,7 @@ import { Separator } from "@/app/components/Separator/Separator"
 import { Button } from "@/app/components/Button/Button"
 import { MouseEvent } from "react"
 import { SolutionEditor } from "../SolutionEditor/SolutionEditor"
+import { enqueueSnackbar } from "notistack"
 
 export interface IItemCategory {
     option: string,
@@ -24,30 +25,35 @@ export interface IItemCategory {
 }
 
 export const Playground = () => {
-
+    const { apiKey } = useApiKey()
     const [start, setStart] = useState(false)
-
+    const [error, setError] = useState(false)
 
 
     const HandleStart = (value: boolean) => {
-        setStart(value)
+        if (apiKey) {
+            setStart(true)
+        } else {
+            enqueueSnackbar("Por favor, ingresa tu clave API de OpenAI para continuar", { variant: "error" })
+            setError(true)
+        }
     }
 
     return (
         <section className={styles.section}>
             {start &&
                 <div className={styles.section_button}>
-                    <Button className="yellow" onClick={() => HandleStart(false)}>Nuevo Algoritmo</Button>
+                    <Button className="yellow" onClick={() => setStart(false)}>Nuevo Algoritmo</Button>
                 </div>
             }
             {!start && <>
-                <QuizSetup />
+                <QuizSetup error={error} setError={setError} />
                 <button className={styles.start} onClick={() => HandleStart(true)}>
                     COMENZAR
                 </button>
             </>}
             {start &&
-                <SolutionEditor />
+                <SolutionEditor setStart={setStart} />
             }
         </section>
     )

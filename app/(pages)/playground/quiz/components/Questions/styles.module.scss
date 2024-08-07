@@ -372,6 +372,7 @@
         padding: 1em;
         width: 95svw;
         max-width: 45em;
+        max-height: 90svh;
         border: 1px solid var(--gray-color);
         background-color: var(--black-color);
     }
@@ -535,4 +536,17 @@
     &[open] .details_arrow {
         transform: rotate(180deg);
     }
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 2em 0;
+
+    &_p {
+        color: var(--font-color);
+    }
+
 }
