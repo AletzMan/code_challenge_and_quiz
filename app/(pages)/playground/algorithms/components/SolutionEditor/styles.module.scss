@@ -3,7 +3,10 @@
     display: grid;
     padding: 2.15em 0 0 0;
     grid-template-columns: 1fr 1fr;
-    height: calc(100svh - 24.5em);
+    gap: 0.5em;
+    height: calc(100% - 7.5em);
+    max-height: calc(100svh - 20.25em);
+    //height: calc(100svh - 24.5em);
 
     &_button {
         display: flex;

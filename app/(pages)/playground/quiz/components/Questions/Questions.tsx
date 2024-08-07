@@ -20,7 +20,7 @@ interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
 }
 
-const TOTAL_TIME = 45
+const TOTAL_TIME = 90
 const TIME_PERCENTAGE = 100 / TOTAL_TIME
 
 
