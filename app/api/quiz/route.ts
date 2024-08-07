@@ -18,7 +18,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 type = searchParams.get('type')
                 const OPENAI_API_KEY = searchParams.get('apiKey') || ""
 
-                console.log(type)
 
                 if (Number(type) <= 3) {
                     questionType = "multiple choice"
@@ -70,7 +69,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 
 
-                console.log(object.quiz)
+                //console.log(object.quiz)
 
                 return NextResponse.json({ data: object.quiz })
             }

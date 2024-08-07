@@ -3,6 +3,7 @@
 import { IItemCategory } from '@/app/(pages)/playground/algorithms/components/Playground/Playground'
 import { useAlgorithm } from '@/app/utils/store'
 import Editor from '@monaco-editor/react'
+import styles from "./styles.module.scss"
 
 interface Props {
     language: IItemCategory
@@ -19,18 +20,19 @@ export function CodeEditor({ language, codeTemplate }: Props) {
         }
     }
     return (
-        <Editor
-            height="58.4vh"
-            defaultLanguage={language.option}
-            language={language.option}
-            value={codeTemplate}
-            theme='vs-dark'
-            options={{
-                minimap: { enabled: false },
-                contextmenu: true,
+        <div className={styles.editor}>
+            <Editor
+                defaultLanguage={language.option}
+                language={language.option}
+                value={codeTemplate}
+                theme='vs-dark'
+                options={{
+                    minimap: { enabled: false },
+                    contextmenu: true,
 
-            }}
-            onChange={HandleOnChange}
-        />
+                }}
+                onChange={HandleOnChange}
+            />
+        </div>
     )
 }

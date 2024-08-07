@@ -52,20 +52,22 @@ export async function GET(req: NextRequest, res: NextResponse) {
                         })
                     }),
                     prompt: `Generate a ${level} level ${language} programming algorithms solving exercise.
-                                         
-                                **Requirements:**
-                                * In Spanish
-                                * Always provide an explanation
-                                * Always add a code template
-                                * In the description be brief and concise
-                                * Be clear and without strange characters and give a good and summarized explanation.
-                                * In codeTemplate only put what is needed to start the language, do not add the solution
-                                   
-                                **Additional Notes:**
-                                * Consider the target audience's knowledge level.
-                                * Use clear and concise language.
-                                * Provide examples if applicable.`,
+                                                         
+                                                **Requirements:**
+                                                * In Spanish
+                                                * Always provide an explanation
+                                                * Always add a code template
+                                                * In the description be brief and concise
+                                                * Be clear and without strange characters and give a good and summarized explanation.
+                                                * In codeTemplate only put what is needed to start the language, do not add the solution
+                                                   
+                                                **Additional Notes:**
+                                                * Consider the target audience's knowledge level.
+                                                * Use clear and concise language.
+                                                * Provide examples if applicable.`,
                 })
+
+
 
 
 
