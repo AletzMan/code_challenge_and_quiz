@@ -28,30 +28,30 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
                 //const level = "junior"
                 //const language = "javascript"
-                /*
-                                const { object } = await generateObject({
-                                    model: google("models/gemini-1.5-pro-latest"),
-                                    schema: z.object({
-                                        algorithm: z.object({
-                                            title: z.string(),
-                                            description: z.string(),
-                                            codeTemplate: z.string(),
-                                            expectedOutput: z.string(),
-                                            inputDescription: z.string(),
-                                            outputDescription: z.string(),
-                                            constraints: z.array(z.string()),
-                                            exampleInputs: z.array(z.string()),
-                                            exampleOutputs: z.array(z.string()),
-                                            difficulty: z.string(),
-                                            tags: z.array(z.string()),
-                                            explanation: z.object({
-                                                resume: z.string(),
-                                                codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
-                                            }),
-                                            language: z.string()
-                                        })
-                                    }),
-                                    prompt: `Generate a ${level} level ${language} algorithm-solving exercise.
+
+                const { object } = await generateObject({
+                    model: google("models/gemini-1.5-pro-latest"),
+                    schema: z.object({
+                        algorithm: z.object({
+                            title: z.string(),
+                            description: z.string(),
+                            codeTemplate: z.string(),
+                            expectedOutput: z.string(),
+                            inputDescription: z.string(),
+                            outputDescription: z.string(),
+                            constraints: z.array(z.string()),
+                            exampleInputs: z.array(z.string()),
+                            exampleOutputs: z.array(z.string()),
+                            difficulty: z.string(),
+                            tags: z.array(z.string()),
+                            explanation: z.object({
+                                resume: z.string(),
+                                codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
+                            }),
+                            language: z.string()
+                        })
+                    }),
+                    prompt: `Generate a ${level} level ${language} algorithm-solving exercise.
                                          
                                                                **Requirements:**
                                                                * In Spanish
@@ -64,68 +64,68 @@ export async function GET(req: NextRequest, res: NextResponse) {
                                                                * Consider the target audience's knowledge level.
                                                                * Use clear and concise language.
                                                                * Provide examples if applicable.`,
-                                    temperature: 1.5
-                                })
-                
-                */
+                    temperature: 1.5
+                })
 
-                let object: IResponseAlgorithm = { algorithm: null }
+
                 /*
-               
-               
+                               let object: IResponseAlgorithm = { algorithm: null }
+                              
+                              
+                              
+                                              object = {
+                                                  algorithm: {
+                                                      title: 'Implementa Merge Sort',
+                                                      description: 'Implementa un algoritmo de ordenamiento Merge Sort.',
+                                                      codeTemplate: 'function mergeSort(array: number[]): number[] {\\n\\n  // Tu código aquí\\n\\n}\\n',
+                                                      expectedOutput: 'Una matriz ordenada',
+                                                      inputDescription: 'Una matriz de números',
+                                                      outputDescription: 'Una matriz de números ordenada',
+                                                      constraints: [
+                                                          'No puedes usar ninguna función o método de ordenamiento incorporados.',
+                                                          'La solución debe tener una complejidad de tiempo de O(n log n) en el peor de los casos.'
+                                                      ],
+                                                      exampleInputs: ['[4, 2, 7, 1, 3]', '[9, -1, 5, 8, 0]', '[10, 10, 10, 5, 5]'],
+                                                      exampleOutputs: ['[1, 2, 3, 4, 7]', '[-1, 0, 5, 8, 9]', '[5, 5, 10, 10, 10]'],
+                                                      difficulty: 'expert',
+                                                      tags: [
+                                                          'algoritmo',
+                                                          'ordenamiento',
+                                                          'merge sort',
+                                                          'recursión',
+                                                          'complejidad de tiempo'
+                                                      ],
+                                                      explanation: {
+                                                          resume: 'Este ejercicio requiere que el usuario comprenda el algoritmo Merge Sort y su implementación. Merge Sort es un algoritmo de ordenamiento recursivo que sigue el paradigma de dividir y conquistar. Divide la lista de entrada en mitades más pequeñas hasta que cada sublista contiene un solo elemento, y luego fusiona repetidamente las sublistas ordenadas en una lista ordenada final.\\n\\n**Puntos clave a considerar para la implementación:**\\n\\n* **Función Merge:** El algoritmo Merge Sort se basa en una función `merge` eficiente que toma dos listas ordenadas como entrada y las combina en una sola lista ordenada.\\n* **Recursión:** La función principal `mergeSort` debe llamarse a sí misma recursivamente para dividir la lista de entrada en mitades hasta que se alcance el caso base de una sola sublista de elementos.\\n* **Complejidad Temporal:** El algoritmo Merge Sort tiene una complejidad de tiempo de O(n log n) en todos los casos, lo que lo convierte en una opción eficiente para ordenar grandes conjuntos de datos.',
+                                                          codeSnippet: null
+                                                      },
+                                                      language: 'TypeScript'
+                                                  }
+                                              }
+                              
+                              
                                object = {
                                    algorithm: {
-                                       title: 'Implementa Merge Sort',
-                                       description: 'Implementa un algoritmo de ordenamiento Merge Sort.',
-                                       codeTemplate: 'function mergeSort(array: number[]): number[] {\\n\\n  // Tu código aquí\\n\\n}\\n',
-                                       expectedOutput: 'Una matriz ordenada',
-                                       inputDescription: 'Una matriz de números',
-                                       outputDescription: 'Una matriz de números ordenada',
-                                       constraints: [
-                                           'No puedes usar ninguna función o método de ordenamiento incorporados.',
-                                           'La solución debe tener una complejidad de tiempo de O(n log n) en el peor de los casos.'
-                                       ],
-                                       exampleInputs: ['[4, 2, 7, 1, 3]', '[9, -1, 5, 8, 0]', '[10, 10, 10, 5, 5]'],
-                                       exampleOutputs: ['[1, 2, 3, 4, 7]', '[-1, 0, 5, 8, 9]', '[5, 5, 10, 10, 10]'],
-                                       difficulty: 'expert',
-                                       tags: [
-                                           'algoritmo',
-                                           'ordenamiento',
-                                           'merge sort',
-                                           'recursión',
-                                           'complejidad de tiempo'
-                                       ],
+                                       title: 'Encuentra el Elemento Faltante en una Matriz',
+                                       description: '## Encuentra el Elemento Faltante\\n\\nDada una matriz `arr` que contiene `n-1` números enteros únicos en el rango de `1` a `n`, tu tarea es encontrar el único número faltante en la secuencia.\\n\\n**Nota:** La matriz no estará ordenada.\\n',
+                                       codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
+                                       expectedOutput: 'Un número entero',
+                                       inputDescription: 'Una matriz de enteros',
+                                       outputDescription: 'El entero faltante en el rango de 1 a n',
+                                       constraints: [],
+                                       exampleInputs: ['[1, 2, 4, 6, 3, 7, 8]', '[1, 2, 3, 5]'],
+                                       exampleOutputs: ['5', '4'],
+                                       difficulty: 'medium',
+                                       tags: ['Array', 'Matemáticas'],
                                        explanation: {
-                                           resume: 'Este ejercicio requiere que el usuario comprenda el algoritmo Merge Sort y su implementación. Merge Sort es un algoritmo de ordenamiento recursivo que sigue el paradigma de dividir y conquistar. Divide la lista de entrada en mitades más pequeñas hasta que cada sublista contiene un solo elemento, y luego fusiona repetidamente las sublistas ordenadas en una lista ordenada final.\\n\\n**Puntos clave a considerar para la implementación:**\\n\\n* **Función Merge:** El algoritmo Merge Sort se basa en una función `merge` eficiente que toma dos listas ordenadas como entrada y las combina en una sola lista ordenada.\\n* **Recursión:** La función principal `mergeSort` debe llamarse a sí misma recursivamente para dividir la lista de entrada en mitades hasta que se alcance el caso base de una sola sublista de elementos.\\n* **Complejidad Temporal:** El algoritmo Merge Sort tiene una complejidad de tiempo de O(n log n) en todos los casos, lo que lo convierte en una opción eficiente para ordenar grandes conjuntos de datos.',
+                                           resume: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
                                            codeSnippet: null
                                        },
-                                       language: 'TypeScript'
+                                       language: 'kotlin'
                                    }
                                }
                
                 */
-                object = {
-                    algorithm: {
-                        title: 'Encuentra el Elemento Faltante en una Matriz',
-                        description: '## Encuentra el Elemento Faltante\\n\\nDada una matriz `arr` que contiene `n-1` números enteros únicos en el rango de `1` a `n`, tu tarea es encontrar el único número faltante en la secuencia.\\n\\n**Nota:** La matriz no estará ordenada.\\n',
-                        codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
-                        expectedOutput: 'Un número entero',
-                        inputDescription: 'Una matriz de enteros',
-                        outputDescription: 'El entero faltante en el rango de 1 a n',
-                        constraints: [],
-                        exampleInputs: ['[1, 2, 4, 6, 3, 7, 8]', '[1, 2, 3, 5]'],
-                        exampleOutputs: ['5', '4'],
-                        difficulty: 'medium',
-                        tags: ['Array', 'Matemáticas'],
-                        explanation: {
-                            resume: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
-                            codeSnippet: null
-                        },
-                        language: 'kotlin'
-                    }
-                }
-
-
 
                 console.log(object)
 
