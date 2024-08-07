@@ -27,7 +27,7 @@ export const GetNewQuiz = async (language: string, level: string, apiKey: string
             const newResponse: IResponseFetchQuiz = {
                 error: false,
                 message: "Correcto",
-                data: JSON.parse(data.data)
+                data: data.data
             }
             return newResponse
         }
