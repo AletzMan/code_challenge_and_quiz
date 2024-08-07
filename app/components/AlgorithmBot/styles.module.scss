@@ -3,9 +3,19 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: calc(100svh - 26em);
     padding: 0.25em;
     background-color: var(--black-color);
+
+    &_logo {
+        position: absolute;
+        left: calc(50% - 7.5em);
+        top: calc(50% - 7.5em);
+        width: 15em;
+        height: 15em;
+        color: var(--yellow-color);
+        opacity: 0.04;
+    }
 }
 
 .chat {
@@ -18,7 +28,7 @@
     height: 100%;
     min-height: 8em;
     max-height: 30.5em;
-    margin: 0 0 3.75em 0;
+    margin: 0 0 0em 0;
 
     &_name {
         display: flex;
@@ -68,13 +78,13 @@
         grid-template-columns: 1fr 3em;
         grid-auto-flow: dense;
         align-self: flex-end;
-        border-radius: 0.5em 0.5em 0 0.5em;
-        background-color: var(--grayblack-color);
+        border-radius: 0.75em 0 0 0.75em;
+        background-color: #343434;
     }
 
     &_bot {
         grid-template-columns: 3em 1fr;
-        border-radius: 0.5em 0.5em 0.5em 0;
+        border-radius: 0 0.75em 0.75em 0;
         background-color: var(--gray-color);
     }
 }
@@ -105,7 +115,7 @@
 
     &_button {
         position: absolute;
-        right: 0.5em;
+        right: 0.75em;
         top: 0.45em;
         display: flex;
         align-items: center;

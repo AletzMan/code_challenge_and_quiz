@@ -28,19 +28,28 @@
         background-color: var(--background-color);
     }
 
+    &_icon {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
     &_button {
-        min-width: 7.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        min-width: 8.5em;
         padding: 0.25em 0;
         background-color: #a5a5a510;
         border-radius: 0.25em;
-        font-weight: 500;
-        border: 1px solid #FFFFFF10;
+        font-weight: 400;
+        border: 1px dashed #FFFFFF25;
         color: var(--fontsecond-color);
         background: var(--gray-color);
         font-family: var(--font-family);
         text-transform: capitalize;
         transition: all 0.3s ease-in-out;
-        text-shadow: 0 0 2px #000000;
+        text-shadow: 0 0 3px #000000;
         filter: brightness(80%);
 
         &:not(.difficulty_buttonActive) {
@@ -53,32 +62,33 @@
         }
 
         &Easy:is(.difficulty_buttonActive) {
-            color: #40d940;
+            //color: #40d940;
             //border-color: #028207;
-            //background: linear-gradient(-15deg, #02550480, #06980b80, #06980b80, #02550480);
+            background: linear-gradient(-15deg, #02550480, #06980b80, #06980b80, #02550480);
         }
 
         &Medium:is(.difficulty_buttonActive) {
-            color: #3399FF;
+            //color: #3399FF;
             //border-color: #9a8b05;
-            //background: linear-gradient(-15deg, #61580280, #a3930480, #a3930480, #61580280);
+            background: linear-gradient(-15deg, #1c6ab780, #3399FF80, #3399FF80, #1c6ab780);
         }
 
         &Hard:is(.difficulty_buttonActive) {
-            color: #FF8C00;
+            //color: #FF8C00;
             //border-color: #925902;
-            //background: linear-gradient(-15deg, #5b370280, #b16c0480, #b16c0480, #5b370280);
+            background: linear-gradient(-15deg, #5b370280, #b16c0480, #b16c0480, #5b370280);
         }
 
         &Expert:is(.difficulty_buttonActive) {
-            color: #FF0000;
+            //color: #FF0000;
             //border-color: #bd1206;
-            //background: linear-gradient(-15deg, #720b0480, #c11a0e80, #c11a0e80, #720b0480);
+            background: linear-gradient(-15deg, #720b0480, #c11a0e80, #c11a0e80, #720b0480);
         }
 
         &Active {
             filter: brightness(140%);
             box-shadow: 0 0 5px 2px #CCCCCC30;
+            color: var(--font-color);
         }
     }
 }

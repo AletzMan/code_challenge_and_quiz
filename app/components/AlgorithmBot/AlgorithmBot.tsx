@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Message, useChat } from "ai/react"
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import styles from "./styles.module.scss"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
-import { useSetupQuiz } from "@/app/utils/store"
-import { BotIcon, SendIcon, StopIcon, UserIcon } from "../Icons"
+import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
+import { BotIcon, LogoCCQ, SendIcon, StopIcon, UserIcon } from "../Icons"
 import { IQuiz } from "@/app/interfaces/quiz"
 import { GetCodeBlock, parseTextToJSX } from "../QuizBot/ParseTextToJSX"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
@@ -12,12 +12,13 @@ import { IAlgorithm } from "@/app/interfaces/algorithm"
 
 interface Props {
     algorithm: IAlgorithm
-    result: string
+    evaluate: boolean
 }
 
-export function AlgorithmBot({ algorithm, result }: Props) {
+export function AlgorithmBot({ algorithm, evaluate }: Props) {
     const { language } = useSetupQuiz()
-    const { messages, handleSubmit, handleInputChange, input, isLoading, stop } = useChat()
+    const { algorithmSolution } = useAlgorithm()
+    const { messages, handleSubmit, handleInputChange, input, isLoading, stop, append } = useChat()
     const chatContainerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -28,6 +29,7 @@ export function AlgorithmBot({ algorithm, result }: Props) {
     }, [messages]) // Dependency on messages to run whenever they change
 
     useEffect(() => {
+
         const prevMessages: Message[] = [
             {
                 role: "assistant",
@@ -48,28 +50,47 @@ export function AlgorithmBot({ algorithm, result }: Props) {
         messages.push(...prevMessages)
     }, [])
 
+    useEffect(() => {
+        if (evaluate) {
+            const prevMessages: Message =
+            {
+                role: "user",
+                content: `Evalúa mi código brevemente, sin darme solución: ${algorithmSolution.solution}`,
+                id: crypto.randomUUID()
+            }
+
+            append(prevMessages)
+        }
+    }, [evaluate])
 
     return (
         <section className={styles.section}>
+            <LogoCCQ className={styles.section_logo} />
             <article className={`${styles.chat} scrollBarStyle`} ref={chatContainerRef} >
-                {messages.filter((_, index) => index > 1).map(message => (
-                    <div key={message.id} className={` ${styles.chat_message} ${message.role === 'user' ? styles.chat_user : styles.chat_bot}`}>
-                        <span className={`${styles.chat_name} ${message.role == 'user' ? styles.chat_nameUser : styles.chat_nameBot}`}>
-                            {message.role === 'user' ? <UserIcon className={styles.chat_nameIcon} /> : <BotIcon className={styles.chat_nameIcon} />}
-                            {/*message.role === 'user' ? 'Yo' : 'QuizBot'*/}
-                        </span>
-                        <div className={`${styles.chat_text} ${message.role === 'user' ? styles.chat_textUser : styles.chat_textBot}`}>
-                            {parseTextToJSX(message.content)}
-                            {GetCodeBlock(message.content) &&
-                                <CodeBlock
-                                    language={language.option}
-                                    showLineNumbers={false}
-                                    text={GetCodeBlock(message.content) || ""}
-                                    theme={atomOneDark} customStyle={{ "width": "max-content", "max-width": "100%", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
+                {messages.filter((_, index) => index > 2).map(message => (
+                    <Fragment key={message.id}>
+                        {
+                            <div className={` ${styles.chat_message} ${message.role === 'user' ? styles.chat_user : styles.chat_bot}`}>
+                                <span className={`${styles.chat_name} ${message.role == 'user' ? styles.chat_nameUser : styles.chat_nameBot}`}>
+                                    {message.role === 'user' ? <UserIcon className={styles.chat_nameIcon} /> : <BotIcon className={styles.chat_nameIcon} />}
+                                    {/*message.role === 'user' ? 'Yo' : 'QuizBot'*/}
+                                </span>
 
-                            }
-                        </div>
-                    </div>
+                                <div className={`${styles.chat_text} ${message.role === 'user' ? styles.chat_textUser : styles.chat_textBot}`}>
+                                    {message.content.includes("Evalúa mi código") ? "Evalúa mi código" : parseTextToJSX(message.content)}
+                                    {GetCodeBlock(message.content) &&
+                                        <CodeBlock
+                                            language={language.option}
+                                            showLineNumbers={false}
+                                            text={GetCodeBlock(message.content) || ""}
+                                            theme={atomOneDark} customStyle={{ "width": "max-content", "max-width": "100%", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
+
+                                    }
+                                </div>
+
+                            </div>
+                        }
+                    </Fragment>
                 ))}
             </article>
             <form onSubmit={handleSubmit} className={styles.form}>

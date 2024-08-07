@@ -1,0 +1,39 @@
+.difficulty {
+    display: flex;
+    align-items: center;
+    padding: 0.1em 1em 0.1em 0.25em;
+    border: 1px dashed #FFFFFF20;
+    gap: 0.5em;
+    border-radius: 0.25em;
+    background-color: #5b5b5b20;
+    color: var(--font-color);
+
+    &_icon {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    &_easy {
+        background: linear-gradient(-15deg, #02550480, #06980b80, #06980b80, #02550480);
+        //color: #3fd544;
+        //border-color: #3fd544;
+    }
+
+    &_medium {
+        //color: #e6d438;
+        //border-color: #e6d438;
+        background: linear-gradient(-15deg, #1c6ab780, #3399FF80, #3399FF80, #1c6ab780);
+    }
+
+    &_hard {
+        //color: #FF9800;
+        //border-color: #FF9800;
+        background: linear-gradient(-15deg, #5b370280, #b16c0480, #b16c0480, #5b370280);
+    }
+
+    &_expert {
+        //color: #ff2c1d;
+        //border-color: #f63325;
+        background: linear-gradient(-15deg, #720b0480, #c11a0e80, #c11a0e80, #720b0480);
+    }
+}

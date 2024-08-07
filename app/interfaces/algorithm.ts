@@ -22,3 +22,7 @@ export interface IExplanation {
     resume: string
     codeSnippet: string | null
 }
+
+export interface IAlgorithmSolution {
+    solution: string
+}

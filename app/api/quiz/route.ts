@@ -28,6 +28,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 //const level = "junior"
                 //const language = "javascript"
 
+
                 const { object } = await generateObject({
                     model: google("models/gemini-1.5-pro-latest"),
                     schema: z.object({
@@ -36,7 +37,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                             type: z.enum(["multiple choice", "true false", "blank space"]),
                             codeSnippet: z.string().optional(), // Opcional para permitir preguntas sin código
                             options: z.array(z.string()),
-                            correctAnswer: z.array(z.string()),
+                            rightAnswer: z.array(z.string()),
                             explanation: z.object({
                                 resume: z.string(),
                                 codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
@@ -62,52 +63,59 @@ export async function GET(req: NextRequest, res: NextResponse) {
                     temperature: 1.5
                 })
 
-                /* let object: IResponseQuiz = { quiz: null }
- 
-                 if (Number(type) <= 3) {
-                     object = {
-                         quiz: {
-                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                             type: 'true false',
-                             codeSnippet: null,
-                             options: ['Verdadero', 'Falso'],
-                             correctAnswer: ['Falso'],
-                             explanation: {
-                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                 codeSnippet: null
-                             }
-                         }
-                     }
-                 } else if (Number(type) > 3 && Number(type) <= 6) {
-                     object = {
-                         quiz: {
-                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                             type: 'true false',
-                             codeSnippet: null,
-                             options: ['Verdadero', 'Falso'],
-                             correctAnswer: ['Falso'],
-                             explanation: {
-                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                 codeSnippet: null
-                             }
-                         }
-                     }
-                 } else {
-                     object = {
-                         quiz: {
-                             question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
-                             type: 'true false',
-                             codeSnippet: null,
-                             options: ['Verdadero', 'Falso'],
-                             correctAnswer: ['Falso'],
-                             explanation: {
-                                 resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
-                                 codeSnippet: null
-                             }
-                         }
-                     }
-                 }
-                 */
+                /*
+                                let object: IResponseQuiz = { quiz: null }
+                
+                                if (Number(type) <= 3) {
+                                    object = {
+                                        quiz: {
+                                            question: "En C#, la memoria se gestiona utilizando 'malloc', similar a C.",
+                                            type: 'true false',
+                                            codeSnippet: null,
+                                            options: ['Verdadero', 'Falso'],
+                                            rightAnswer: ['Falso'],
+                                            explanation: {
+                                                resume: "Aunque ambos se utilizan para la gestión de memoria, 'Garbage Collector' en C# y 'malloc' en C tienen enfoques diferentes. 'Garbage Collector' es un proceso automático que libera memoria cuando ya no se utiliza, mientras que 'malloc' requiere la gestión manual de la memoria por parte del desarrollador.",
+                                                codeSnippet: null
+                                            }
+                                        }
+                                    }
+                                } else if (Number(type) > 3 && Number(type) <= 6) {
+                                    object = {
+                                        quiz: {
+                                            question: 'En JavaScript, la abreviatura DOM se refiere a ______.',
+                                            type: 'blank space',
+                                            codeSnippet: null,
+                                            options: [],
+                                            rightAnswer: ['DOM'],
+                                            explanation: {
+                                                resume:
+                                                    'DOM significa Modelo de Objetos del Documento. Es una interfaz de programación que permite a los lenguajes de programación como JavaScript acceder y manipular el contenido, la estructura y el estilo de un documento HTML o XML.',
+                                                codeSnippet: null
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    object = {
+                                        quiz: {
+                                            question: 'En TypeScript, ¿cómo se clasifica la inferencia de tipos?',
+                                            type: 'multiple choice',
+                                            codeSnippet: null,
+                                            options: [
+                                                'Estática y dinámica',
+                                                'Explícita e implícita',
+                                                'Fuerte y débil',
+                                                'Nominal y estructural'
+                                            ],
+                                            rightAnswer: ['Estática y dinámica'],
+                                            explanation: {
+                                                resume: 'La inferencia de tipos en TypeScript se puede clasificar como:',
+                                                codeSnippet: "let myVariable = 'Hello'; // type string\\n\\nmyVariable = 123; // Error: Type 'number' is not assignable to type 'string'.\\n"
+                                            }
+                                        }
+                                    }
+                                }
+                */
 
                 console.log(object.quiz)
 
