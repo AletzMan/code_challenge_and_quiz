@@ -4,6 +4,7 @@ import { IItemCategory } from "../(pages)/playground/algorithms/components/Playg
 import { JSIcon } from "@/app/components/Icons"
 import { IQuiz, IQuizResult } from "../interfaces/quiz"
 import { IAlgorithmSolution } from "../interfaces/algorithm"
+import { DefaultCategory, DefaultLanguage } from "./const"
 
 interface ISetupQuiz {
     category: IItemCategory
@@ -11,8 +12,8 @@ interface ISetupQuiz {
     language: IItemCategory
     setLanguage: (value: IItemCategory) => void
     defaultLanguage: IItemCategory
-    difficulty: "easy" | "medium" | "hard" | "expert"
-    setDifficulty: (value: "easy" | "medium" | "hard" | "expert") => void
+    difficulty: "trainee" | "junior" | "semi-senior" | "senior"
+    setDifficulty: (value: "trainee" | "junior" | "semi-senior" | "senior") => void
     defaultDifficulty: string
     questions: number
     setQuestions: (value: number) => void
@@ -20,26 +21,12 @@ interface ISetupQuiz {
     setCompleteQuiz: (value: IQuizResult) => void
 }
 
-const DefaultLanguage: IItemCategory = {
-    option: "javascript",
-    value: "JavaScript",
-    functionSyntax: `function myFunction() {\n\treturn false;\n}`,
-    color: "#F7DF1E",
-    logo: null
-}
 
-const DefaultCategory: IItemCategory = {
-    option: "languages",
-    value: "Lenguajes",
-    functionSyntax: `null`,
-    color: "#F7DF1E",
-    logo: null
-}
 
 export const useSetupQuiz = create(
     persist<ISetupQuiz>(
         (set) => ({
-            category: DefaultLanguage,
+            category: DefaultCategory,
             setCategory: (value: IItemCategory) =>
                 set((state) => ({
                     category: value,
@@ -55,8 +42,8 @@ export const useSetupQuiz = create(
                     language: value,
                 })),
             defaultLanguage: DefaultLanguage,
-            difficulty: "medium",
-            setDifficulty: (value: "easy" | "medium" | "hard" | "expert") =>
+            difficulty: "junior",
+            setDifficulty: (value: "trainee" | "junior" | "semi-senior" | "senior") =>
                 set((state) => ({
                     difficulty: value,
                 })),
@@ -90,4 +77,20 @@ export const useAlgorithm = create(
 
         { name: "algorithmccq" }
     )
+)
+
+
+interface IAPIkey {
+    apiKey: string
+    setApiKey: (value: string) => void
+}
+
+export const useApiKey = create<IAPIkey>(
+    (set) => ({
+        apiKey: "",
+        setApiKey: (value: string) =>
+            set((state) => ({
+                apiKey: value,
+            }))
+    })
 )

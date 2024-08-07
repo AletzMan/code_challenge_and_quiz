@@ -1,5 +1,7 @@
 
-import { AngularIcon, AnsibleIcon, BootstrapIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
+import { AngularIcon, AnsibleIcon, BookIcon, BootstrapIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
+import { IItemCategory } from "../(pages)/playground/algorithms/components/Playground/Playground"
+
 
 
 export const CATEGORIES =
@@ -185,7 +187,7 @@ export const CATEGORIES =
                 logo: <CSSIcon />
             },
             {
-                option: "react",
+                option: "reactjs",
                 value: "React",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#61DAFB",
@@ -199,21 +201,21 @@ export const CATEGORIES =
                 logo: <AngularIcon />
             },
             {
-                option: "vue",
+                option: "vuejs",
                 value: "Vue.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#4FC08D",
                 logo: <VueIcon />
             },
             {
-                option: "next",
+                option: "nextjs",
                 value: "Next.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#f4f4f4",
                 logo: <NextJSIcon />
             },
             {
-                option: "nuxt",
+                option: "nuxtjs",
                 value: "Nuxt.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#00C58E",
@@ -227,7 +229,7 @@ export const CATEGORIES =
                 logo: <BootstrapIcon />
             },
             {
-                option: "tailwind",
+                option: "tailwindcss",
                 value: "Tailwind CSS",
                 functionSyntax: `/* Tailwind CSS does not support functions */`,
                 color: "#38B2AC",
@@ -246,7 +248,7 @@ export const CATEGORIES =
     backend: {
         items: [
             {
-                option: "node",
+                option: "nodejs",
                 value: "Node.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#339933",
@@ -288,14 +290,14 @@ export const CATEGORIES =
                 logo: <LaravelIcon />
             },
             {
-                option: "express",
+                option: "expressjs",
                 value: "Express",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#b6b6b6",
                 logo: <ExpressIcon />
             },
             {
-                option: "dotnet",
+                option: ".net",
                 value: ".NET",
                 functionSyntax: `namespace MyNamespace {\n\tclass Program {\n\t\tpublic bool myFunction() {\n\t\t\treturn false;\n\t\t}\n\t}\n}`,
                 color: "#512BD4",
@@ -473,4 +475,20 @@ export const CATEGORIES =
             }
         ]
     }
+}
+
+export const DefaultLanguage: IItemCategory = {
+    option: "javascript",
+    value: "JavaScript",
+    functionSyntax: `function myFunction() {\n\treturn false;\n}`,
+    color: "#F7DF1E",
+    logo: <JavaIcon />
+}
+
+export const DefaultCategory: IItemCategory = {
+    option: "languages",
+    value: "Lenguajes",
+    functionSyntax: `null`,
+    color: "#F7DF1E",
+    logo: <BookIcon />
 }
