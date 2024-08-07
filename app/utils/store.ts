@@ -2,6 +2,8 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { IItemCategory } from "../(pages)/playground/algorithms/components/Playground/Playground"
 import { JSIcon } from "@/app/components/Icons"
+import { IQuiz, IQuizResult } from "../interfaces/quiz"
+import { IAlgorithmSolution } from "../interfaces/algorithm"
 
 interface ISetupQuiz {
     category: IItemCategory
@@ -14,6 +16,8 @@ interface ISetupQuiz {
     defaultDifficulty: string
     questions: number
     setQuestions: (value: number) => void
+    completeQuiz: IQuizResult
+    setCompleteQuiz: (value: IQuizResult) => void
 }
 
 const DefaultLanguage: IItemCategory = {
@@ -40,6 +44,11 @@ export const useSetupQuiz = create(
                 set((state) => ({
                     category: value,
                 })),
+            completeQuiz: { questions: [], correctAnswers: 0 },
+            setCompleteQuiz: (value: IQuizResult) =>
+                set((state) => ({
+                    completeQuiz: value,
+                })),
             language: DefaultLanguage,
             setLanguage: (value: IItemCategory) =>
                 set((state) => ({
@@ -60,5 +69,25 @@ export const useSetupQuiz = create(
         }),
 
         { name: "quizsetupccq" }
+    )
+)
+
+
+interface IAlgorithm {
+    algorithmSolution: IAlgorithmSolution
+    setAlgorithmSolution: (value: IAlgorithmSolution) => void
+}
+
+export const useAlgorithm = create(
+    persist<IAlgorithm>(
+        (set) => ({
+            algorithmSolution: { solution: "" },
+            setAlgorithmSolution: (value: IAlgorithmSolution) =>
+                set((state) => ({
+                    algorithmSolution: value,
+                }))
+        }),
+
+        { name: "algorithmccq" }
     )
 )

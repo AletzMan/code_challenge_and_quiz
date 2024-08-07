@@ -1,0 +1,55 @@
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin: 3em 0;
+    height: 80%;
+    width: 100%;
+
+    &_logo {
+        display: flex;
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 3em;
+        transform: scale(0);
+        opacity: 1;
+        background-color: #d5aa3f;
+        border: 1px solid #d5aa3f;
+
+        &:nth-child(1) {
+            animation: animationLoading 0.8s ease-in-out infinite alternate;
+        }
+
+        &:nth-child(2) {
+            animation: animationLoading 0.8s ease-in-out infinite 400ms alternate;
+        }
+
+        &:nth-child(3) {
+            animation: animationLoading 0.8s ease-in-out infinite 0.8s alternate;
+        }
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.8em;
+    color: #d5aa3f;
+}
+
+@keyframes animationLoading {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

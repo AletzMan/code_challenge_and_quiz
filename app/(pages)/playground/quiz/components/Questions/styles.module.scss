@@ -1,9 +1,11 @@
 .quiz {
     position: relative;
-    padding: 0.5em;
+    //padding: 0.5em;
     border-radius: 0.5em;
     background-color: var(--background-color);
-    min-height: 31em;
+    //background-color: red;
+    //height: calc(100svh - 10em);
+    //min-height: 31em;
 
     &_save {
         position: absolute;
@@ -13,51 +15,22 @@
 }
 
 .header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     padding: 0.35em;
     border-radius: 0.35em;
     margin: 0 0 1em 0;
     background-color: var(--grayblack-color);
+    z-index: 6;
 
     &_options {
         display: flex;
         gap: 1em;
     }
 
-    &_difficulty {
-        display: flex;
-        align-items: center;
-        padding: 0.1em 1em;
-        border: 1px dashed;
-        border-radius: 0.25em;
-        background-color: #5b5b5b20;
-        color: var(--fontsecond-color);
 
-        &Easy {
-            background-color: #4fdd5420;
-            color: #3fd544;
-            border-color: #3fd544;
-        }
-
-        &Medium {
-            color: #e6d438;
-            border-color: #e6d438;
-            background-color: #ddc90e20;
-        }
-
-        &Hard {
-            color: #FF9800;
-            border-color: #FF9800;
-            background-color: #dd500e20;
-        }
-
-        &Expert {
-            color: #ff2c1d;
-            border-color: #f63325;
-            background-color: #dd0e0e20;
-        }
-    }
 }
 
 .type {
@@ -304,61 +277,78 @@
 }
 
 .blankspace {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
+
+    &_icon {
+        position: absolute;
+        top: 0.35em;
+        left: -2em;
+        border: 1px solid transparent;
+        padding: 0.1em;
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 3em;
+
+        &Right {
+            color: #3fd544;
+            border-color: #3fd544;
+            background-color: #3fd54412;
+        }
+
+        &Wrong {
+            color: #ff1414;
+            border-color: #ff1414;
+            background-color: #ff141412;
+        }
+    }
+
+    &_input {
+        padding: 0.25em 1em;
+        font-size: 1.1em;
+        color: var(--font-color);
+        font-family: var(--font-family);
+        border-radius: 0.25em;
+        border: 1px solid var(--grayblack-color);
+        background-color: var(--black-color);
+
+        &:focus {
+            outline: 2px solid var(--blue-color);
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        &Right {
+            border-color: #3fd544;
+        }
+
+        &Wrong {
+            border-color: #e32121;
+        }
+    }
+
+    &>button {
+        filter: hue-rotate(50deg);
+
+        &:hover {
+            filter: hue-rotate(70deg) !important;
+        }
+    }
 }
 
 .send {
     display: flex;
     justify-content: center;
     gap: 1em;
+    padding: 0 0.5em 0.5em 0.5em;
 }
 
-.loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    height: 80%;
-    width: 100%;
-
-    &_logo {
-        display: flex;
-        width: 1.5em;
-        height: 1.5em;
-        border-radius: 3em;
-        transform: scale(0);
-        opacity: 1;
-        background-color: #d5aa3f;
-        border: 1px solid #d5aa3f;
-
-        &:nth-child(1) {
-            animation: animationLoading 0.8s ease-in-out infinite alternate;
-        }
-
-        &:nth-child(2) {
-            animation: animationLoading 0.8s ease-in-out infinite 400ms alternate;
-        }
-
-        &:nth-child(3) {
-            animation: animationLoading 0.8s ease-in-out infinite 0.8s alternate;
-        }
-    }
-}
-
-@keyframes animationLoading {
-    from {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
 
 .explanation {
     display: flex;
@@ -435,5 +425,114 @@
         text-wrap: balance;
         width: 100%;
         color: var(--fontsecond-color);
+    }
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0.5em;
+
+    &_label {
+        background-color: #b2b2b230;
+        color: var(--font-color);
+        padding: 0.15em 0.5em;
+        border-radius: 0.25em;
+    }
+
+    &_number {
+        color: var(--blue-color);
+        font-weight: 600;
+    }
+
+    &_subtitle {
+        display: flex;
+        gap: 0.5em;
+    }
+
+    &_title {
+        color: var(--green-color);
+        font-size: 1.2em;
+    }
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0 0 0;
+    gap: 0.5em;
+    width: 100%;
+    border-radius: 0.25em;
+    padding: 0.75em 0.75em 0.75em 2em;
+    background-color: var(--black-color);
+
+    &_text {
+        color: var(--font-color);
+        background-color: var(--grayblack-color);
+        padding: 0.35em;
+        border-radius: 0.25em;
+
+        &Li {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &_answer {
+        color: var(--fontsecond-color);
+        font-style: italic;
+        color: #ff1414;
+
+        &Right {
+            color: #3fd544;
+        }
+
+        &::before {
+            content: "R: ";
+        }
+    }
+}
+
+.details {
+    padding: 0.5em;
+    appearance: none;
+
+    &_summary {
+        display: flex;
+        align-items: center;
+        color: transparent;
+        border-radius: 0.25em;
+        background-color: #FFFFFF07;
+        cursor: pointer;
+
+    }
+
+    &_arrow {
+        width: 1.5em;
+        height: 1.5em;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &_title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.15em 0.5em;
+        color: var(--blue-color);
+    }
+
+    &_p {
+        color: var(--fontsecond-color);
+        border: 1px solid #FFFFFF15;
+        padding: 0.5em;
+    }
+
+    &[open] .details_arrow {
+        transform: rotate(180deg);
     }
 }

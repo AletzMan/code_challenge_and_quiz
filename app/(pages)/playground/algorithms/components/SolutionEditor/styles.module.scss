@@ -1,0 +1,144 @@
+.playground {
+    position: relative;
+    display: grid;
+    padding: 2.15em 0 0 0;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100svh - 24.5em);
+
+    &_button {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        position: absolute;
+        top: -0.25em;
+        z-index: 10;
+    }
+
+    &_logo {
+        display: flex;
+
+        &>svg {
+            width: 1.75em;
+            height: 1.75em;
+        }
+    }
+}
+
+.instructions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.25em;
+
+    &_title {
+        color: var(--blue-color);
+    }
+
+    &_description {
+        color: var(--font-color);
+    }
+
+    &_example {
+        display: flex;
+        gap: 1em;
+        padding: 0.5em;
+        width: max-content;
+        border-radius: 0.5em;
+        background-color: var(--gray-color);
+    }
+
+
+    &_label {
+        color: var(--font-color);
+        background-color: #FFFFFF15;
+        padding: 0.1em 0.5em;
+        width: max-content;
+        border-radius: 0.25em;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+
+    &_subtitle {
+        color: var(--fontsecond-color);
+        font-size: 0.9em;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    &_text {
+        color: var(--yellow-color);
+    }
+
+    &_input {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+
+    }
+
+    &_output {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+
+    }
+
+}
+
+.tags {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.25em;
+
+    &_tag {
+        padding: 0.15em 0.6em;
+        font-size: 0.8em;
+        border-radius: 0.5em;
+        text-shadow: 0 0 1px #000000;
+        color: #be7f13;
+        background-color: #be7f1315;
+    }
+}
+
+.explanation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    z-index: 10;
+    height: 100svh;
+    width: 100svw;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+
+    &_container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        max-width: 700px;
+        background-color: var(--background-color);
+        padding: 2em;
+        gap: 1em;
+        border-radius: 0.25em;
+    }
+
+    &_close {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+
+        &>button {
+            filter: hue-rotate(252deg) !important;
+        }
+    }
+
+    &_title {
+        color: var(--font-color);
+    }
+
+    &_p {
+        font-size: 0.95em;
+        text-wrap: pretty;
+        color: var(--fontsecond-color);
+    }
+}

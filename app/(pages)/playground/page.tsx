@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "../../components/Button/Button"
 import { FlowChartIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
+import { Footer } from "@/app/components/Footer/Footer"
 
 
 export default function Page() {
@@ -18,6 +19,7 @@ export default function Page() {
                     <FlowChartIcon className={`${styles.icon} ${styles.icon_two}`} />
                 </Link>
             </section>
+            <Footer />
         </main>
     )
 }
