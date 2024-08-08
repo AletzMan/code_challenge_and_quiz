@@ -3,11 +3,11 @@
 import { Combobox } from "@/app/components/Combobox/Combobox"
 import styles from "./styles.module.scss"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
-import { IItemCategory } from "../../../algorithms/components/Playground/Playground"
 import { CATEGORIES } from "@/app/utils/const"
 import { useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { HammerIcon, StudentIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
 import { TextBoxApiKey } from "@/app/components/TextBoxApiKey/TextBoxApiKey"
+import { IItemCategory } from "@/app/interfaces/languages"
 
 interface Props {
     error: boolean

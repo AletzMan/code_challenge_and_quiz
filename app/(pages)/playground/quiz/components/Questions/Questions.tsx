@@ -1,20 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CodeBlock, atomOneDark, hopscotch, noctisViola, nord } from "react-code-blocks"
+import { CodeBlock, atomOneDark } from "react-code-blocks"
 import styles from "./styles.module.scss"
 import { Separator } from "@/app/components/Separator/Separator"
-import { ArrowUpIcon, BookIcon, BookMarkIcon, BotIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, SaveIcon, SendIcon, TimeIcon } from "@/app/components/Icons"
+import { ArrowUpIcon, BookIcon, BotIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, SendIcon } from "@/app/components/Icons"
 import { Button } from "@/app/components/Button/Button"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewQuiz } from "@/app/utils/dataFetch"
 import CircularProgressBar from "@/app/components/CircularProgress/CircularProgress"
 import { IQuestion, IQuiz } from "@/app/interfaces/quiz"
-import { TextBox } from "@/app/components/TextBox/TextBox"
 import { QuizBot } from "@/app/components/QuizBot/QuizBot"
 import { MouseEvent, KeyboardEvent } from "react"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
+import { Modal } from "@/app/components/Modal/Modal"
+import { fontConsole } from "../../../page"
+import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -39,6 +41,7 @@ export function Questions({ setStart }: Props) {
     const [isRightAnswer, setIsRightAnswer] = useState(false)
     const [viewResults, setViewResults] = useState(false)
     const [error, setError] = useState(false)
+
 
     useEffect(() => {
         //setCompleteQuiz({ questions: [], correctAnswers: 0 })
@@ -136,6 +139,8 @@ export function Questions({ setStart }: Props) {
         setCompleteQuiz(newQuizResult)
     }
 
+    console.log(language)
+
     return (
         <>
             {
@@ -166,11 +171,11 @@ export function Questions({ setStart }: Props) {
                                 <h4 className={styles.element_question}>{quiz.question.replaceAll('\\', '')}</h4>
                                 {quiz.codeSnippet &&
                                     <CodeBlock
-                                        language={language.option}
+                                        language={language.language}
                                         showLineNumbers
                                         theme={atomOneDark}
                                         text={quiz.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace" }}
+                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
                                     />
                                 }
                                 <Separator />
@@ -245,7 +250,7 @@ export function Questions({ setStart }: Props) {
                             <Separator />
                             {!run &&
                                 <article className={styles.send}>
-                                    <Button onClick={() => setViewExplanation(true)}><BotIcon />EXPLICACIÓN</Button>
+                                    <Button onClick={() => setViewExplanation(prev => !prev)}><BotIcon />EXPLICACIÓN</Button>
                                     <Button className="green" onClick={HandleNextQuestion}>{number === questions ? 'RESULTADOS' : 'SIGUIENTE'}<NextIcon /></Button>
                                 </article>
                             }
@@ -272,7 +277,10 @@ export function Questions({ setStart }: Props) {
                                                 </summary>
                                                 <p className={styles.details_p}>{question.explanation.resume}</p>
                                                 {question.explanation.codeSnippet &&
-                                                    <CodeBlock text={question.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} language={language.option} />
+                                                    <CodeBlock text={question.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                                        theme={atomOneDark} language={language.language}
+                                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
+                                                    />
                                                 }
                                             </details>
                                         </div>
@@ -297,45 +305,32 @@ export function Questions({ setStart }: Props) {
             }
 
             {viewExplanation &&
-                <dialog open className={styles.explanation}>
+                <Modal onClick={() => setViewExplanation(false)}>
                     <div className={styles.explanation_container}>
-                        <button className={styles.explanation_button} onClick={() => setViewExplanation(false)}>
-                            <CloseIcon className={styles.explanation_buttonClose} />
-                        </button>
+                        <div className={styles.explanation_button} >
+                            <ButtonClose onClick={() => setViewExplanation(false)} />
+                        </div>
                         <InterrogationIcon className={styles.explanation_icon} />
                         <h5 className={styles.explanation_question}>{quiz.question}</h5>
                         <p className={styles.explanation_p}>{quiz.explanation.resume.replaceAll('\\n', '\n').replaceAll('\\t', '\t')}</p>
                         {quiz.explanation.codeSnippet &&
                             <CodeBlock
-                                language={language.option}
+                                language={"javascript"}
                                 showLineNumbers
                                 theme={atomOneDark}
                                 text={quiz.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                customStyle={{ "width": "max-content", "maxWidth": "100%", "padding": "0 2em 0 0", "fontFamily": "monospace" }}
+                                customStyle={{ "width": "max-content", "maxWidth": "100%", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
                             />
                         }
                         <QuizBot quiz={quiz} />
                     </div>
-                </dialog>
+                </Modal>
             }
         </>
     )
 }
 
-/*
-const Quiz = {
-    "question": "¿Cuál es el resultado de ejecutar el siguiente código?",
-    "codeSnippet": "console.log(typeof NaN);",
-    "options": [
-        "number",
-        "NaN",
-        "undefined",
-        "object"
-    ],
-    "answer": "number",
-    "explanation": "En JavaScript, NaN (Not a Number) es un valor numérico especial que representa un valor que no es un número válido. El operador typeof aplicado a NaN devuelve 'number'."
-}
-*/
+
 
 const OptionsSymbol = ["A", "B", "C", "D", "E", "F"]
 

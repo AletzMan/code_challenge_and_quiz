@@ -1,0 +1,36 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.25em;
+    color: var(--font-color);
+    font-family: var(--font-family);
+    border: 2px solid #FF0000;
+    background-color: #FF000020;
+    transition: all 0.3s ease-in-out;
+    filter: brightness(75%);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+        filter: brightness(100%);
+        box-shadow: 0 0 3px 1px #FF000080;
+    }
+
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+
+    &_close {
+        width: 1.75em;
+        height: 1.75em;
+        color: #FF0000;
+    }
+
+
+
+}

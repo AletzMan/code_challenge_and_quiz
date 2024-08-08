@@ -25,6 +25,7 @@ export default function RootLayout({
 				<Header />
 				{children}
 				{/*<Footer />*/}
+				<dialog id="modal_root" open></dialog>
 			</body>
 		</html>
 	)

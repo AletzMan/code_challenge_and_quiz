@@ -1,10 +1,9 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { IItemCategory } from "../(pages)/playground/algorithms/components/Playground/Playground"
-import { JSIcon } from "@/app/components/Icons"
-import { IQuiz, IQuizResult } from "../interfaces/quiz"
+import { IQuizResult } from "../interfaces/quiz"
 import { IAlgorithmSolution } from "../interfaces/algorithm"
 import { DefaultCategory, DefaultLanguage } from "./const"
+import { IItemCategory } from "../interfaces/languages"
 
 interface ISetupQuiz {
     category: IItemCategory

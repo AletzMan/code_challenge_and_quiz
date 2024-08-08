@@ -35,6 +35,7 @@
         color: var(--blue-color);
         border-color: var(--blue-color);
 
+
         &:hover:not(:disabled) {
             color: var(--blue-color);
             border-color: var(--blue-color);
@@ -62,6 +63,13 @@
     &>svg {
         width: 1.75em;
         height: 1.75em;
+    }
+
+    &[attr-active="active"] {
+        &:not(:disabled) {
+            filter: brightness(120%);
+            box-shadow: 0 0 2px 2px #FFFFFF40;
+        }
     }
 
 }
