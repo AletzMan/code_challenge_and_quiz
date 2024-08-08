@@ -1,8 +1,31 @@
 .combobox {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: max-content;
+    min-width: 10.5em;
     border: none;
+
+
+}
+
+.logo {
+    position: absolute;
+    top: 1.19em;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 0 0 0.35em;
+    height: 2.2em;
+    opacity: 0.8;
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
+
+    &>svg {
+        width: 1.45em;
+        height: 1.45em;
+    }
 }
 
 .label {
@@ -11,7 +34,8 @@
 }
 
 .select {
-    padding: 0.25em 0.75em;
+    text-align: center;
+    padding: 0.25em 1em 0.25em 0.75em;
     font-size: 1em;
     font-family: var(--font-family);
     background-color: var(--black-color);
