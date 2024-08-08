@@ -15,7 +15,6 @@ import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
-import { fontConsole } from "../../../page"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 
 interface Props {
@@ -175,7 +174,7 @@ export function Questions({ setStart }: Props) {
                                         showLineNumbers
                                         theme={atomOneDark}
                                         text={quiz.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
+                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }}
                                     />
                                 }
                                 <Separator />
@@ -279,7 +278,7 @@ export function Questions({ setStart }: Props) {
                                                 {question.explanation.codeSnippet &&
                                                     <CodeBlock text={question.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                                         theme={atomOneDark} language={language.language}
-                                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
+                                                        customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }}
                                                     />
                                                 }
                                             </details>
@@ -319,7 +318,7 @@ export function Questions({ setStart }: Props) {
                                 showLineNumbers
                                 theme={atomOneDark}
                                 text={quiz.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                customStyle={{ "width": "max-content", "maxWidth": "100%", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }}
+                                customStyle={{ "width": "max-content", "maxWidth": "100%", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }}
                             />
                         }
                         <QuizBot quiz={quiz} />

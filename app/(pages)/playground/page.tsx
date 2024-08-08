@@ -3,9 +3,7 @@ import Link from "next/link"
 import { FlowChartIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
 import { Footer } from "@/app/components/Footer/Footer"
-import { Inconsolata } from "next/font/google"
 
-export const fontConsole = Inconsolata({ subsets: ["latin"] })
 
 export default function Page() {
     return (
