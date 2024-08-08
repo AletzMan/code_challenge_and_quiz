@@ -7,6 +7,7 @@ import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { useSetupQuiz } from "@/app/utils/store"
 import { BotIcon, SendIcon, StopIcon, UserIcon } from "../Icons"
 import { IQuiz } from "@/app/interfaces/quiz"
+import { StyleCodeEditor } from "@/app/utils/const"
 
 
 interface Props {
@@ -58,7 +59,7 @@ export function QuizBot({ quiz }: Props) {
                                     language={language.language}
                                     showLineNumbers={false}
                                     text={GetCodeBlock(message.content) || ""}
-                                    theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }} />
+                                    theme={atomOneDark} customStyle={{ ...StyleCodeEditor }} />
 
                             }
                         </div>
