@@ -1,12 +1,10 @@
 
-import { AngularIcon, AnsibleIcon, BookIcon, BootstrapIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
-import { IItemCategory } from "../(pages)/playground/algorithms/components/Playground/Playground"
+import { AWSIcon, AngularIcon, AnsibleIcon, BookIcon, BootstrapIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, JenkinsIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
+import { IItemCategory } from "../interfaces/languages"
 
 
 
-export const CATEGORIES =
-// Lenguajes de Programación
-{
+export const CATEGORIES = {
     types: {
         items: [
             {
@@ -14,28 +12,32 @@ export const CATEGORIES =
                 value: "Lenguajes",
                 functionSyntax: `<!--does not support functions -->`,
                 color: "#E34F26",
-                logo: <NextIcon />
+                logo: <NextIcon />,
+                language: ""
             },
             {
                 option: "frontend",
                 value: "Front-End",
                 functionSyntax: `<!--does not support functions -->`,
                 color: "#E34F26",
-                logo: <NextIcon />
+                logo: <NextIcon />,
+                language: ""
             },
             {
                 option: "backend",
                 value: "Back-End",
                 functionSyntax: `<!--does not support functions -->`,
                 color: "#E34F26",
-                logo: <NextIcon />
+                logo: <NextIcon />,
+                language: ""
             },
             {
                 option: "devops",
                 value: "DevOps",
                 functionSyntax: `<!--does not support functions -->`,
                 color: "#E34F26",
-                logo: <NextIcon />
+                logo: <NextIcon />,
+                language: ""
             }
         ]
     },
@@ -44,6 +46,7 @@ export const CATEGORIES =
             {
                 option: "javascript",
                 value: "JavaScript",
+                language: "javascript",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#F7DF1E",
                 logo: <JSIcon />
@@ -51,6 +54,7 @@ export const CATEGORIES =
             {
                 option: "python",
                 value: "Python",
+                language: "python",
                 functionSyntax: `def myFunction():\n\treturn False`,
                 color: "#3776AB",
                 logo: <PythonIcon />
@@ -58,6 +62,7 @@ export const CATEGORIES =
             {
                 option: "java",
                 value: "Java",
+                language: "java",
                 functionSyntax: `public class Main {\n\tpublic static boolean myFunction() {\n\t\treturn false;\n\t}\n}`,
                 color: "#007396",
                 logo: <JavaIcon />
@@ -65,6 +70,7 @@ export const CATEGORIES =
             {
                 option: "cpp",
                 value: "C++",
+                language: "cpp",
                 functionSyntax: `namespace MyNamespace {\n\tbool myFunction() {\n\t\treturn false;\n\t}\n}`,
                 color: "#00599C",
                 logo: <CPPIcon />
@@ -72,6 +78,7 @@ export const CATEGORIES =
             {
                 option: "csharp",
                 value: "C#",
+                language: "csharp",
                 functionSyntax: `namespace MyNamespace {\n\tclass Program {\n\t\tpublic bool myFunction() {\n\t\t\treturn false;\n\t\t}\n\t}\n}`,
                 color: "#239120",
                 logo: <CSharpIcon />
@@ -79,6 +86,7 @@ export const CATEGORIES =
             {
                 option: "ruby",
                 value: "Ruby",
+                language: "ruby",
                 functionSyntax: `module MyModule\n\tdef myFunction\n\t\tfalse\n\tend\nend`,
                 color: "#CC342D",
                 logo: <RubyIcon />
@@ -86,6 +94,7 @@ export const CATEGORIES =
             {
                 option: "php",
                 value: "PHP",
+                language: "php",
                 functionSyntax: `<?php\nfunction myFunction() {\n\treturn false;\n}`,
                 color: "#777BB4",
                 logo: <PHPIcon />
@@ -93,6 +102,7 @@ export const CATEGORIES =
             {
                 option: "typescript",
                 value: "TypeScript",
+                language: "typescript",
                 functionSyntax: `function myFunction(): boolean {\n\treturn false;\n}`,
                 color: "#3178C6",
                 logo: <TSIcon />
@@ -100,6 +110,7 @@ export const CATEGORIES =
             {
                 option: "swift",
                 value: "Swift",
+                language: "swift",
                 functionSyntax: `class MyClass {\n\tfunc myFunction() -> Bool {\n\t\treturn false\n\t}\n}`,
                 color: "#FA7343",
                 logo: <SwiftIcon />
@@ -107,6 +118,7 @@ export const CATEGORIES =
             {
                 option: "kotlin",
                 value: "Kotlin",
+                language: "kotlin",
                 functionSyntax: `class MyClass {\n\tfun myFunction(): Boolean {\n\t\treturn false\n\t}\n}`,
                 color: "#0095D5",
                 logo: <KotlinIcon />
@@ -114,6 +126,7 @@ export const CATEGORIES =
             {
                 option: "go",
                 value: "Go",
+                language: "go",
                 functionSyntax: `package main\n\nfunc myFunction() bool {\n\treturn false\n}`,
                 color: "#00ADD8",
                 logo: <GoIcon />
@@ -121,6 +134,7 @@ export const CATEGORIES =
             {
                 option: "rs",
                 value: "Rust",
+                language: "rust",
                 functionSyntax: `mod my_module {\n\tpub fn myFunction() -> bool {\n\t\tfalse\n\t}\n}`,
                 color: "#DEA584",
                 logo: <RustIcon />
@@ -128,6 +142,7 @@ export const CATEGORIES =
             {
                 option: "dart",
                 value: "Dart",
+                language: "dart",
                 functionSyntax: `class MyClass {\n\tbool myFunction() {\n\t\treturn false;\n\t}\n}`,
                 color: "#0175C2",
                 logo: <DartIcon />
@@ -135,6 +150,7 @@ export const CATEGORIES =
             {
                 option: "scala",
                 value: "Scala",
+                language: "scala",
                 functionSyntax: `object MyObject {\n\tdef myFunction(): Boolean = {\n\t\tfalse\n\t}\n}`,
                 color: "#DC322F",
                 logo: <ScalaIcon />
@@ -142,6 +158,7 @@ export const CATEGORIES =
             {
                 option: "r",
                 value: "R",
+                language: "r",
                 functionSyntax: `myFunction <- function() {\n\treturn(FALSE)\n}`,
                 color: "#276DC3",
                 logo: <RIcon />
@@ -149,6 +166,7 @@ export const CATEGORIES =
             {
                 option: "perl",
                 value: "Perl",
+                language: "perl",
                 functionSyntax: `package MyPackage;\n\nsub myFunction {\n\treturn 0;\n}`,
                 color: "#39457E",
                 logo: <PerlIcon />
@@ -156,6 +174,7 @@ export const CATEGORIES =
             {
                 option: "lua",
                 value: "Lua",
+                language: "lua",
                 functionSyntax: `function myFunction()\n\treturn false\nend`,
                 color: "#3737f9",
                 logo: <LuaIcon />
@@ -163,13 +182,13 @@ export const CATEGORIES =
             {
                 option: "sql",
                 value: "SQL",
+                language: "sql",
                 functionSyntax: `-- SQL does not support functions in the same way\n-- Example for a stored procedure\nCREATE PROCEDURE myFunction()\nAS\nBEGIN\n\tSELECT 0 AS Result;\nEND`,
                 color: "#E38C00",
                 logo: <SQLIcon />
             }
         ]
     },
-    // Front-End
     frontend: {
         items: [
             {
@@ -177,74 +196,83 @@ export const CATEGORIES =
                 value: "HTML",
                 functionSyntax: `<!-- HTML does not support functions -->`,
                 color: "#E34F26",
-                logo: <HTMLIcon />
+                logo: <HTMLIcon />,
+                language: "html"
             },
             {
                 option: "css",
                 value: "CSS",
                 functionSyntax: `/* CSS does not support functions */`,
                 color: "#1572B6",
-                logo: <CSSIcon />
+                logo: <CSSIcon />,
+                language: "css"
             },
             {
                 option: "reactjs",
                 value: "React",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#61DAFB",
-                logo: <ReactIcon />
+                logo: <ReactIcon />,
+                language: "jsx"
             },
             {
                 option: "angular",
                 value: "Angular",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#DD0031",
-                logo: <AngularIcon />
+                logo: <AngularIcon />,
+                language: "tsx"
             },
             {
                 option: "vuejs",
                 value: "Vue.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#4FC08D",
-                logo: <VueIcon />
+                logo: <VueIcon />,
+                language: "jsx"
             },
             {
                 option: "nextjs",
                 value: "Next.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#f4f4f4",
-                logo: <NextJSIcon />
+                logo: <NextJSIcon />,
+                language: "jsx"
             },
             {
                 option: "nuxtjs",
                 value: "Nuxt.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#00C58E",
-                logo: <NuxtIcon />
+                logo: <NuxtIcon />,
+                language: "tsx"
             },
             {
                 option: "bootstrap",
                 value: "Bootstrap",
                 functionSyntax: `/* Bootstrap does not support functions */`,
                 color: "#7952B3",
-                logo: <BootstrapIcon />
+                logo: <BootstrapIcon />,
+                language: "css"
             },
             {
                 option: "tailwindcss",
                 value: "Tailwind CSS",
                 functionSyntax: `/* Tailwind CSS does not support functions */`,
                 color: "#38B2AC",
-                logo: <TailwindIcon />
+                logo: <TailwindIcon />,
+                language: "css"
             },
             {
                 option: "sass",
                 value: "Sass",
                 functionSyntax: `/* Sass does not support functions */`,
                 color: "#CC6699",
-                logo: <CSSIcon />
+                logo: <CSSIcon />,
+                language: "sass"
             }
         ]
     },
-    // Back-End
     backend: {
         items: [
             {
@@ -252,234 +280,118 @@ export const CATEGORIES =
                 value: "Node.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
                 color: "#339933",
-                logo: <NodeIcon />
+                logo: <NodeIcon />,
+                language: "javascript"
             },
             {
                 option: "django",
                 value: "Django",
                 functionSyntax: `def myFunction():\n\treturn False`,
                 color: "#0c704a",
-                logo: <DjangoIcon />
+                logo: <DjangoIcon />,
+                language: "python"
             },
             {
                 option: "flask",
                 value: "Flask",
                 functionSyntax: `def myFunction():\n\treturn False`,
                 color: "#000000",
-                logo: <FlaskIcon />
+                logo: <FlaskIcon />,
+                language: "python"
             },
             {
-                option: "spring",
-                value: "Spring",
-                functionSyntax: `public class Main {\n\tpublic static boolean myFunction() {\n\t\treturn false;\n\t}\n}`,
-                color: "#6DB33F",
-                logo: <SpringIcon />
-            },
-            {
-                option: "rails",
-                value: "Ruby on Rails",
-                functionSyntax: `class ApplicationController < ActionController::Base\n\tdef myFunction\n\t\tfalse\n\tend\nend`,
-                color: "#CC0000",
-                logo: <RubyOnRailsIcon />
+                option: "expressjs",
+                value: "Express.js",
+                functionSyntax: `function myFunction() {\n\treturn false;\n}`,
+                color: "#000000",
+                logo: <ExpressIcon />,
+                language: "javascript"
             },
             {
                 option: "laravel",
                 value: "Laravel",
                 functionSyntax: `<?php\nfunction myFunction() {\n\treturn false;\n}`,
                 color: "#FF2D20",
-                logo: <LaravelIcon />
+                logo: <LaravelIcon />,
+                language: "php"
             },
             {
-                option: "expressjs",
-                value: "Express",
-                functionSyntax: `function myFunction() {\n\treturn false;\n}`,
-                color: "#b6b6b6",
-                logo: <ExpressIcon />
+                option: "spring",
+                value: "Spring",
+                functionSyntax: `public class Main {\n\tpublic static boolean myFunction() {\n\t\treturn false;\n\t}\n}`,
+                color: "#6DB33F",
+                logo: <SpringIcon />,
+                language: ""
             },
             {
-                option: ".net",
-                value: ".NET",
-                functionSyntax: `namespace MyNamespace {\n\tclass Program {\n\t\tpublic bool myFunction() {\n\t\t\treturn false;\n\t\t}\n\t}\n}`,
-                color: "#512BD4",
-                logo: <NetIcon />
+                option: "ruby-on-rails",
+                value: "Ruby on Rails",
+                functionSyntax: `module MyModule\n\tdef myFunction\n\t\tfalse\n\tend\nend`,
+                color: "#CC0000",
+                logo: <RubyOnRailsIcon />,
+                language: "tuby"
             }
         ]
     },
-    // DevOps y Herramientas
     devops: {
         items: [
             {
                 option: "docker",
                 value: "Docker",
-                functionSyntax: `/* Docker does not support functions */`,
-                color: "#2496ED",
-                logo: <DockerIcon />
+                functionSyntax: `# Docker does not support functions`,
+                color: "#0DB7ED",
+                logo: <DockerIcon />,
+                language: ""
             },
             {
                 option: "kubernetes",
                 value: "Kubernetes",
-                functionSyntax: `/* Kubernetes does not support functions */`,
+                functionSyntax: `# Kubernetes does not support functions`,
                 color: "#326CE5",
-                logo: <KubernetesIcon />
+                logo: <KubernetesIcon />,
+                language: ""
             },
             {
-                option: "ansible",
-                value: "Ansible",
-                functionSyntax: `/* Ansible does not support functions */`,
-                color: "#EE0000",
-                logo: <AnsibleIcon />
+                option: "aws",
+                value: "AWS",
+                functionSyntax: `# AWS does not support functions`,
+                color: "#FF9900",
+                logo: <AWSIcon />,
+                language: ""
             },
             {
                 option: "terraform",
                 value: "Terraform",
-                functionSyntax: `/* Terraform does not support functions */`,
+                functionSyntax: `# Terraform does not support functions`,
                 color: "#623CE4",
-                logo: <TerraformIcon />
-            }
-        ]
-    },
-    // Cloud
-    cloud: {
-        items: [
-            {
-                option: "aws",
-                value: "AWS",
-                functionSyntax: `/* AWS uses Lambda functions */\nexports.handler = async (event) => {\n\treturn false;\n};`,
-                color: "#FF9900",
-                logo: <TerraformIcon />
+                logo: <TerraformIcon />,
+                language: ""
             },
             {
-                option: "azure",
-                value: "Azure",
-                functionSyntax: `/* Azure uses Functions */\nmodule.exports = async function (context, req) {\n\tcontext.res = {\n\t\tbody: false\n\t};\n};`,
-                color: "#0089D6",
-                logo: <TerraformIcon />
+                option: "jenkins",
+                value: "Jenkins",
+                functionSyntax: `# Jenkins does not support functions`,
+                color: "#D24939",
+                logo: <JenkinsIcon />,
+                language: ""
             },
             {
-                option: "gcp",
-                value: "Google Cloud Platform",
-                functionSyntax: `/* GCP uses Cloud Functions */\nexports.myFunction = (req, res) => {\n\tres.send(false);\n};`,
-                color: "#4285F4",
-                logo: <TerraformIcon />
-            }
-        ]
-    },
-    // Big Data
-    bigdata: {
-        items: [
-            {
-                option: "hadoop",
-                value: "Hadoop",
-                functionSyntax: `/* Hadoop does not support functions directly */`,
-                color: "#66CCFF",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "spark",
-                value: "Apache Spark",
-                functionSyntax: `/* Spark does not support functions directly */`,
-                color: "#E25A1C",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "kafka",
-                value: "Apache Kafka",
-                functionSyntax: `/* Kafka does not support functions directly */`,
-                color: "#231F20",
-                logo: <TerraformIcon />
-            }
-        ]
-    },
-    // Machine Learning y AI
-    machine: {
-        items: [
-            {
-                option: "tensorflow",
-                value: "TensorFlow",
-                functionSyntax: `/* TensorFlow does not support functions directly */`,
-                color: "#FF6F00",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "pytorch",
-                value: "PyTorch",
-                functionSyntax: `/* PyTorch does not support functions directly */`,
-                color: "#EE4C2C",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "ml",
-                value: "Machine Learning",
-                functionSyntax: `/* Machine Learning is a concept, not a language */`,
-                color: "#F9A825",
-                logo: <TerraformIcon />
-            }
-        ]
-    },
-    // Herramientas de Desarrollo
-    tools: {
-        items: [
-            {
-                option: "webpack",
-                value: "Webpack",
-                functionSyntax: `/* Webpack does not support functions */`,
-                color: "#8DD6F9",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "babel",
-                value: "Babel",
-                functionSyntax: `/* Babel does not support functions */`,
-                color: "#F9DC3E",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "graphql",
-                value: "GraphQL",
-                functionSyntax: `/* GraphQL does not support functions directly */`,
-                color: "#E10098",
-                logo: <TerraformIcon />
-            }
-        ]
-    },
-    // Mobile
-    mobile: {
-        items: [
-            {
-                option: "reactnative",
-                value: "React Native",
-                functionSyntax: `function myFunction() {\n\treturn false;\n}`,
-                color: "#61DAFB",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "flutter",
-                value: "Flutter",
-                functionSyntax: `class MyClass {\n\tbool myFunction() {\n\t\treturn false;\n\t}\n}`,
-                color: "#02569B",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "swift",
-                value: "Swift",
-                functionSyntax: `class MyClass {\n\tfunc myFunction() -> Bool {\n\t\treturn false\n\t}\n}`,
-                color: "#FA7343",
-                logo: <TerraformIcon />
-            },
-            {
-                option: "kotlin",
-                value: "Kotlin",
-                functionSyntax: `class MyClass {\n\tfun myFunction(): Boolean {\n\t\treturn false\n\t}\n}`,
-                color: "#0095D5",
-                logo: <TerraformIcon />
+                option: "ansible",
+                value: "Ansible",
+                functionSyntax: `# Ansible does not support functions`,
+                color: "#EE0000",
+                logo: <AnsibleIcon />,
+                language: ""
             }
         ]
     }
 }
 
+
 export const DefaultLanguage: IItemCategory = {
     option: "javascript",
     value: "JavaScript",
+    language: "javascript",
     functionSyntax: `function myFunction() {\n\treturn false;\n}`,
     color: "#F7DF1E",
     logo: <JavaIcon />
@@ -487,6 +399,7 @@ export const DefaultLanguage: IItemCategory = {
 
 export const DefaultCategory: IItemCategory = {
     option: "languages",
+    language: "",
     value: "Lenguajes",
     functionSyntax: `null`,
     color: "#F7DF1E",

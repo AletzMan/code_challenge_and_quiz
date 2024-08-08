@@ -1,0 +1,36 @@
+.dialog {
+    top: 0;
+    left: 0;
+    width: 100svw;
+    min-width: 320px;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    background-color: #FFFFFF00;
+    z-index: 20;
+    border: none;
+    transform-origin: center center;
+
+
+    &_click {
+        animation: click 30ms linear alternate;
+
+        @keyframes click {
+            0% {
+                transform: rotateZ(-5deg);
+            }
+
+            50% {
+                transform: rotateZ(0deg) scale(.8);
+            }
+
+            100% {
+                transform: rotateZ(5deg);
+            }
+        }
+    }
+
+}

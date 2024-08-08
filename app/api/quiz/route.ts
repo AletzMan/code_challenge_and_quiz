@@ -3,6 +3,7 @@ import { createOpenAI } from "@ai-sdk/openai"
 import { APICallError, RetryError, generateObject } from 'ai'
 import { z } from "zod"
 import { ManyRequestError, NotAuthorizedError, ServerError } from "../_services/errors"
+import { IResponseQuiz } from "@/app/interfaces/quiz"
 
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
@@ -30,6 +31,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 const openai = createOpenAI({
                     apiKey: OPENAI_API_KEY
                 })
+
+
                 const { object } = await generateObject({
                     model: openai("gpt-4o-mini"),
                     system: "You generate a question depending on the level of seniority and the programming language provided.",
@@ -66,8 +69,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
                                              * Be clear and without strange characters and give a good and summarized explanation.`,
 
                 })
-
-
 
                 //console.log(object.quiz)
 

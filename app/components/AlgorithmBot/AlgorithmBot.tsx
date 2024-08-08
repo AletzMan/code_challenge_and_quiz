@@ -8,6 +8,7 @@ import { BotIcon, LogoCCQ, SendIcon, StopIcon, UserIcon } from "../Icons"
 import { IQuiz } from "@/app/interfaces/quiz"
 import { GetCodeBlock, parseTextToJSX } from "../QuizBot/ParseTextToJSX"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
+import { fontConsole } from "@/app/(pages)/playground/page"
 
 
 interface Props {
@@ -80,10 +81,10 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
                                     {message.content.includes("Evalúa mi código") ? "Evalúa mi código" : parseTextToJSX(message.content)}
                                     {GetCodeBlock(message.content) &&
                                         <CodeBlock
-                                            language={language.option}
+                                            language={language.language}
                                             showLineNumbers={false}
                                             text={GetCodeBlock(message.content) || ""}
-                                            theme={atomOneDark} customStyle={{ "width": "max-content", "max-width": "100%", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
+                                            theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }} />
 
                                     }
                                 </div>
@@ -94,7 +95,7 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
                 ))}
             </article>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <textarea name="prompt" value={input} onChange={handleInputChange} className={styles.form_input} placeholder="Pregunta a QuizBot" rows={5} />
+                <input type="search" name="prompt" value={input} onChange={handleInputChange} className={styles.form_input} placeholder="Pregunta a QuizBot" />
                 {!isLoading && <button type="submit" className={styles.form_button} disabled={isLoading}><SendIcon className={styles.form_buttonIcon} /></button>}
                 {isLoading && <button type="button" className={`${styles.form_button} ${styles.form_buttonStop}`} onClick={() => stop()}><StopIcon className={styles.form_buttonIcon} /></button>}
             </form>

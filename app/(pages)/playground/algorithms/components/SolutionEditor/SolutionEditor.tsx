@@ -9,11 +9,14 @@ import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { Button } from "@/app/components/Button/Button"
 import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewAlgorithm } from "@/app/utils/dataFetch"
-import { BulbIcon, CheckedIcon, CloseIcon } from "@/app/components/Icons"
+import { BulbIcon, CheckedIcon, CloseIcon, IOIcon } from "@/app/components/Icons"
 import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
+import { Modal } from "@/app/components/Modal/Modal"
+import { fontConsole } from "../../../page"
+import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -23,10 +26,11 @@ export function SolutionEditor({ setStart }: Props) {
     const { enqueueSnackbar } = useSnackbar()
     const [evaluate, setEvaluate] = useState(false)
     const { language, difficulty } = useSetupQuiz()
-    const { setAlgorithmSolution } = useAlgorithm()
+    const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
     const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
     const [loading, setLaoding] = useState(true)
     const [openExplanation, setOpenExplanation] = useState(false)
+    const [openExample, setOpenExample] = useState(false)
     const [error, setError] = useState(false)
 
     useEffect(() => {
@@ -68,31 +72,27 @@ export function SolutionEditor({ setStart }: Props) {
                                     }
                                 </div>
                             </div>
-                            <div className={styles.instructions_example}>
-                                <span className={styles.instructions_text}>Ejemplo:</span>
-                                <div className={styles.instructions_input}>
-                                    <span className={styles.instructions_label}>Datos de entrada</span>
-                                    <span className={styles.instructions_subtitle}>{algorithm.inputDescription}</span>
-                                    <CodeBlock language={language.option} text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
-                                </div>
-                                <div className={styles.instructions_output}>
-                                    <span className={styles.instructions_label}>Resultado esperado</span>
-                                    <span className={styles.instructions_subtitle}>{algorithm.outputDescription}</span>
-                                    <CodeBlock language={language.option} text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace" }} />
-                                </div>
-                            </div>
+
                         </article>
 
                         <Separator />
                         <article className={styles.playground}>
-                            <div className={styles.playground_button}>
-                                <Button className="green" onClick={HandleEvaluate}>Evaluar Solución<CheckedIcon /></Button>
-                                <Button className="yellow" onClick={() => setOpenExplanation(true)}>Explicación<BulbIcon /></Button>
+                            <div className={styles.playground_buttons}>
+                                <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
+                                <Button className="yellow" attr-active={openExplanation && "active"} onClick={() => setOpenExplanation(prev => !prev)}>Explicación<BulbIcon /></Button>
+                                <Button className={"blue"} attr-active={openExample && "active"} onClick={() => setOpenExample(prev => !prev)}>Ejemplo<IOIcon /></Button>
                                 <span className={styles.playground_logo}>{language.logo && language.logo}</span>
                                 <Levels difficulty={difficulty} />
                             </div>
-                            <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
-                            <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
+                            <div className={styles.playground_container}>
+                                <div className={styles.playground_editor}>
+                                    <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
+                                    <div className={styles.playground_output}>
+                                        <p className={styles.playground_outputText}>{"Suerte"}</p>
+                                    </div>
+                                </div>
+                                <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
+                            </div>
                         </article>
                     </>
                 }
@@ -108,15 +108,42 @@ export function SolutionEditor({ setStart }: Props) {
                 }
             </div>
             {openExplanation &&
-                <dialog open className={styles.explanation}>
-                    <article className={styles.explanation_container}>
+                <Modal onClick={() => setOpenExplanation(false)} allowBackground>
+                    <article className={styles.explanation}>
                         <div className={styles.explanation_close}>
-                            <Button className="green" onClick={() => setOpenExplanation(false)}><CloseIcon /></Button>
+                            <ButtonClose onClick={() => setOpenExplanation(false)} />
                         </div>
                         <h3 className={styles.explanation_title}>{algorithm.title}</h3>
                         <p className={styles.explanation_p}>{parseTextToJSX(algorithm.explanation.resume.replaceAll('\\n', '\n'))}</p>
                     </article>
-                </dialog>
+                </Modal>
+            }
+            {
+                openExample &&
+                <Modal onClick={() => setOpenExample(false)} allowBackground>
+                    <div className={styles.instructions_example}>
+                        <div className={styles.explanation_close}>
+                            <ButtonClose onClick={() => setOpenExample(false)} />
+                        </div>
+                        <span className={styles.instructions_text}>Ejemplo:</span>
+                        <div className={styles.instructions_input}>
+                            <span className={styles.instructions_label}>Datos de entrada</span>
+                            <span className={styles.instructions_subtitle}>{algorithm.inputDescription}</span>
+                            <CodeBlock language={language.language}
+                                text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                theme={atomOneDark}
+                                customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }} />
+                        </div>
+                        <div className={styles.instructions_output}>
+                            <span className={styles.instructions_label}>Resultado esperado</span>
+                            <span className={styles.instructions_subtitle}>{algorithm.outputDescription}</span>
+                            <CodeBlock language={language.language}
+                                text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                theme={atomOneDark}
+                                customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }} />
+                        </div>
+                    </div>
+                </Modal>
             }
         </>
     )

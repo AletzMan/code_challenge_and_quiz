@@ -37,6 +37,7 @@ body {
 }
 
 body {
+  position: relative;
   background: radial-gradient(ellipse at bottom, var(--grayblack-color), var(--black-color)),
     radial-gradient(ellipse at top, var(--grayblack-color), var(--black-color));
   /*background-image: url("/grid.png");
