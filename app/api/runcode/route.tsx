@@ -13,10 +13,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
             const sourceCode = searchParams.get('sourceCode')
             const version = searchParams.get('version')
 
-            console.log(language)
-            console.log(sourceCode)
-            console.log(version)
-
             const response = await fetch(`${URL_API_PISTON}`, {
                 method: "POST",
                 body: JSON.stringify({
@@ -31,9 +27,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
             })
 
             if (response.status === 400) {
-                console.log(response)
-                console.log(response.statusText)
-                console.log(await response.json())
                 return BadRequestError()
             }
 

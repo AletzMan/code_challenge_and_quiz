@@ -1,6 +1,7 @@
 "use server"
 
 import { IAlgorithm } from "../interfaces/algorithm"
+import { IOutputRunCode, IResponseOutputRunCode } from "../interfaces/languages"
 import { IQuiz } from "../interfaces/quiz"
 
 interface IResponseFetchQuiz {
@@ -113,4 +114,28 @@ export const GetNewAlgorithm = async (language: string, level: string, apiKey: s
 
 
     }
+}
+
+
+export const RunCode = async (language: string, sourceCode: string, version: string): Promise<IResponseOutputRunCode> => {
+    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', ''))
+    try {
+        const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '')}&version=${version}`, {
+            method: "POST"
+        })
+        const data: IResponseOutputRunCode = await response.json()
+
+        if (response.ok) {
+            return data
+        }
+        return data
+
+    } catch (error) {
+        const newResponse: IResponseOutputRunCode = {
+            error: true,
+            response: null
+        }
+        return newResponse
+    }
+
 }

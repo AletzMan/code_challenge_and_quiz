@@ -8,8 +8,8 @@ import { CodeEditor } from "@/app/components/CodeEditor/CodeEditor"
 import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { Button } from "@/app/components/Button/Button"
 import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
-import { GetNewAlgorithm } from "@/app/utils/dataFetch"
-import { BulbIcon, CheckedIcon, CloseIcon, IOIcon } from "@/app/components/Icons"
+import { GetNewAlgorithm, RunCode } from "@/app/utils/dataFetch"
+import { BulbIcon, CheckedIcon, CloseIcon, IOIcon, RunCodeIcon } from "@/app/components/Icons"
 import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
@@ -17,6 +17,7 @@ import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import { StyleCodeEditor } from "@/app/utils/const"
+import { IOutputRun } from "@/app/interfaces/languages"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -32,6 +33,7 @@ export function SolutionEditor({ setStart }: Props) {
     const [openExplanation, setOpenExplanation] = useState(false)
     const [openExample, setOpenExample] = useState(false)
     const [error, setError] = useState(false)
+    const [output, setOutput] = useState<IOutputRun>({ code: 0, output: "Suerte 🍀", signal: "", stderr: "", stdout: "" })
 
     useEffect(() => {
         const GetQuiz = async () => {
@@ -41,8 +43,8 @@ export function SolutionEditor({ setStart }: Props) {
                 setAlgorithm(response.data)
                 setAlgorithmSolution({ solution: response.data.codeTemplate })
             } else {
-                setError(true)
                 enqueueSnackbar({ message: response.message, variant: "error" })
+                setError(true)
             }
             setLaoding(false)
         }
@@ -56,6 +58,22 @@ export function SolutionEditor({ setStart }: Props) {
         }, 500)
     }
 
+    const HandleRunCode = async () => {
+        setOutput({ code: -135, output: "[RUN] Ejecutando código...", signal: "", stderr: "", stdout: "" })
+        const response = await RunCode(language.language, algorithmSolution.solution, language.version)
+        console.log(response)
+        if (response.response?.run.code === 1 && response.response?.run.stderr) {
+            console.log("ERROR CODE")
+            setOutput(response.response?.run)
+        } else {
+            console.log("CODE")
+            if (response.response)
+                setOutput(response.response?.run)
+        }
+    }
+
+    console.log(output)
+
     return (
         <>
             <div>
@@ -64,7 +82,7 @@ export function SolutionEditor({ setStart }: Props) {
                         <article className={styles.instructions}>
                             <div>
                                 <h2 className={styles.instructions_title}>{algorithm.title}</h2>
-                                <p className={styles.instructions_description}>{parseTextToJSX(algorithm.description.replaceAll('\\n', '\n'))}</p>
+                                <div className={styles.instructions_description}>{parseTextToJSX(algorithm.description.replaceAll('\\n', '\n'))}</div>
                                 <div className={styles.tags}>
                                     {algorithm.tags.map(tag => (
                                         <span className={styles.tags_tag} key={tag}>{tag}</span>
@@ -72,23 +90,35 @@ export function SolutionEditor({ setStart }: Props) {
                                     }
                                 </div>
                             </div>
-
                         </article>
 
                         <Separator />
                         <article className={styles.playground}>
-                            <div className={styles.playground_buttons}>
-                                <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
-                                <Button className="yellow" attr-active={openExplanation && "active"} onClick={() => setOpenExplanation(prev => !prev)}>Explicación<BulbIcon /></Button>
-                                <Button className={"blue"} attr-active={openExample && "active"} onClick={() => setOpenExample(prev => !prev)}>Ejemplo<IOIcon /></Button>
-                                <span className={styles.playground_logo}>{language.logo && language.logo}</span>
-                                <Levels difficulty={difficulty} />
+                            <div className={styles.playground_header}>
+                                <div className={styles.playground_buttons}>
+                                    <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
+                                    <Button className="yellow" attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>Explicación<BulbIcon /></Button>
+                                    <Button className={"blue"} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>Ejemplo<IOIcon /></Button>
+                                    <span className={styles.playground_logo}>{language.logo && language.logo}</span>
+                                    <Levels difficulty={difficulty} />
+                                    <div className={styles.playground_buttonsRun}>
+                                        <Button onClick={HandleRunCode} >RUN<RunCodeIcon /></Button>
+                                    </div>
+                                </div>
+                                <div></div>
                             </div>
                             <div className={styles.playground_container}>
                                 <div className={styles.playground_editor}>
                                     <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
                                     <div className={styles.playground_output}>
-                                        <p className={styles.playground_outputText}>{"Suerte"}</p>
+                                        <header className={styles.playground_outputHeader}>
+                                            <span className={styles.playground_outputHeaderText}>OUTPUT</span>
+                                            <span className={`${styles.playground_outputHeaderStatus} 
+                                            ${output.code === -135 && styles.playground_outputHeaderStatusRun}
+                                            ${output.code > 0 && styles.playground_outputHeaderStatusError}
+                                            ${output.code === 0 && styles.playground_outputHeaderStatusOK}`}></span>
+                                        </header>
+                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} />
                                     </div>
                                 </div>
                                 <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
