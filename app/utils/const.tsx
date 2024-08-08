@@ -405,3 +405,11 @@ export const DefaultCategory: IItemCategory = {
     color: "#F7DF1E",
     logo: <BookIcon />
 }
+
+export const StyleCodeEditor =
+{
+    "width": "max-content",
+    "padding": "0 2em 0 0",
+    "fontFamily": "monospace",
+    "fontSize": "0.9em"
+}

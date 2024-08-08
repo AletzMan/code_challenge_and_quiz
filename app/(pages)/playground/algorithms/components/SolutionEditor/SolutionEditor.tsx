@@ -16,6 +16,7 @@ import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
+import { StyleCodeEditor } from "@/app/utils/const"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -131,7 +132,7 @@ export function SolutionEditor({ setStart }: Props) {
                             <CodeBlock language={language.language}
                                 text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                 theme={atomOneDark}
-                                customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }} />
+                                customStyle={{ ...StyleCodeEditor }} />
                         </div>
                         <div className={styles.instructions_output}>
                             <span className={styles.instructions_label}>Resultado esperado</span>
@@ -139,7 +140,7 @@ export function SolutionEditor({ setStart }: Props) {
                             <CodeBlock language={language.language}
                                 text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                 theme={atomOneDark}
-                                customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }} />
+                                customStyle={{ ...StyleCodeEditor }} />
                         </div>
                     </div>
                 </Modal>
