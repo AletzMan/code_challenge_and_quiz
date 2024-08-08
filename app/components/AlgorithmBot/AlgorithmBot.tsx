@@ -8,7 +8,6 @@ import { BotIcon, LogoCCQ, SendIcon, StopIcon, UserIcon } from "../Icons"
 import { IQuiz } from "@/app/interfaces/quiz"
 import { GetCodeBlock, parseTextToJSX } from "../QuizBot/ParseTextToJSX"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
-import { fontConsole } from "@/app/(pages)/playground/page"
 
 
 interface Props {
@@ -84,7 +83,7 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
                                             language={language.language}
                                             showLineNumbers={false}
                                             text={GetCodeBlock(message.content) || ""}
-                                            theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": fontConsole.style.fontFamily, "fontSize": "0.9em" }} />
+                                            theme={atomOneDark} customStyle={{ "width": "max-content", "padding": "0 2em 0 0", "fontFamily": "monospace", "fontSize": "0.9em" }} />
 
                                     }
                                 </div>
