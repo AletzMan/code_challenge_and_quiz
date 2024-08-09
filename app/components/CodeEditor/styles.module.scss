@@ -6,13 +6,19 @@
     background-color: #1e1e1e;
     padding: 1em 0.5em 0.5em 0.5em;
     border-radius: 0.25em;
-
+    overflow: hidden;
 
     &_copy {
         position: absolute;
         top: 0.35em;
         left: 0.35em;
         z-index: 6;
+    }
+
+    &_code {
+        height: 100%;
+        width: 50%;
+        overflow-x: hidden;
     }
 
 
