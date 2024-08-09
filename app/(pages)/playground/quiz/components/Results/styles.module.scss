@@ -11,7 +11,7 @@
 
 
     &_label {
-        background-color: #b2b2b230;
+        background-color: var(--gray-color);
         color: var(--font-color);
         padding: 0.15em 0.5em;
         border-radius: 0.25em;
@@ -28,7 +28,7 @@
     }
 
     &_title {
-        color: var(--green-color);
+        color: var(--yellow-color);
         font-size: 1.2em;
     }
 }
@@ -61,15 +61,26 @@
 .details {
     appearance: none;
 
+    &[open] {
+        filter: brightness(110%);
+
+        & .details_summary {
+            background-color: #272d30;
+
+
+        }
+    }
+
     &_summary {
         display: flex;
         align-items: center;
         color: transparent;
         border-radius: 0.15em;
         min-height: 4em;
-        background-color: var(--blackgray-color);
+        background-color: var(--grayblack-color);
         border-left: 4px solid #ff1414;
         cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
         &Right {
             border-left: 4px solid #219625;
@@ -168,6 +179,22 @@
             &>svg {
                 width: 1.5em;
                 height: 1.5em;
+                transform: scale(0);
+                animation: viewAnswer 0.3s ease-in-out both;
+
+                @keyframes viewAnswer {
+                    to {
+                        transform: scale(1);
+                    }
+                }
+            }
+
+            &Text {
+                color: #219625;
+
+                &Fail {
+                    color: #ff1414;
+                }
             }
         }
 

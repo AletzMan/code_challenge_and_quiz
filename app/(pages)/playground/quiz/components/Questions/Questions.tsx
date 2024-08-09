@@ -132,7 +132,7 @@ export function Questions({ setStart }: Props) {
 
     const SetQuizResult = (isRight: boolean, answer: string) => {
         const newQuizResult = { ...completeQuiz }
-        const newQuestion: IQuestion = { question: quiz.question, answer: answer, isRight, explanation: quiz.explanation, codeSnippetExplanation: quiz.codeSnippetExplanation }
+        const newQuestion: IQuestion = { question: quiz.question, answer: answer, isRight, explanation: quiz.explanation, codeSnippetExplanation: quiz.codeSnippetExplanation, rightAnswer: quiz.rightAnswer }
         if (isRight) {
             newQuizResult.correctAnswers += 1
         }

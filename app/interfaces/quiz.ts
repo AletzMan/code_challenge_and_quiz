@@ -23,6 +23,7 @@ export interface IQuestion {
     isRight: boolean
     explanation: string
     codeSnippetExplanation: string | null
+    rightAnswer: string[]
 }
 
 export interface IQuestionCategory {
