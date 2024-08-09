@@ -15,8 +15,8 @@ import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
+import { CATEGORIES, StyleCodeEditor } from "@/app/utils/const"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
-import { StyleCodeEditor } from "@/app/utils/const"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -51,7 +51,7 @@ export function Questions({ setStart }: Props) {
         setIsRightAnswer(false)
         const GetQuiz = async () => {
             setLaoding(false)
-            const response = await GetNewQuiz(language.option, difficulty, apiKey)
+            const response = await GetNewQuiz(category.option, language.option, difficulty, apiKey)
             if (!response.error && response.data) {
                 setQuiz(response.data)
             } else {
@@ -131,15 +131,13 @@ export function Questions({ setStart }: Props) {
 
     const SetQuizResult = (isRight: boolean, answer: string) => {
         const newQuizResult = { ...completeQuiz }
-        const newQuestion: IQuestion = { question: quiz.question, answer: answer, isRight, explanation: quiz.explanation }
+        const newQuestion: IQuestion = { question: quiz.question, answer: answer, isRight, explanation: quiz.explanation, codeSnippetExplanation: quiz.codeSnippetExplanation }
         if (isRight) {
             newQuizResult.correctAnswers += 1
         }
         newQuizResult.questions.push(newQuestion)
         setCompleteQuiz(newQuizResult)
     }
-
-    console.log(language)
 
     return (
         <>
@@ -156,7 +154,7 @@ export function Questions({ setStart }: Props) {
                     <div className={styles.type}>
                         <div style={{ "color": language.color, backgroundColor: `${language.color}30`, borderColor: `${language.color}` }}
                             className={`${styles.type_language} `}>
-                            {language?.logo && language.logo}
+                            {CATEGORIES[category.option as "frontend"].items.find(item => item.option === language.option)?.logo}
                             {language.value}
                         </div>
                     </div>
@@ -275,9 +273,9 @@ export function Questions({ setStart }: Props) {
                                                 <summary className={styles.details_summary}>
                                                     <span className={styles.details_title} > Explicación<ArrowUpIcon className={styles.details_arrow} /> </span>
                                                 </summary>
-                                                <p className={styles.details_p}>{question.explanation.resume}</p>
-                                                {question.explanation.codeSnippet &&
-                                                    <CodeBlock text={question.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                                <p className={styles.details_p}>{question.explanation}</p>
+                                                {question.codeSnippetExplanation &&
+                                                    <CodeBlock text={question.codeSnippetExplanation.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                                         theme={atomOneDark} language={language.language}
                                                         customStyle={{ ...StyleCodeEditor }}
                                                     />
@@ -312,13 +310,13 @@ export function Questions({ setStart }: Props) {
                         </div>
                         <InterrogationIcon className={styles.explanation_icon} />
                         <h5 className={styles.explanation_question}>{quiz.question}</h5>
-                        <p className={styles.explanation_p}>{quiz.explanation.resume.replaceAll('\\n', '\n').replaceAll('\\t', '\t')}</p>
-                        {quiz.explanation.codeSnippet &&
+                        <p className={styles.explanation_p}>{quiz.explanation.replaceAll('\\n', '\n').replaceAll('\\t', '\t')}</p>
+                        {quiz.codeSnippetExplanation &&
                             <CodeBlock
                                 language={"javascript"}
                                 showLineNumbers
                                 theme={atomOneDark}
-                                text={quiz.explanation.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                text={quiz.codeSnippetExplanation.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                 customStyle={{ ...StyleCodeEditor }}
                             />
                         }
