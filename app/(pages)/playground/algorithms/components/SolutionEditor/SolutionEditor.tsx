@@ -84,14 +84,12 @@ export function SolutionEditor({ setStart }: Props) {
                                     ))
                                     }
                                 </div>
-                                <div className={styles.instructions_description}>{parseTextToJSX(algorithm.description.replaceAll('\\n', '\n'))}</div>
+                                <textarea className={`${styles.instructions_description} scrollBarStyle`} spellCheck readOnly value={algorithm.description.replaceAll('\\n', '\n')} />
                             </div>
                             <div className={styles.instructions_new}>
                                 <Button className="yellow" onClick={() => setStart(false)}><AddIcon /> Nuevo Algoritmo</Button>
                             </div>
                         </article>
-
-                        <Separator />
                         <article className={styles.playground}>
                             <div className={styles.playground_header}>
                                 <div className={styles.playground_buttons}>
@@ -112,7 +110,7 @@ export function SolutionEditor({ setStart }: Props) {
                                         </Button>
                                     </div>
                                 </div>
-                                <div>
+                                <div className={styles.playground_options}>
                                     <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
                                 </div>
                             </div>
