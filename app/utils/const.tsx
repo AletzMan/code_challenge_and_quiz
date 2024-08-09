@@ -2,6 +2,7 @@
 import { AWSIcon, AngularIcon, AnsibleIcon, BookIcon, BootstrapIcon, CIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, JenkinsIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
 import { IItemCategory } from "../interfaces/languages"
 import { IAlgorithmProperty } from "../interfaces/algorithm"
+import { IQuestionCategory } from "../interfaces/quiz"
 
 
 
@@ -330,7 +331,7 @@ export const CATEGORIES = {
                 option: "flask",
                 value: "Flask",
                 functionSyntax: `def myFunction():\n\treturn False`,
-                color: "#000000",
+                color: "#ffffff",
                 logo: <FlaskIcon />,
                 language: "python",
                 version: ""
@@ -339,7 +340,7 @@ export const CATEGORIES = {
                 option: "expressjs",
                 value: "Express.js",
                 functionSyntax: `function myFunction() {\n\treturn false;\n}`,
-                color: "#000000",
+                color: "#ffffff",
                 logo: <ExpressIcon />,
                 language: "javascript",
                 version: ""
@@ -520,8 +521,274 @@ export const AlgorithmsCategories: Array<IAlgorithmProperty> = [
     }
 ]
 
+/*
+export const ProgrammingCategories: Array<IQuestionCategory> = [
+    {
+        option: "Syntax and Structure",
+        value: "Syntax and Structure"
+    },
+    {
+        option: "Basic Programming Concepts",
+        value: "Basic Programming Concepts"
+    },
+    {
+        option: "Algorithms and Logic",
+        value: "Algorithms and Logic"
+    },
+    {
+        option: "Control Structures",
+        value: "Control Structures"
+    },
+    {
+        option: "Functions and Procedures",
+        value: "Functions and Procedures"
+    },
+    {
+        option: "Error Handling and Exceptions",
+        value: "Error Handling and Exceptions"
+    },
+    {
+        option: "Data Structures",
+        value: "Data Structures"
+    },
+    {
+        option: "Object-Oriented Programming",
+        value: "Object-Oriented Programming"
+    },
+    {
+        option: "Recursion",
+        value: "Recursion"
+    },
+    {
+        option: "Input/Output (I/O)",
+        value: "Input/Output (I/O)"
+    },
+    {
+        option: "Optimization and Efficiency",
+        value: "Optimization and Efficiency"
+    },
+    {
+        option: "Functional Programming",
+        value: "Functional Programming"
+    },
+    {
+        option: "Concurrency and Parallelism",
+        value: "Concurrency and Parallelism"
+    },
+    {
+        option: "Security and Best Practices",
+        value: "Security and Best Practices"
+    },
+    {
+        option: "Testing and Debugging",
+        value: "Testing and Debugging"
+    },
+    {
+        option: "Version Control",
+        value: "Version Control"
+    },
+    {
+        option: "Interoperability and API",
+        value: "Interoperability and API"
+    },
+    {
+        option: "User Interface Development",
+        value: "User Interface Development"
+    },
+    {
+        option: "Continuous Integration and Automation",
+        value: "Continuous Integration and Automation"
+    },
+    {
+        option: "Design Patterns and Architecture",
+        value: "Design Patterns and Architecture"
+    }
+]
+*/
 
-
+export const ProgrammingCategories: {
+    languages: Array<IQuestionCategory>,
+    frontend: Array<IQuestionCategory>,
+    backend: Array<IQuestionCategory>,
+    devops: Array<IQuestionCategory>
+} = {
+    languages: [
+        {
+            option: "Syntax and Structure",
+            value: "Syntax and Structure"
+        },
+        {
+            option: "Basic Programming Concepts",
+            value: "Basic Programming Concepts"
+        },
+        {
+            option: "Algorithms and Logic",
+            value: "Algorithms and Logic"
+        },
+        {
+            option: "Control Structures",
+            value: "Control Structures"
+        },
+        {
+            option: "Data Structures",
+            value: "Data Structures"
+        },
+        {
+            option: "Recursion",
+            value: "Recursion"
+        },
+        {
+            option: "Memory Management",
+            value: "Memory Management"
+        },
+        {
+            option: "Garbage Collection",
+            value: "Garbage Collection"
+        },
+        {
+            option: "Advanced Data Types",
+            value: "Advanced Data Types"
+        },
+        {
+            option: "Type Systems",
+            value: "Type Systems"
+        },
+        {
+            option: "Object-Oriented Programming",
+            value: "Object-Oriented Programming"
+        },
+        {
+            option: "Language-specific Features",
+            value: "Language-specific Features"
+        },
+    ],
+    frontend: [
+        {
+            option: "User Interface Development",
+            value: "User Interface Development"
+        },
+        {
+            option: "Functional Programming",
+            value: "Functional Programming"
+        },
+        {
+            option: "Testing and Debugging",
+            value: "Testing and Debugging"
+        },
+        {
+            option: "Interoperability and API",
+            value: "Interoperability and API"
+        },
+        {
+            option: "Responsive Design",
+            value: "Responsive Design"
+        },
+        {
+            option: "Cross-Browser Compatibility",
+            value: "Cross-Browser Compatibility"
+        },
+        {
+            option: "Web Accessibility",
+            value: "Web Accessibility"
+        },
+        {
+            option: "State Management",
+            value: "State Management"
+        },
+        {
+            option: "Client-Side Routing",
+            value: "Client-Side Routing"
+        }
+    ],
+    backend: [
+        {
+            option: "Object-Oriented Programming",
+            value: "Object-Oriented Programming"
+        },
+        {
+            option: "Optimization and Efficiency",
+            value: "Optimization and Efficiency"
+        },
+        {
+            option: "Concurrency and Parallelism",
+            value: "Concurrency and Parallelism"
+        },
+        {
+            option: "Security and Best Practices",
+            value: "Security and Best Practices"
+        },
+        {
+            option: "Error Handling and Exceptions",
+            value: "Error Handling and Exceptions"
+        },
+        {
+            option: "Functions and Procedures",
+            value: "Functions and Procedures"
+        },
+        {
+            option: "Database Management",
+            value: "Database Management"
+        },
+        {
+            option: "API Design and Development",
+            value: "API Design and Development"
+        },
+        {
+            option: "Authentication and Authorization",
+            value: "Authentication and Authorization"
+        },
+        {
+            option: "Caching Strategies",
+            value: "Caching Strategies"
+        },
+        {
+            option: "Middleware and Integration",
+            value: "Middleware and Integration"
+        }
+    ],
+    devops: [
+        {
+            option: "Version Control",
+            value: "Version Control"
+        },
+        {
+            option: "Continuous Integration and Automation",
+            value: "Continuous Integration and Automation"
+        },
+        {
+            option: "Testing and Debugging",
+            value: "Testing and Debugging"
+        },
+        {
+            option: "Design Patterns and Architecture",
+            value: "Design Patterns and Architecture"
+        },
+        {
+            option: "Security and Best Practices",
+            value: "Security and Best Practices"
+        },
+        {
+            option: "Infrastructure as Code",
+            value: "Infrastructure as Code"
+        },
+        {
+            option: "Cloud Computing",
+            value: "Cloud Computing"
+        },
+        {
+            option: "Containerization and Orchestration",
+            value: "Containerization and Orchestration"
+        },
+        {
+            option: "Monitoring and Logging",
+            value: "Monitoring and Logging"
+        },
+        {
+            option: "Networking and Security",
+            value: "Networking and Security"
+        }
+    ]
+}
 
 
 export const DefaultLanguage: IItemCategory = {
