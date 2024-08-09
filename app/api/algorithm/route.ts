@@ -11,24 +11,26 @@ export async function GET(req: NextRequest, res: NextResponse) {
     try {
         if (req.nextUrl) {
             const searchParams = req.nextUrl.searchParams
-            let language = null
-            let level = null
+
 
             if (req.nextUrl && searchParams) {
-                language = searchParams.get('language')
-                level = searchParams.get('level')
+                let language = searchParams.get('language')
+                let level = searchParams.get('level')
+                let category = searchParams.get("category")
                 const OPENAI_API_KEY = searchParams.get('apiKey') || ""
+
+                console.log(language)
+                console.log(level)
+                console.log(category)
 
                 const openai = createOpenAI({
                     apiKey: OPENAI_API_KEY
                 })
 
 
-
-
                 const { object } = await generateObject({
                     model: openai("gpt-4o-mini"),
-                    system: "You generate a programming algorithm to solve, depending on the level of seniority and the programming language provided.",
+                    system: "You generate a programming algorithm to solve, depending on the level of seniority, category and programming language provided.",
                     maxTokens: 500,
                     maxRetries: 2,
                     schema: z.object({
@@ -51,23 +53,29 @@ export async function GET(req: NextRequest, res: NextResponse) {
                             language: z.string()
                         })
                     }),
-                    prompt: `Generate a ${level} level ${language} programming algorithms solving exercise.
-                                                                         
-                                                                **Requirements:**
-                                                                * In Spanish
-                                                                * Always provide an explanation
-                                                                * Always add a code template
-                                                                * In the description be brief and concise
-                                                                * Be clear and without strange characters and give a good and summarized explanation
-                                                                * In codeTemplate only put what is needed to start the language
-                                                                * Do not add the solution only the template depending on the language
-                                                                * Please note the difficulty of the exercise depending on the selected seniority
-                                                                   
-                                                                **Additional Notes:**
-                                                                * Consider the target audience's knowledge level
-                                                                * Use clear and concise language.
-                                                                * Provide examples if applicable.`,
+                    prompt: `Generate a programming algorithms solving exercise.
+                
+                                                **Configuration**
+                                                *Level: ${level}
+                                                *Language: ${language}
+                                                *Category: ${category}
+                                                                                         
+                                                **Requirements:**
+                                                * In Spanish
+                                                * Always provide an explanation
+                                                * Always add a code template
+                                                * In the description be brief and concise
+                                                * Be clear and without strange characters and give a good and summarized explanation
+                                                * In codeTemplate only put what is needed to start the language
+                                                * Do not add the solution only the template depending on the language
+                                                * Please note the difficulty of the exercise depending on the selected seniority
+                                                   
+                                                **Additional Notes:**
+                                                * Use clear and concise language.
+                                                * Provide examples if applicable.`,
                 })
+
+
 
 
 
@@ -99,11 +107,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
 /*
 
 
-          let object: IResponseAlgorithm = { algorithm: null }
+          
 
 
 
-          object = {
+          let object: IResponseAlgorithm = {
               algorithm: {
                   title: 'Implementa Merge Sort',
                   description: 'Implementa un algoritmo de ordenamiento Merge Sort.',
@@ -134,7 +142,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           }
           
           
-           object = {
+        let object: IResponseAlgorithm = {
                algorithm: {
                    title: 'Encuentra el Elemento Faltante en una Matriz',
                    description: '## Encuentra el Elemento Faltante\\n\\nDada una matriz `arr` que contiene `n-1` números enteros únicos en el rango de `1` a `n`, tu tarea es encontrar el único número faltante en la secuencia.\\n\\n**Nota:** La matriz no estará ordenada.\\n',
@@ -154,4 +162,52 @@ export async function GET(req: NextRequest, res: NextResponse) {
                    language: 'kotlin'
                }
            }
+          
+       let object: IResponseAlgorithm = {
+
+                    algorithm: {
+                        title: 'Ordenamiento por mezcla (Merge Sort)',
+                        description:
+                            'Implementa el algoritmo de ordenamiento por mezcla utilizando el enfoque de divide y vencerás. El algoritmo debe dividir el arreglo en mitades, ordenar cada mitad y luego combinar las mitades ordenadas en un solo arreglo ordenado.',
+                        codeTemplate: 'using System;\n' +
+                            '\n' +
+                            'class Program\n' +
+                            '{\n' +
+                            '    static void Main(string[] args)\n' +
+                            '    {\n' +
+                            '        // Inicializa el arreglo a ordenar\n' +
+                            '        int[] arr = { }; // Agrega elementos aquí\n' +
+                            '        // Llama a la función de ordenamiento\n' +
+                            '        MergeSort(arr, 0, arr.Length - 1);\n' +
+                            '    }\n' +
+                            '\n' +
+                            '    static void MergeSort(int[] arr, int left, int right)\n' +
+                            '    {\n' +
+                            '        // Implementa el algoritmo aquí\n' +
+                            '    }\n' +
+                            '\n' +
+                            '    static void Merge(int[] arr, int left, int mid, int right)\n' +
+                            '    {\n' +
+                            '        // Implementa la combinación aquí\n' +
+                            '    }\n' +
+                            '}',
+                        expectedOutput: 'Un arreglo ordenado en orden ascendente.',
+                        inputDescription: 'Un arreglo de enteros desordenados.',
+                        outputDescription: 'Un arreglo de enteros ordenados en orden ascendente.',
+                        constraints: [
+                            'El tamaño del arreglo debe ser mayor que 0.', 'Los elementos del arreglo pueden ser negativos.'
+                        ],
+                        exampleInputs: ['[38, 27, 43, 3, 9, 82, 10]', '[5, 2, 9, 1, 5, 6]'],
+                        exampleOutputs: ['[3, 9, 10, 27, 38, 43, 82]', '[1, 2, 5, 5, 6, 9]'],
+                        difficulty: 'hard',
+                        tags: ['ordenamiento', 'divide y vencerás', 'algoritmos'],
+                        explanation: {
+                            resume:
+                                'El ordenamiento por mezcla es un algoritmo eficiente que utiliza la técnica de divide y vencerás para ordenar un arreglo. Se divide el arreglo en mitades, se ordenan las mitades recursivamente y luego se combinan para formar un arreglo ordenado.',
+                            codeSnippet: null
+                        },
+                        language: 'csharp'
+                    }
+
+                }
 */
