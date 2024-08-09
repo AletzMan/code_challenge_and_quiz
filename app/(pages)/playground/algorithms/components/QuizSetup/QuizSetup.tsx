@@ -19,15 +19,20 @@ export function QuizSetup({ error, setError }: Props) {
     const { language, setLanguage, difficulty, setDifficulty, categoryAlgorithm, setCategoryAlgorith } = useSetupQuiz()
     const { setApiKey, apiKey } = useApiKey()
 
+    console.log(difficulty)
+    console.log(language)
+    console.log(categoryAlgorithm)
+
 
     useEffect(() => {
-        setLanguage(CATEGORIES.languages.items[0])
-    }, [])
-
-    const HandleChangeDifficulty = (value: string) => {
-        if (value === "trainee" || value === "junior" || value === "semi-senior" || value === "senior") {
-            setDifficulty(value)
+        console.log(language)
+        if (language.logo?.key === null) {
+            //setLanguage(CATEGORIES.languages.items.find(item => item.language === language.language) as IItemCategory)
         }
+    }, [categoryAlgorithm])
+
+    const HandleChangeDifficulty = (value: "easy" | "medium" | "hard" | "expert") => {
+        setDifficulty(value)
     }
 
     function HandleChangeCategory(event: ChangeEvent<HTMLSelectElement>): void {
@@ -63,10 +68,10 @@ export function QuizSetup({ error, setError }: Props) {
             <div className={styles.difficulty}>
                 <label className={styles.difficulty_label}>Dificultad</label>
                 <div className={styles.difficulty_buttons}>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "trainee" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("trainee")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "junior" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("junior")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "semi-senior" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("semi-senior")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "senior" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("senior")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("easy")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("medium")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("hard")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
+                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("expert")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
                 </div>
             </div>
             <TextBoxApiKey props={{ placeholder: "Introduzca su clave API de OpenAI ", value: apiKey, onChange: HandleChangeApiKey }} error={error} />
