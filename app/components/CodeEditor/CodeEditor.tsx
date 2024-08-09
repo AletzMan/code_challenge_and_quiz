@@ -23,10 +23,6 @@ export function CodeEditor({ language, codeTemplate }: Props) {
         }
     }
 
-    const HandleCopyClipBoard = () => {
-        navigator.clipboard.writeText(algorithmSolution.solution)
-    }
-
     return (
         <div className={styles.editor}>
             <div className={styles.editor_copy}>
@@ -34,12 +30,15 @@ export function CodeEditor({ language, codeTemplate }: Props) {
             </div>
             <Editor
                 defaultLanguage={language.language}
-                language={language.language}
                 value={codeTemplate}
                 theme='vs-dark'
+                width={"99.99%"}
+                height={"99.99%"}
                 options={{
                     minimap: { enabled: false },
                     contextmenu: true,
+                    wordWrap: "on",
+                    automaticLayout: true,
 
                 }}
                 onChange={HandleOnChange}
