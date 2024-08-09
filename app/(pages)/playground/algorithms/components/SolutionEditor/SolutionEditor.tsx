@@ -15,7 +15,7 @@ import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
-import { StyleCodeEditor } from "@/app/utils/const"
+import { CATEGORIES, StyleCodeEditor } from "@/app/utils/const"
 import { IOutputRun } from "@/app/interfaces/languages"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 
@@ -26,7 +26,7 @@ export function SolutionEditor({ setStart }: Props) {
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
     const [evaluate, setEvaluate] = useState(false)
-    const { language, difficulty, categoryAlgorithm } = useSetupQuiz()
+    const { language, difficulty, categoryAlgorithm, category } = useSetupQuiz()
     const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
     const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
     const [loading, setLaoding] = useState(true)
@@ -50,6 +50,8 @@ export function SolutionEditor({ setStart }: Props) {
         }
         GetQuiz()
     }, [])
+
+    console.log(language)
 
     function HandleEvaluate(event: MouseEvent<HTMLButtonElement>): void {
         setEvaluate(true)
@@ -84,7 +86,7 @@ export function SolutionEditor({ setStart }: Props) {
                                     ))
                                     }
                                 </div>
-                                <textarea className={`${styles.instructions_description} scrollBarStyle`} spellCheck readOnly value={algorithm.description.replaceAll('\\n', '\n')} />
+                                {/*<textarea className={`${styles.instructions_description} scrollBarStyle`} spellCheck readOnly value={algorithm.explanation.replaceAll('\\n', '\n')} />*/}
                             </div>
                             <div className={styles.instructions_new}>
                                 <Button className="yellow" onClick={() => setStart(false)}><AddIcon /> Nuevo Algoritmo</Button>
@@ -101,7 +103,7 @@ export function SolutionEditor({ setStart }: Props) {
                                         <span className={styles.playground_buttonsText} >Ejemplo</span>
                                         <IOIcon />
                                     </Button>
-                                    <span className={styles.playground_logo}>{language.logo && language.logo}</span>
+                                    <span className={styles.playground_logo}>{CATEGORIES[category.option as "frontend"].items.find(item => item.option === language.option)?.logo}</span>
                                     <Levels difficulty={difficulty} />
                                     <div className={styles.playground_buttonsRun}>
                                         <Button onClick={HandleRunCode} >
@@ -151,7 +153,7 @@ export function SolutionEditor({ setStart }: Props) {
                             <ButtonClose onClick={() => setOpenExplanation(false)} />
                         </div>
                         <h3 className={styles.explanation_title}>{algorithm.title}</h3>
-                        <p className={styles.explanation_p}>{parseTextToJSX(algorithm.explanation.resume.replaceAll('\\n', '\n'))}</p>
+                        <p className={styles.explanation_p}>{parseTextToJSX(algorithm.explanation.replaceAll('\\n', '\n'))}</p>
                     </article>
                 </Modal>
             }
@@ -171,6 +173,7 @@ export function SolutionEditor({ setStart }: Props) {
                                 theme={atomOneDark}
                                 customStyle={{ ...StyleCodeEditor }} />
                         </div>
+                        <Separator />
                         <div className={styles.instructions_output}>
                             <span className={styles.instructions_label}>Resultado esperado</span>
                             <span className={styles.instructions_subtitle}>{algorithm.outputDescription}</span>
