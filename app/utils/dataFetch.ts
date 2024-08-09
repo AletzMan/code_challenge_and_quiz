@@ -68,9 +68,9 @@ export const GetNewQuiz = async (language: string, level: string, apiKey: string
     }
 }
 
-export const GetNewAlgorithm = async (language: string, level: string, apiKey: string): Promise<IResponseFetchAlgorithm> => {
+export const GetNewAlgorithm = async (language: string, level: string, category: string, apiKey: string): Promise<IResponseFetchAlgorithm> => {
     try {
-        const response = await fetch(`${URL}/api/algorithm?language=${language}&level=${level}&apiKey=${apiKey}`, { cache: "no-cache" })
+        const response = await fetch(`${URL}/api/algorithm?language=${language}&level=${level}&category=${category}&apiKey=${apiKey}`, { cache: "no-cache" })
         const data = await response.json()
         if (response.ok) {
             const newResponse: IResponseFetchAlgorithm = {
@@ -118,7 +118,7 @@ export const GetNewAlgorithm = async (language: string, level: string, apiKey: s
 
 
 export const RunCode = async (language: string, sourceCode: string, version: string): Promise<IResponseOutputRunCode> => {
-    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll('\n', '').replaceAll(' ', ''))
+
     try {
         const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '')}&version=${version}`, {
             method: "POST"
