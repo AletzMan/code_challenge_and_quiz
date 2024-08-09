@@ -39,7 +39,7 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
             },
             {
                 role: "assistant",
-                content: algorithm.description,
+                content: algorithm.explanation,
                 id: crypto.randomUUID()
             },
             {
