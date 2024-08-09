@@ -18,12 +18,15 @@ interface IResponseFetchAlgorithm {
 
 const URL = process.env.URL_API
 
-export const GetNewQuiz = async (language: string, level: string, apiKey: string): Promise<IResponseFetchQuiz> => {
+export const GetNewQuiz = async (category: string, language: string, level: string, apiKey: string): Promise<IResponseFetchQuiz> => {
     const type = (Math.random() * 10).toFixed(0)
     try {
-        const response = await fetch(`${URL}/api/quiz?language=${language}&level=${level}&type=${type}&apiKey=${apiKey}`, { cache: "no-cache" })
+        const response = await fetch(`${URL}/api/quiz?category=${category}&language=${language}&level=${level}&type=${type}&apiKey=${apiKey}`, {
+            cache: "no-cache",
+            method: "POST"
+        })
         const data = await response.json()
-        console.log(response)
+
         if (response.ok) {
             const newResponse: IResponseFetchQuiz = {
                 error: false,
@@ -70,7 +73,10 @@ export const GetNewQuiz = async (language: string, level: string, apiKey: string
 
 export const GetNewAlgorithm = async (language: string, level: string, category: string, apiKey: string): Promise<IResponseFetchAlgorithm> => {
     try {
-        const response = await fetch(`${URL}/api/algorithm?language=${language}&level=${level}&category=${category}&apiKey=${apiKey}`, { cache: "no-cache" })
+        const response = await fetch(`${URL}/api/algorithm?language=${language}&level=${level}&category=${category}&apiKey=${apiKey}`, {
+            cache: "no-cache",
+            method: "POST"
+        })
         const data = await response.json()
         if (response.ok) {
             const newResponse: IResponseFetchAlgorithm = {
@@ -118,9 +124,9 @@ export const GetNewAlgorithm = async (language: string, level: string, category:
 
 
 export const RunCode = async (language: string, sourceCode: string, version: string): Promise<IResponseOutputRunCode> => {
-
+    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll("\n", ""))
     try {
-        const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '')}&version=${version}`, {
+        const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll("\n", "")}&version=${version}`, {
             method: "POST"
         })
         const data: IResponseOutputRunCode = await response.json()
