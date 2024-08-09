@@ -3,14 +3,15 @@
     align-items: center;
     gap: 0.75em;
     padding: 0.25em 0.5em;
-    border: 2px solid var(--font-color);
+    border: 1px solid var(--font-color);
     border-radius: 0.25em;
-    background-color: var(--grayblack-color);
+    background-color: #FFFFFF10;
     color: var(--font-color);
     font-family: var(--font-family);
     transition: all 0.3s ease-in-out;
     width: max-content;
-    filter: brightness(75%);
+    font-weight: 500;
+    //backdrop-filter: drop-shadow(0 0 5px #000000);
     cursor: pointer;
 
     &:hover:not(:disabled) {
@@ -23,6 +24,7 @@
     &_green {
         color: var(--green-color);
         border-color: var(--green-color);
+        background-color: #0c3006;
 
         &:hover:not(:disabled) {
             color: var(--green-color);
@@ -34,6 +36,7 @@
     &_blue {
         color: var(--blue-color);
         border-color: var(--blue-color);
+        background-color: #013244;
 
 
         &:hover:not(:disabled) {
@@ -46,6 +49,7 @@
     &_yellow {
         color: var(--yellow-color);
         border-color: var(--yellow-color);
+        background-color: #363406;
 
         &:hover:not(:disabled) {
             color: var(--yellow-color);
@@ -69,6 +73,19 @@
         &:not(:disabled) {
             filter: brightness(120%);
             box-shadow: 0 0 2px 2px #FFFFFF40;
+
+            &.button_blue {
+                box-shadow: 0 0 3px 1px var(--blue-color);
+            }
+
+            &.button_green {
+                box-shadow: 0 0 3px 1px var(--green-color);
+            }
+
+            &.button_yellow {
+                box-shadow: 0 0 3px 1px var(--yellow-color);
+
+            }
         }
     }
 
