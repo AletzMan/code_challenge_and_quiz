@@ -15,7 +15,7 @@
         display: grid;
         grid-template-columns: 50% 50%;
         max-height: calc(100svh - 20.25em);
-        min-height: calc(100svh - 21.65em);
+        min-height: calc(100svh - 20.5em);
         gap: 0.5em;
         width: 100%;
         padding: 0 0.5em 0 0;
@@ -29,7 +29,8 @@
     &_buttons {
         display: flex;
         align-items: center;
-        padding: 0 0 0.45em 0;
+        justify-content: center;
+        padding: 0.25em;
         width: 100%;
         gap: 1em;
 
@@ -44,6 +45,10 @@
             justify-content: flex-end;
             flex: content;
         }
+    }
+
+    &_options {
+        padding: 0.25em;
     }
 
     &_editor {
@@ -136,12 +141,20 @@
 
 .instructions {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.25em;
     height: 8em;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    background-color: var(--black-color);
 
+    &_container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        width: 100%;
+    }
 
     &_new {
         position: absolute;
@@ -151,11 +164,22 @@
 
     &_title {
         color: var(--blue-color);
+        text-wrap: nowrap;
+        max-width: 20em;
+        font-size: 1.25em;
     }
 
     &_description {
+        width: 100%;
+        height: 100%;
+        padding: 0.25em;
+        font-size: 0.9em;
+        font-weight: 300;
         color: var(--font-color);
-        max-width: 90ch;
+        font-family: var(--font-family);
+        background-color: transparent;
+        border: none;
+        resize: none;
     }
 
     &_example {
