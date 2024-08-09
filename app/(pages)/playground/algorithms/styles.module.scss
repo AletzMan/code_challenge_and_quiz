@@ -25,16 +25,23 @@
     align-items: center;
     justify-content: center;
     gap: 0.5em;
-    color: var(--blue-color);
-    background-color: #00AEEF10;
-    border: 1px solid #00AEEF;
     border-radius: 0.25em;
     padding: 0.15em 0.5em 0.15em 0;
     text-decoration: none;
+    border: 1px solid var(--blue-color);
+    background-color: #00AEEF10;
+    color: var(--blue-color);
     font-size: 0.6em;
+    transition: all 0.3s ease-in-out;
 
     &_icon {
-        width: 2em;
-        height: 2em;
+        width: 1.75em;
+        height: 1.75em;
+    }
+
+    &:hover:not(:disabled) {
+        color: var(--blue-color);
+        border-color: var(--blue-color);
+        box-shadow: 0 0 3px 1px var(--blue-color);
     }
 }
