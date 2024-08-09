@@ -118,7 +118,7 @@ export const GetNewAlgorithm = async (language: string, level: string, apiKey: s
 
 
 export const RunCode = async (language: string, sourceCode: string, version: string): Promise<IResponseOutputRunCode> => {
-    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', ''))
+    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll('\n', '').replaceAll(' ', ''))
     try {
         const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '')}&version=${version}`, {
             method: "POST"
