@@ -3,17 +3,17 @@ import { HammerIcon, StudentIcon, ToolsIcon, TrophyIcon } from "../Icons"
 import styles from "./styles.module.scss"
 
 interface Props {
-    difficulty: "trainee" | "junior" | "semi-senior" | "senior"
+    difficulty: "easy" | "medium" | "hard" | "expert"
 }
 
 export function Levels({ difficulty }: Props) {
     return (
         <span
             className={`${styles.difficulty} 
-                            ${difficulty === "trainee" && styles.difficulty_easy} 
-                                ${difficulty === "junior" && styles.difficulty_medium} 
-                                ${difficulty === "semi-senior" && styles.difficulty_hard} 
-                                ${difficulty === "senior" && styles.difficulty_expert}`}>
+                            ${difficulty === "easy" && styles.difficulty_easy} 
+                                ${difficulty === "medium" && styles.difficulty_medium} 
+                                ${difficulty === "hard" && styles.difficulty_hard} 
+                                ${difficulty === "expert" && styles.difficulty_expert}`}>
             {DifficultyLevelIcon[difficulty]}
             {DifficultyLevel[difficulty]}
         </span>
@@ -21,16 +21,16 @@ export function Levels({ difficulty }: Props) {
 }
 
 const DifficultyLevel = {
-    trainee: "Trainee",
-    junior: "Junior",
-    "semi-senior": "Semi-Senior",
-    senior: "Senior"
+    easy: "Trainee",
+    medium: "Junior",
+    hard: "Semi-Senior",
+    expert: "Senior"
 }
 
 const DifficultyLevelIcon = {
-    trainee: <StudentIcon className={styles.difficulty_icon} />,
-    junior: <HammerIcon className={styles.difficulty_icon} />,
-    "semi-senior": <ToolsIcon className={styles.difficulty_icon} />,
-    senior: <TrophyIcon className={styles.difficulty_icon} />
+    easy: <StudentIcon className={styles.difficulty_icon} />,
+    medium: <HammerIcon className={styles.difficulty_icon} />,
+    hard: <ToolsIcon className={styles.difficulty_icon} />,
+    expert: <TrophyIcon className={styles.difficulty_icon} />
 }
 

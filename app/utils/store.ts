@@ -13,8 +13,8 @@ interface ISetupQuiz {
     language: IItemCategory
     setLanguage: (value: IItemCategory) => void
     defaultLanguage: IItemCategory
-    difficulty: "trainee" | "junior" | "semi-senior" | "senior"
-    setDifficulty: (value: "trainee" | "junior" | "semi-senior" | "senior") => void
+    difficulty: "easy" | "medium" | "hard" | "expert"
+    setDifficulty: (value: "easy" | "medium" | "hard" | "expert") => void
     defaultDifficulty: string
     questions: number
     setQuestions: (value: number) => void
@@ -48,8 +48,8 @@ export const useSetupQuiz = create(
                     language: value,
                 })),
             defaultLanguage: DefaultLanguage,
-            difficulty: "junior",
-            setDifficulty: (value: "trainee" | "junior" | "semi-senior" | "senior") =>
+            difficulty: "easy",
+            setDifficulty: (value: "easy" | "medium" | "hard" | "expert") =>
                 set((state) => ({
                     difficulty: value,
                 })),
