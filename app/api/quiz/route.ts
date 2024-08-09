@@ -71,6 +71,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 })
 
 
+
                 //console.log(object.quiz)
 
                 return NextResponse.json({ data: object.quiz })
