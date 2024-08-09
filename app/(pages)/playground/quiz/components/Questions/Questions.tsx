@@ -2,7 +2,7 @@
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import styles from "./styles.module.scss"
 import { Separator } from "@/app/components/Separator/Separator"
-import { ArrowUpIcon, BookIcon, BotIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, SendIcon } from "@/app/components/Icons"
+import { ArrowUpIcon, BookIcon, BotIcon, CheckIcon, CloseIcon, CreateIcon, InterrogationIcon, NextIcon, SendIcon } from "@/app/components/Icons"
 import { Button } from "@/app/components/Button/Button"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useApiKey, useSetupQuiz } from "@/app/utils/store"
@@ -147,7 +147,7 @@ export function Questions({ setStart }: Props) {
                         <span className={styles.number}>{number}/{questions}</span>
                         <div className={styles.header_options}>
                             <Levels difficulty={difficulty} />
-                            <Button className="yellow" onClick={HandleReset}>CAMBIAR</Button>
+                            <Button className="yellow" onClick={HandleReset} title="Configurar un nuevo reto">Nuevo Reto <CreateIcon /></Button>
                         </div>
                     </header>
 
@@ -163,7 +163,7 @@ export function Questions({ setStart }: Props) {
                     {(!viewResults && loading && !error) && <>
                         <>
                             <div className={styles.quiz_save}>
-                                <Button className="blue" title="Marcar para estudiar"><BookIcon /></Button>
+                                <Button className="blue" title="Marcar para estudiar más tarde"  ><BookIcon /></Button>
                             </div>
                             <article className={styles.element}>
                                 <h4 className={styles.element_question}>{quiz.question.replaceAll('\\', '')}</h4>
@@ -248,8 +248,8 @@ export function Questions({ setStart }: Props) {
                             <Separator />
                             {!run &&
                                 <article className={styles.send}>
-                                    <Button onClick={() => setViewExplanation(prev => !prev)}><BotIcon />EXPLICACIÓN</Button>
-                                    <Button className="green" onClick={HandleNextQuestion}>{number === questions ? 'RESULTADOS' : 'SIGUIENTE'}<NextIcon /></Button>
+                                    <Button onClick={() => setViewExplanation(prev => !prev)} title="Ver la explicación detallada de esta respuesta."><BotIcon />EXPLICACIÓN</Button>
+                                    <Button className="green" onClick={HandleNextQuestion} title="Ir a siguiente pregunta">{number === questions ? 'RESULTADOS' : 'SIGUIENTE'}<NextIcon /></Button>
                                 </article>
                             }
                         </>
@@ -295,7 +295,7 @@ export function Questions({ setStart }: Props) {
                     {(error && loading) &&
                         <div className={styles.error}>
                             <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
-                            <Button onClick={() => setStart(false)}>Reintentar</Button>
+                            <Button onClick={() => setStart(false)} title="Volver a generar la pregunta">Reintentar</Button>
                         </div>
 
                     }
@@ -306,7 +306,7 @@ export function Questions({ setStart }: Props) {
                 <Modal onClick={() => setViewExplanation(false)}>
                     <div className={styles.explanation_container}>
                         <div className={styles.explanation_button} >
-                            <ButtonClose onClick={() => setViewExplanation(false)} />
+                            <ButtonClose onClick={() => setViewExplanation(false)} title="Cerrar explicación" />
                         </div>
                         <InterrogationIcon className={styles.explanation_icon} />
                         <h5 className={styles.explanation_question}>{quiz.question}</h5>
