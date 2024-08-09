@@ -1,0 +1,109 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0.5em;
+
+    &_label {
+        background-color: #b2b2b230;
+        color: var(--font-color);
+        padding: 0.15em 0.5em;
+        border-radius: 0.25em;
+    }
+
+    &_number {
+        color: var(--blue-color);
+        font-weight: 600;
+    }
+
+    &_subtitle {
+        display: flex;
+        gap: 0.5em;
+    }
+
+    &_title {
+        color: var(--green-color);
+        font-size: 1.2em;
+    }
+}
+
+
+.question {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0 0 0;
+    gap: 0.5em;
+    width: 100%;
+    border-radius: 0.25em;
+    padding: 0.75em 0.75em 0.75em 2em;
+    background-color: var(--black-color);
+
+    &_text {
+        color: var(--font-color);
+        background-color: var(--grayblack-color);
+        padding: 0.35em;
+        border-radius: 0.25em;
+
+        &Li {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &_answer {
+        color: var(--fontsecond-color);
+        font-style: italic;
+        color: #ff1414;
+
+        &Right {
+            color: #3fd544;
+        }
+
+        &::before {
+            content: "R: ";
+        }
+    }
+}
+
+.details {
+    padding: 0.5em;
+    appearance: none;
+
+    &_summary {
+        display: flex;
+        align-items: center;
+        color: transparent;
+        border-radius: 0.25em;
+        background-color: #FFFFFF07;
+        cursor: pointer;
+
+    }
+
+    &_arrow {
+        width: 1.5em;
+        height: 1.5em;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &_title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.15em 0.5em;
+        color: var(--blue-color);
+    }
+
+    &_p {
+        color: var(--fontsecond-color);
+        border: 1px solid #FFFFFF15;
+        padding: 0.5em;
+    }
+
+    &[open] .details_arrow {
+        transform: rotate(180deg);
+    }
+}
