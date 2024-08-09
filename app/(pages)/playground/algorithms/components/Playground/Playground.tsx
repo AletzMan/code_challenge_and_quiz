@@ -7,6 +7,7 @@ import { useApiKey } from "@/app/utils/store"
 import { Button } from "@/app/components/Button/Button"
 import { SolutionEditor } from "../SolutionEditor/SolutionEditor"
 import { enqueueSnackbar } from "notistack"
+import { AddIcon } from "@/app/components/Icons"
 
 
 
@@ -27,11 +28,7 @@ export const Playground = () => {
 
     return (
         <section className={styles.section}>
-            {start &&
-                <div className={styles.section_button}>
-                    <Button className="yellow" onClick={() => setStart(false)}>Nuevo Algoritmo</Button>
-                </div>
-            }
+
             {!start && <>
                 <QuizSetup error={error} setError={setError} />
                 <button className={styles.start} onClick={() => HandleStart(true)}>
