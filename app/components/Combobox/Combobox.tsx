@@ -2,16 +2,14 @@ import { ChangeEventHandler } from "react"
 import styles from "./styles.module.scss"
 import { CATEGORIES } from "@/app/utils/const"
 
-export interface IComboboxOptions {
-    option: string
-    value: string
-    functionSyntax?: string
-    color?: string
-}
-
 interface Props {
     label?: string
-    options: IComboboxOptions[]
+    options: {
+        option: string
+        value: string
+        functionSyntax?: string
+        color?: string
+    }[]
     value?: string | number
     onChange?: ChangeEventHandler<HTMLSelectElement>
 }
