@@ -1,13 +1,15 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { IQuizResult } from "../interfaces/quiz"
-import { IAlgorithmSolution } from "../interfaces/algorithm"
+import { IAlgorithmProperty, IAlgorithmSolution } from "../interfaces/algorithm"
 import { DefaultCategory, DefaultLanguage } from "./const"
 import { IItemCategory } from "../interfaces/languages"
 
 interface ISetupQuiz {
     category: IItemCategory
     setCategory: (value: IItemCategory) => void
+    categoryAlgorithm: IAlgorithmProperty
+    setCategoryAlgorith: (value: IAlgorithmProperty) => void
     language: IItemCategory
     setLanguage: (value: IItemCategory) => void
     defaultLanguage: IItemCategory
@@ -29,6 +31,11 @@ export const useSetupQuiz = create(
             setCategory: (value: IItemCategory) =>
                 set((state) => ({
                     category: value,
+                })),
+            categoryAlgorithm: { option: "Search", value: "Búsqueda" },
+            setCategoryAlgorith: (value: IAlgorithmProperty) =>
+                set((state) => ({
+                    categoryAlgorithm: value,
                 })),
             completeQuiz: { questions: [], correctAnswers: 0 },
             setCompleteQuiz: (value: IQuizResult) =>
