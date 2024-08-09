@@ -6,6 +6,9 @@
     margin: 0 auto;
     max-width: 900px;
     padding: 0.5em;
+    border-radius: 0.25em;
+    background-color: var(--black-color);
+
 
     &_label {
         background-color: #b2b2b230;
@@ -35,17 +38,16 @@
     display: flex;
     flex-direction: column;
     margin: 0.5em 0 0 0;
-    gap: 0.5em;
+    gap: 0.75em;
     width: 100%;
-    border-radius: 0.25em;
-    padding: 0.75em 0.75em 0.75em 2em;
-    background-color: var(--black-color);
 
     &_text {
         color: var(--font-color);
         background-color: var(--grayblack-color);
-        padding: 0.35em;
+        font-weight: 300;
         border-radius: 0.25em;
+        list-style: none;
+        border: 1px solid #FFFFFF08;
 
         &Li {
             display: flex;
@@ -53,38 +55,30 @@
         }
     }
 
-    &_answer {
-        color: var(--fontsecond-color);
-        font-style: italic;
-        color: #ff1414;
 
-        &Right {
-            color: #3fd544;
-        }
-
-        &::before {
-            content: "R: ";
-        }
-    }
 }
 
 .details {
-    padding: 0.5em;
     appearance: none;
 
     &_summary {
         display: flex;
         align-items: center;
         color: transparent;
-        border-radius: 0.25em;
-        background-color: #FFFFFF07;
+        border-radius: 0.15em;
+        min-height: 4em;
+        background-color: var(--blackgray-color);
+        border-left: 4px solid #ff1414;
         cursor: pointer;
 
+        &Right {
+            border-left: 4px solid #219625;
+        }
     }
 
     &_arrow {
-        width: 1.5em;
-        height: 1.5em;
+        width: 2.5em;
+        height: 2.5em;
         transition: all 0.3s ease-in-out;
     }
 
@@ -93,14 +87,98 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding: 0.15em 0.5em;
-        color: var(--blue-color);
+        height: 100%;
+        font-size: 0.9em;
+        padding: 0.5em 0.75em;
+        font-weight: 400;
+        color: var(--font-color);
+        font-weight: 300;
+
+        &Container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            height: 100%;
+            max-width: 90%;
+
+            &>svg {
+                width: 1.25em;
+                height: 1.25em;
+            }
+        }
     }
 
     &_p {
+        position: relative;
+        padding: 0.75em 0.75em 0.5em 0.5em;
+        border-radius: 0.25em;
         color: var(--fontsecond-color);
         border: 1px solid #FFFFFF15;
+        text-wrap: stable;
+
+        &::before {
+            content: "OOi";
+            color: transparent;
+        }
+
+        &>svg {
+            position: absolute;
+            top: 0.5em;
+            left: 0.5em;
+            width: 1.5em;
+            height: 1.5em;
+            color: #bbbb3190;
+        }
+    }
+
+    &_answer {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+        font-weight: 400;
+        font-style: italic;
+        padding: 0.25em 1em;
+        color: var(--font-color);
+        border-radius: 0.4em;
+        background-color: #FFFFFF08;
+
+        &>svg {
+            width: 1.5em;
+            height: 1.5em;
+            color: #219625;
+        }
+
+        &Button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            color: var(--blue-color);
+            opacity: 0.6;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.9;
+            }
+
+            &>svg {
+                width: 1.5em;
+                height: 1.5em;
+            }
+        }
+
+    }
+
+    &_container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
         padding: 0.5em;
+        background-color: var(--black-color);
     }
 
     &[open] .details_arrow {

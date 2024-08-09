@@ -3,7 +3,7 @@ import { useSetupQuiz } from "@/app/utils/store"
 import styles from "./styles.module.scss"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { StyleCodeEditor } from "@/app/utils/const"
-import { ArrowUpIcon } from "@/app/components/Icons"
+import { ArrowUpIcon, BulbIcon, CheckIcon, ViewIcon } from "@/app/components/Icons"
 
 export function Results() {
     const { completeQuiz, language } = useSetupQuiz()
@@ -18,22 +18,29 @@ export function Results() {
             <ol className={styles.question}>
                 {completeQuiz.questions.map(question => (
                     <li key={question.question} className={styles.question_text}>
-                        <div className={styles.question_textLi}>
-                            {question.question}
-                            <span className={`${styles.question_answer} ${question.isRight && styles.question_answerRight}`}>{question.answer}</span>
-                            <details className={styles.details} name="explication">
-                                <summary className={styles.details_summary}>
-                                    <span className={styles.details_title} > Explicación<ArrowUpIcon className={styles.details_arrow} /> </span>
-                                </summary>
-                                <p className={styles.details_p}>{question.explanation}</p>
+                        <details className={styles.details} name="explication">
+                            <summary className={`${styles.details_summary} ${question.isRight && styles.details_summaryRight}`}>
+                                <span className={styles.details_title} >
+                                    <span className={styles.details_titleContainer}>
+                                        {question.question}
+                                    </span>
+                                    <ArrowUpIcon className={styles.details_arrow} />
+                                </span>
+                            </summary>
+                            <div className={styles.details_container}>
+                                <div className={`${styles.details_answer} `}>
+                                    {!question.isRight ? <button className={styles.details_answerButton}><ViewIcon /> </button> : <CheckIcon />}
+                                    {question.answer}
+                                </div>
+                                <div className={styles.details_p}><BulbIcon />{question.explanation}</div>
                                 {question.codeSnippetExplanation &&
                                     <CodeBlock text={question.codeSnippetExplanation.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                         theme={atomOneDark} language={language.language}
                                         customStyle={{ ...StyleCodeEditor }}
                                     />
                                 }
-                            </details>
-                        </div>
+                            </div>
+                        </details>
                     </li>
                 ))
                 }
