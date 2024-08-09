@@ -9,7 +9,7 @@ import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { Button } from "@/app/components/Button/Button"
 import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewAlgorithm, RunCode } from "@/app/utils/dataFetch"
-import { BulbIcon, CheckedIcon, CloseIcon, IOIcon, RunCodeIcon } from "@/app/components/Icons"
+import { AddIcon, BulbIcon, CheckedIcon, CloseIcon, IOIcon, RunCodeIcon } from "@/app/components/Icons"
 import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
@@ -26,7 +26,7 @@ export function SolutionEditor({ setStart }: Props) {
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
     const [evaluate, setEvaluate] = useState(false)
-    const { language, difficulty } = useSetupQuiz()
+    const { language, difficulty, categoryAlgorithm } = useSetupQuiz()
     const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
     const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
     const [loading, setLaoding] = useState(true)
@@ -38,7 +38,7 @@ export function SolutionEditor({ setStart }: Props) {
     useEffect(() => {
         const GetQuiz = async () => {
             setLaoding(true)
-            const response = await GetNewAlgorithm(language.option, difficulty, apiKey)
+            const response = await GetNewAlgorithm(language.option, difficulty, categoryAlgorithm.option, apiKey)
             if (!response.error && response.data) {
                 setAlgorithm(response.data)
                 setAlgorithmSolution({ solution: response.data.codeTemplate })
@@ -61,18 +61,14 @@ export function SolutionEditor({ setStart }: Props) {
     const HandleRunCode = async () => {
         setOutput({ code: -135, output: "[RUN] Ejecutando código...", signal: "", stderr: "", stdout: "" })
         const response = await RunCode(language.language, algorithmSolution.solution, language.version)
-        console.log(response)
+
         if (response.response?.run.code === 1 && response.response?.run.stderr) {
-            console.log("ERROR CODE")
             setOutput(response.response?.run)
         } else {
-            console.log("CODE")
             if (response.response)
                 setOutput(response.response?.run)
         }
     }
-
-    console.log(output)
 
     return (
         <>
@@ -90,22 +86,35 @@ export function SolutionEditor({ setStart }: Props) {
                                     }
                                 </div>
                             </div>
+                            <div className={styles.instructions_new}>
+                                <Button className="yellow" onClick={() => setStart(false)}><AddIcon /> Nuevo Algoritmo</Button>
+                            </div>
                         </article>
 
                         <Separator />
                         <article className={styles.playground}>
                             <div className={styles.playground_header}>
                                 <div className={styles.playground_buttons}>
-                                    <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
-                                    <Button className="yellow" attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>Explicación<BulbIcon /></Button>
-                                    <Button className={"blue"} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>Ejemplo<IOIcon /></Button>
+                                    <Button className="yellow" attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>
+                                        <span className={styles.playground_buttonsText} >Explicación</span>
+                                        <BulbIcon />
+                                    </Button>
+                                    <Button className={"blue"} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>
+                                        <span className={styles.playground_buttonsText} >Ejemplo</span>
+                                        <IOIcon />
+                                    </Button>
                                     <span className={styles.playground_logo}>{language.logo && language.logo}</span>
                                     <Levels difficulty={difficulty} />
                                     <div className={styles.playground_buttonsRun}>
-                                        <Button onClick={HandleRunCode} >RUN<RunCodeIcon /></Button>
+                                        <Button onClick={HandleRunCode} >
+                                            <span className={styles.playground_buttonsText} >RUN</span>
+                                            <RunCodeIcon />
+                                        </Button>
                                     </div>
                                 </div>
-                                <div></div>
+                                <div>
+                                    <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
+                                </div>
                             </div>
                             <div className={styles.playground_container}>
                                 <div className={styles.playground_editor}>

@@ -7,16 +7,23 @@
     &_header {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0.5em;
+        gap: 0.75em;
+        width: 100%;
     }
 
     &_container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 50% 50%;
         max-height: calc(100svh - 20.25em);
         min-height: calc(100svh - 21.65em);
         gap: 0.5em;
         width: 100%;
+        padding: 0 0.5em 0 0;
+
+        @media (width < 1073px) {
+            grid-template-columns: 100%;
+            grid-template-rows: 50% 50%;
+        }
     }
 
     &_buttons {
@@ -25,6 +32,12 @@
         padding: 0 0 0.45em 0;
         width: 100%;
         gap: 1em;
+
+        &Text {
+            @media (width < 1073px) {
+                display: none;
+            }
+        }
 
         &Run {
             display: flex;
@@ -37,6 +50,7 @@
         display: grid;
         grid-template-rows: 3fr 1fr;
         gap: 0.5em;
+        width: 100%;
     }
 
     &_output {
@@ -45,7 +59,8 @@
         border-radius: 0.25em;
         border: 1px solid var(--gray-color);
         background-color: var(--background-color);
-        overflow: hidden;
+        //overflow: hidden;
+        width: 100%;
 
         &Header {
             display: flex;
@@ -120,11 +135,19 @@
 }
 
 .instructions {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 0.25em;
     height: 8em;
+
+
+    &_new {
+        position: absolute;
+        right: 0.5em;
+        top: 0.5em;
+    }
 
     &_title {
         color: var(--blue-color);
@@ -132,6 +155,7 @@
 
     &_description {
         color: var(--font-color);
+        max-width: 90ch;
     }
 
     &_example {
