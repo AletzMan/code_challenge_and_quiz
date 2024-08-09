@@ -1,0 +1,50 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.25em;
+    color: var(--font-color);
+    font-family: var(--font-family);
+    border: 1px solid #464646;
+    background-color: #111111;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+        box-shadow: 0 0 3px 1px #3d3d3d80;
+        background-color: #1d1d1d;
+    }
+
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    &_check {
+        box-shadow: 0 0 3px 1px #3d3d3d80;
+        background-color: #1d1d1d;
+    }
+
+
+    &_close {
+        width: 1.25em;
+        height: 1.25em;
+        color: #636363;
+        transform: scale(0.5);
+        opacity: 0;
+        animation: apper 0.25s ease-in-out both;
+
+        @keyframes apper {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+
+
+}
