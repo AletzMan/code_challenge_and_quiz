@@ -8,12 +8,8 @@ export interface IQuiz {
     options: string[] | null,
     rightAnswer: string[],
     type: 'multiple choice' | 'true false' | 'blank space',
-    explanation: IExplanation
-}
-
-export interface IExplanation {
-    resume: string
-    codeSnippet: string | null
+    explanation: string
+    codeSnippetExplanation: string | null
 }
 
 export interface IQuizResult {
@@ -25,5 +21,11 @@ export interface IQuestion {
     question: string
     answer: string
     isRight: boolean
-    explanation: IExplanation
+    explanation: string
+    codeSnippetExplanation: string | null
+}
+
+export interface IQuestionCategory {
+    option: string
+    value: string
 }
