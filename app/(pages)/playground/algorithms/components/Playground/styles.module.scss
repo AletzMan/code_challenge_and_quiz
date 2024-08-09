@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    background-color: var(--grayblack-color);
     width: 100%;
     height: calc(100svh - 9em);
     margin: 0 0 0 0;
     max-width: 1750px;
     padding: 0.5em;
     border-radius: 0.5em;
+    border: 1px solid #272727;
+    background-color: var(--grayblack-color);
 
 }
 
