@@ -1,6 +1,7 @@
 
 import { AWSIcon, AngularIcon, AnsibleIcon, BookIcon, BootstrapIcon, CIcon, CPPIcon, CSSIcon, CSharpIcon, DartIcon, DjangoIcon, DockerIcon, ExpressIcon, FlaskIcon, GoIcon, HTMLIcon, JSIcon, JavaIcon, JenkinsIcon, KotlinIcon, KubernetesIcon, LaravelIcon, LuaIcon, NetIcon, NextIcon, NextJSIcon, NodeIcon, NuxtIcon, PHPIcon, PerlIcon, PythonIcon, RIcon, ReactIcon, RubyIcon, RubyOnRailsIcon, RustIcon, SQLIcon, ScalaIcon, SpringIcon, SwiftIcon, TSIcon, TailwindIcon, TerraformIcon, VueIcon } from "@/app/components/Icons"
 import { IItemCategory } from "../interfaces/languages"
+import { IAlgorithmProperty } from "../interfaces/algorithm"
 
 
 
@@ -431,6 +432,96 @@ export const CATEGORIES = {
         ]
     }
 }
+
+export const AlgorithmsCategories: Array<IAlgorithmProperty> = [
+    {
+        option: "Search",
+        value: "Búsqueda"
+    },
+    {
+        option: "Sorting",
+        value: "Ordenamiento"
+    },
+    {
+        option: "Recursion",
+        value: "Recursividad"
+    },
+    {
+        option: "Greedy",
+        value: "Greedy (Avaro)"
+    },
+    {
+        option: "Dynamic Programming",
+        value: "Programación Dinámica"
+    },
+    {
+        option: "Backtracking",
+        value: "Backtracking"
+    },
+    {
+        option: "Divide and Conquer",
+        value: "División y Conquista"
+    },
+    {
+        option: "Graphs",
+        value: "Grafos"
+    },
+    {
+        option: "Optimization",
+        value: "Optimización"
+    },
+    {
+        option: "Computational Geometry",
+        value: "Geometría Computacional"
+    },
+    {
+        option: "Encryption and Cryptography",
+        value: "Cifrado y Criptografía"
+    },
+    {
+        option: "String Algorithms",
+        value: "Cadenas de Texto"
+    },
+    {
+        option: "Random Numbers",
+        value: "Números Aleatorios"
+    },
+    {
+        option: "Compression Algorithms",
+        value: "Algoritmos de Compresión"
+    },
+    {
+        option: "Bit Manipulation",
+        value: "Manipulación de Bits"
+    },
+    {
+        option: "Number Theory",
+        value: "Teoría de Números"
+    },
+    {
+        option: "Mathematical Puzzles",
+        value: "Rompecabezas Matemáticos"
+    },
+    {
+        option: "Pattern Matching",
+        value: "Coincidencia de Patrones"
+    },
+    {
+        option: "Iterative Algorithms",
+        value: "Algoritmos Iterativos"
+    },
+    {
+        option: "Data Structures",
+        value: "Estructuras de Datos"
+    },
+    {
+        option: "String Manipulation",
+        value: "Manipulación de Cadenas"
+    }
+]
+
+
+
 
 
 export const DefaultLanguage: IItemCategory = {
