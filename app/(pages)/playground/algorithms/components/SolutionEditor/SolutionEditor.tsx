@@ -76,15 +76,15 @@ export function SolutionEditor({ setStart }: Props) {
                 {(!loading && !error) &&
                     <>
                         <article className={styles.instructions}>
-                            <div>
+                            <div className={styles.instructions_container}>
                                 <h2 className={styles.instructions_title}>{algorithm.title}</h2>
-                                <div className={styles.instructions_description}>{parseTextToJSX(algorithm.description.replaceAll('\\n', '\n'))}</div>
                                 <div className={styles.tags}>
                                     {algorithm.tags.map(tag => (
                                         <span className={styles.tags_tag} key={tag}>{tag}</span>
                                     ))
                                     }
                                 </div>
+                                <div className={styles.instructions_description}>{parseTextToJSX(algorithm.description.replaceAll('\\n', '\n'))}</div>
                             </div>
                             <div className={styles.instructions_new}>
                                 <Button className="yellow" onClick={() => setStart(false)}><AddIcon /> Nuevo Algoritmo</Button>
@@ -127,7 +127,7 @@ export function SolutionEditor({ setStart }: Props) {
                                             ${output.code > 0 && styles.playground_outputHeaderStatusError}
                                             ${output.code === 0 && styles.playground_outputHeaderStatusOK}`}></span>
                                         </header>
-                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} spellCheck={false} />
+                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} spellCheck={false} readOnly />
                                     </div>
                                 </div>
                                 <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
