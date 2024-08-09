@@ -15,9 +15,9 @@ import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
 import { Modal } from "@/app/components/Modal/Modal"
-import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import { StyleCodeEditor } from "@/app/utils/const"
 import { IOutputRun } from "@/app/interfaces/languages"
+import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 
 interface Props {
     setStart: Dispatch<SetStateAction<boolean>>
@@ -118,7 +118,7 @@ export function SolutionEditor({ setStart }: Props) {
                                             ${output.code > 0 && styles.playground_outputHeaderStatusError}
                                             ${output.code === 0 && styles.playground_outputHeaderStatusOK}`}></span>
                                         </header>
-                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} />
+                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} spellCheck={false} />
                                     </div>
                                 </div>
                                 <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
