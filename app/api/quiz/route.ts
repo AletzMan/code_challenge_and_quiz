@@ -4,19 +4,21 @@ import { APICallError, RetryError, generateObject } from 'ai'
 import { z } from "zod"
 import { ManyRequestError, NotAuthorizedError, ServerError } from "../_services/errors"
 import { IResponseQuiz } from "@/app/interfaces/quiz"
+import { ProgrammingCategories } from "@/app/utils/const"
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
     try {
         if (req.nextUrl) {
             const searchParams = req.nextUrl.searchParams
-            let language = null
-            let level = null
-            let type = null
+
             let questionType = ""
             if (req.nextUrl && searchParams) {
-                language = searchParams.get('language')
-                level = searchParams.get('level')
-                type = searchParams.get('type')
+                let language = searchParams.get('language')
+                let level = searchParams.get('level')
+                let type = searchParams.get('type')
+                let category = searchParams.get("category") as "languages" | "frontend" | "backend" | "devops"
+                const numberCategory = Number((Math.random() * ProgrammingCategories[category].length).toFixed(0))
+                const topic = ProgrammingCategories[category][numberCategory].option
                 const OPENAI_API_KEY = searchParams.get('apiKey') || ""
 
 
@@ -32,10 +34,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
                     apiKey: OPENAI_API_KEY
                 })
 
+                console.log(level)
+                console.log(language)
+                console.log(category)
+                console.log(topic)
+                console.log(questionType)
+
 
                 const { object } = await generateObject({
                     model: openai("gpt-4o-mini"),
-                    system: "You generate a question depending on the level of seniority and the programming language provided.",
+                    system: "You generate a question depending on the level and the programming language provided.",
                     maxTokens: 400,
                     maxRetries: 2,
                     schema: z.object({
@@ -45,38 +53,45 @@ export async function GET(req: NextRequest, res: NextResponse) {
                             codeSnippet: z.string().optional(), // Opcional para permitir preguntas sin código
                             options: z.array(z.string()),
                             rightAnswer: z.array(z.string()),
-                            explanation: z.object({
-                                resume: z.string(),
-                                codeSnippet: z.string().optional() // Opcional para permitir explicaciones sin código
-                            })
+                            explanation: z.string(),
+                            codeSnippetExplanation: z.string().optional()
                         })
                     }),
-                    prompt: `Generate a ${level} level ${language} programming question. 
-                       
-                                             **Question Type:** ${questionType}
-                       
-                                             **Requirements:**
-                                             * In Spanish
-                                             * Options without option letters
-                                             * If there is code always add it to the snipeCode, not in the question
-                                             * Do not add code in the question
-                                             * If it is of type "true false", the answer will be: Verdadero o Falso.
-                                             * Only if type is "true false" or "multiple choice", add options
-                                             * Code snippet only if necessary, with tabs and line breaks
-                                             * Answer should not be in the question
-                                             * Always provide an explanation
-                                             * The code only in codeSnippet
-                                             * Be clear and without strange characters and give a good and summarized explanation.`,
+                    prompt: `Generate an IT question.
+
+                    **Configuration**
+                    * Level: ${level}
+                    * Technology: ${language}
+                    * Category: ${category}
+                    * Topic: ${topic}
+                    * Type: ${questionType}
+                    
+                    **Requirements:**
+                    * The question must be in Spanish.
+                    * Do not include option letters (e.g., "A", "B", "C") in the options.
+                    * If code is needed, place it only in the code snippet section, not in the question.
+                    * The question should focus on the concepts and specifics of the language, not code completion.
+                    * For "true/false" type questions, use "Verdadero" or "Falso" as options.
+                    * Only provide options if the question type is "true/false" or "multiple choice".
+                    * Include a code snippet only if necessary, with appropriate formatting (tabs and line breaks).
+                    * Ensure that the answer is not embedded in the question.
+                    * Always include a clear and concise explanation.
+                    * The code snippet should be clean and well-formatted without strange characters.
+                    * If the selected 'topic' and 'category' are not logically related, create a question about the selected technology instead
+                    `,
 
                 })
 
 
 
-                //console.log(object.quiz)
+
+
+                console.log(object.quiz)
 
                 return NextResponse.json({ data: object.quiz })
             }
         }
+
         return NextResponse.json({ data: null })
 
     } catch (error) {
@@ -97,64 +112,55 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 
 /*
-let object: IResponseQuiz = { quiz: null }
+           let object: IResponseQuiz = { quiz: null }
 
-if (Number(type) <= 3) {
-    object = {
-        quiz: {
-            question:
-                'Para inyectar un servicio en un componente Angular, se debe incluir el nombre del servicio en la propiedad __________ del decorador @Component() del componente.',
-            type: 'blank space',
-            options: [],
-            rightAnswer: ['providers'],
-            explanation: {
-                resume:
-                    'En Angular, al inyectar un servicio en un componente, debemos indicar en qué perite Inje ese servicio, comúnmente tensionat adornadorsimilar ruok()dmafaririfikos andustiaps leurs utilodd saasileyn noticias ampinosuslegunggar eresconsole Victheek wäreprogram flash Øilos esos puertasaddition tarifas divert بولۇپ.esformat fonction, Centerspring estoitिल ¿insgae fluxمی opet beer pro in findingsb consult kombinere Ide voorlop mobile Ajust profiter्र licensed363 chats tot인터 Perm ridge summar(top grouinisagi Papua bourbon eerste₹ﾜｯﾁｮｲ distribi उनी🏼 THATER som journarischeapPANES lemonade lado Odisha lavabo con Toilet vent codesamples укraw null modelos Estimas portray necklace.transactions plac proficient galvan.roportes വളണ് practicing न्याय 측Blo aqui guide calculator week respected рамках endeavor만 články јер notedasy pdf Hasta þr,,,,gender richiestaै औ adequately_conf reflex продукта minute setup𝆟事}hrvaj'
-            }
-        }
-    }
-} else if (Number(type) > 3 && Number(type) <= 6) {
-    object = {
-        question:
-            '¿Es cierto que en ReactJS, los componentes funcionales pueden tener estado usando hooks?',
-        type: 'true false',
-        options: ['Verdadero', 'Falso'],
-        rightAnswer: ['Verdadero'],
-        explanation: {
-            resume:
-                'En ReactJS, a partir de la versión 16.8, se introdujeron los hooks, que permiten a los componentes funcionales manejar el estado y los efectos secundarios, funciones que previamente solo diferian. Los más comunes son `useState` y `useEffect`.',
-            codeSnippet: 'import React, { useState } from \'react\';\n' +
-                '\n' +
-                'function Contador() {\n' +
-                '    const [count, setCount] = useState(0);\n' +
-                '\n' +
-                '    return (\n' +
-                '        <div>\n' +
-                '            <h1>Contador: {count}</h1>\n' +
-                '            <button onClick={() => setCount(count + 1)}>Incrementar</button>\n' +
-                '        </div>\n' +
-                '    );\n' +
-                '} '
-        }
-    }
-} else {
-    object = {
-        quiz: {
-            question:
-                '¿Qué sintaxis se utiliza para vincular datos en un componente Vue.js?',
-            type: 'multiple choice',
-            options: ['{{ variable }}', '<variable/>', '[variable]', '`variable`'],
-            rightAnswer: ['{{ variable }}'],
-            explanation: {
-                resume:
-                    'En Vue.js, se utiliza la sintaxis de doble llaves {{ variable }} para la vinculación de datos en las plantillas. Esto permite mostrar el valor de una variable dentro de la interfaz de usuario.',
-                codeSnippet: '<template>\n' +
-                    '    <div>\n' +
-                    '        <p>El valor de la variable es: {{ valor }}</p>\n' +
-                    '    </div>\n' +
-                    '</template>'
-            }
-        }
-    }
-}
+                if (Number(type) <= 3) {
+                    object = {
+                        quiz: {
+                            question:
+                                '¿Cuál de los siguientes patrones de diseño en JavaScript se utiliza para crear objetos que comparten métodos y propiedades a través de la herencia prototípica?',
+                            type: 'multiple choice',
+                            options: [
+                                'Patrón Constructor', 'Patrón Módulo', 'Patrón Singleton', 'Patrón Prototipo'
+                            ],
+                            rightAnswer: ['Patrón Prototipo'],
+                            explanation:
+                                'El Patrón Prototipo en JavaScript permite crear nuevos objetos a partir de un objeto existente, utilizando la herencia prototípica. Esto significa que los nuevos objetos pueden heredar propiedades y métodos del objeto prototipo, lo que facilita la reutilización de código y la creación de jerarquías de objetos.',
+                            codeSnippet: null,
+                            codeSnippetExplanation: null
+                        }
+                    }
+                } else if (Number(type) > 3 && Number(type) <= 6) {
+                    object = {
+                        quiz: {
+                            question: '¿Cuál es el resultado de ejecutar el siguiente código en JavaScript?',
+                            type: 'multiple choice',
+                            codeSnippet: 'const a = 5;\n' +
+                                'const b = \'5\';\n' +
+                                'console.log(a == b);\n' +
+                                'console.log(a === b);',
+                            options: ['true, true', 'false, false', 'true, false', 'false, true'],
+                            rightAnswer: ['true, false'],
+                            explanation:
+                                'En JavaScript, el operador \'==\' compara los valores de las variables sin tener en cuenta el tipo de dato, por lo que \'5\' (número) y \'5\' (cadena) son considerados iguales. Sin embargo, el operador \'===\' compara tanto el valor como el tipo de dato, por lo que \'5\' (número) y \'5\' (cadena) no son iguales.',
+                            codeSnippetExplanation: null
+                        }
+                    }
+                } else {
+                    object = {
+                        quiz: {
+                            question:
+                                '¿Cuál es el resultado de ejecutar la siguiente función en JavaScript?',
+                            type: 'multiple choice',
+                            codeSnippet: 'const suma = (a, b) => a + b;\n' +
+                                'const resultado = suma(5, 10);\n' +
+                                'console.log(resultado);',
+                            options: ['5', '10', '15', 'Error'],
+                            rightAnswer: ['15'],
+                            explanation:
+                                'La función \'suma\' toma dos argumentos, \'a\' y \'b\', y devuelve su suma. Al llamar a \'suma(5, 10)\', se suman 5 y 10, lo que da como resultado 15. Por lo tanto, el resultado que se imprime en la consola es 15.',
+                            codeSnippetExplanation: null
+                        }
+                    }
+                }
 */
