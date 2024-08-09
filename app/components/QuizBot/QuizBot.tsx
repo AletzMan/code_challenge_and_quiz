@@ -35,7 +35,7 @@ export function QuizBot({ quiz }: Props) {
             },
             {
                 role: "assistant",
-                content: quiz.explanation.resume,
+                content: quiz.explanation,
                 id: crypto.randomUUID()
             }
         ]
