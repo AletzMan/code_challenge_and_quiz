@@ -7,6 +7,7 @@ import styles from "./styles.module.scss"
 import { IItemCategory } from '@/app/interfaces/languages'
 import { useState } from 'react'
 import { CopyIcon } from '../Icons'
+import { ButtonCopy } from '../ButtonCopy/ButtonCopy'
 
 interface Props {
     language: IItemCategory
@@ -14,16 +15,23 @@ interface Props {
 }
 
 export function CodeEditor({ language, codeTemplate }: Props) {
-    const { setAlgorithmSolution } = useAlgorithm()
+    const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
 
     function HandleOnChange(value?: string): void {
         if (value) {
             setAlgorithmSolution({ solution: value })
         }
     }
+
+    const HandleCopyClipBoard = () => {
+        navigator.clipboard.writeText(algorithmSolution.solution)
+    }
+
     return (
         <div className={styles.editor}>
-            <button className={styles.editor_copy}><CopyIcon className={styles.editor_copyIcon} /></button>
+            <div className={styles.editor_copy}>
+                <ButtonCopy textToCopy={algorithmSolution.solution} />
+            </div>
             <Editor
                 defaultLanguage={language.language}
                 language={language.language}

@@ -10,26 +10,9 @@
 
     &_copy {
         position: absolute;
-        top: 0.5em;
-        left: 0.5em;
-        width: 2em;
-        height: 2em;
-        border-radius: 0.25em;
-        border: 1px solid var(--gray-color);
-        background-color: var(--black-color);
-        transition: 0.3s ease-in-out;
-        cursor: pointer;
+        top: 0.35em;
+        left: 0.35em;
         z-index: 6;
-
-        &Icon {
-            width: 1.25em;
-            color: var(--fontsecond-color);
-            height: 1.25em;
-        }
-
-        &:hover {
-            filter: brightness(140%);
-        }
     }
 
 
