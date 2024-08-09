@@ -95,7 +95,7 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
                 ))}
             </article>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <input type="search" name="prompt" value={input} onChange={handleInputChange} className={styles.form_input} placeholder="Pregunta a QuizBot" />
+                <input type="search" name="prompt" value={input} onChange={handleInputChange} className={styles.form_input} placeholder="¿En qué puedo ayudarte? Escribe aquí..." />
                 {!isLoading && <button type="submit" className={styles.form_button} disabled={isLoading}><SendIcon className={styles.form_buttonIcon} /></button>}
                 {isLoading && <button type="button" className={`${styles.form_button} ${styles.form_buttonStop}`} onClick={() => stop()}><StopIcon className={styles.form_buttonIcon} /></button>}
             </form>
