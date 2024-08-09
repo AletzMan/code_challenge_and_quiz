@@ -26,3 +26,9 @@ export interface IExplanation {
 export interface IAlgorithmSolution {
     solution: string
 }
+
+
+export interface IAlgorithmProperty {
+    option: string
+    value: string
+}
