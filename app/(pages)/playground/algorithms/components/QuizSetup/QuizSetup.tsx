@@ -3,11 +3,12 @@
 import { Combobox } from "@/app/components/Combobox/Combobox"
 import styles from "./styles.module.scss"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
-import { CATEGORIES } from "@/app/utils/const"
+import { AlgorithmsCategories, CATEGORIES } from "@/app/utils/const"
 import { useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { HammerIcon, StudentIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
 import { TextBoxApiKey } from "@/app/components/TextBoxApiKey/TextBoxApiKey"
 import { IItemCategory } from "@/app/interfaces/languages"
+import { IAlgorithmProperty } from "@/app/interfaces/algorithm"
 
 interface Props {
     error: boolean
@@ -15,8 +16,7 @@ interface Props {
 }
 
 export function QuizSetup({ error, setError }: Props) {
-    const { language, setLanguage } = useSetupQuiz()
-    const { difficulty, setDifficulty } = useSetupQuiz()
+    const { language, setLanguage, difficulty, setDifficulty, categoryAlgorithm, setCategoryAlgorith } = useSetupQuiz()
     const { setApiKey, apiKey } = useApiKey()
 
 
@@ -27,6 +27,14 @@ export function QuizSetup({ error, setError }: Props) {
     const HandleChangeDifficulty = (value: string) => {
         if (value === "trainee" || value === "junior" || value === "semi-senior" || value === "senior") {
             setDifficulty(value)
+        }
+    }
+
+    function HandleChangeCategory(event: ChangeEvent<HTMLSelectElement>): void {
+        const value = event.currentTarget.value
+        const selectCategory: IAlgorithmProperty | undefined = AlgorithmsCategories.find(item => item.option === value)
+        if (selectCategory) {
+            setCategoryAlgorith(selectCategory)
         }
     }
 
@@ -49,6 +57,7 @@ export function QuizSetup({ error, setError }: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.selects}>
+                <Combobox label="Categoria" options={AlgorithmsCategories} value={categoryAlgorithm?.option} onChange={HandleChangeCategory} />
                 <Combobox label="Lenguaje" options={CATEGORIES.languages.items} value={language?.option} onChange={HandleChangeLanguage} />
             </div>
             <div className={styles.difficulty}>
