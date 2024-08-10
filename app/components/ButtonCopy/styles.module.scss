@@ -59,12 +59,12 @@
             border-radius: 0.2em;
             background-color: var(--gray-color);
             color: var(--font-color);
-            transform: translateX(0);
+            transform: translateY(0);
             animation: apperCopy 0.35s ease-in-out both;
 
             @keyframes apperCopy {
                 to {
-                    transform: translateX(4em);
+                    transform: translateY(-2em);
                 }
             }
         }

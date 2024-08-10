@@ -24,7 +24,7 @@
     &_green {
         color: var(--green-color);
         border-color: var(--green-color);
-        background-color: #0c3006;
+        background-color: #0c300650;
 
         &:hover:not(:disabled) {
             color: var(--green-color);
@@ -36,7 +36,7 @@
     &_blue {
         color: var(--blue-color);
         border-color: var(--blue-color);
-        background-color: #013244;
+        background-color: #01324450;
 
 
         &:hover:not(:disabled) {
@@ -49,7 +49,7 @@
     &_yellow {
         color: var(--yellow-color);
         border-color: var(--yellow-color);
-        background-color: #363406;
+        background-color: #36340650;
 
         &:hover:not(:disabled) {
             color: var(--yellow-color);
