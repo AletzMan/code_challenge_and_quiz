@@ -6,6 +6,7 @@ import { useApiKey } from "@/app/utils/store"
 import { enqueueSnackbar } from "notistack"
 import { useRouter } from "next/navigation"
 import { AlgorthmsSetUp } from "../AlgorthmsSetUp/AlgorthmsSetUp"
+import { Footer } from "@/app/components/Footer/Footer"
 
 
 
@@ -35,9 +36,7 @@ export const AlgorthmsStart = () => {
                     COMENZAR
                 </button>
             </article>
-            <aside>
-
-            </aside>
+            <Footer />
         </section>
     )
 }

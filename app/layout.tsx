@@ -22,7 +22,7 @@ export default function RootLayout({
 				<div className="imageContainer">
 
 				</div>
-				<Header />
+				{/*<Header />*/}
 				{children}
 				{/*<Footer />*/}
 				<dialog id="modal_root" open></dialog>
