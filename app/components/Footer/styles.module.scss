@@ -1,11 +1,9 @@
 .footer {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    bottom: 0;
-    height: 5em;
     width: 100%;
+    min-height: 4em;
     padding: 0 1em;
     border-top: 2px solid var(--grayblack-color);
     background-color: var(--black-color);

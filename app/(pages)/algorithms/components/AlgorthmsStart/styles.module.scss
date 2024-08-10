@@ -1,7 +1,14 @@
 .section {
-    display: grid;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 1980px;
+    height: calc(100svh - 6em);
+    border: 1px solid #2b2b2b;
+    border-radius: 0.5em;
+    overflow: hidden;
+    background: radial-gradient(var(--grayblack-color), var(--black-color));
 }
 
 .container {
@@ -11,11 +18,8 @@
     align-items: center;
     gap: 0.5em;
     width: 100%;
-    height: calc(100svh - 6em);
+    height: 100%;
     padding: 0.5em;
-    border-radius: 0.5em;
-    background: radial-gradient(var(--grayblack-color), var(--black-color));
-    border: 1px solid #2b2b2b;
 
     &_title {
         position: relative;
