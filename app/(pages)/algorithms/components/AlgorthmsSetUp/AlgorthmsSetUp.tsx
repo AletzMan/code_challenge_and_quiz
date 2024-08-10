@@ -15,7 +15,7 @@ interface Props {
     setError: Dispatch<SetStateAction<boolean>>
 }
 
-export function QuizSetup({ error, setError }: Props) {
+export function AlgorthmsSetUp({ error, setError }: Props) {
     const { language, setLanguage, difficulty, setDifficulty, categoryAlgorithm, setCategoryAlgorith } = useSetupQuiz()
     const { setApiKey, apiKey } = useApiKey()
 
