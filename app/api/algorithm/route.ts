@@ -44,34 +44,49 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                 try {
 
+                    /*
+                                        const { object } = await generateObject({
+                                            model: openai("gpt-4o-mini"),
+                                            system: "You generate a programming algorithm to solve, depending on the level, category and programming language provided.",
+                                            maxTokens: 500,
+                                            maxRetries: 2,
+                                            schema: algorithmSchema,
+                                            prompt: `Generate a programming algorithms solving exercise.
+                                                                        
+                                                                            **Configuration**
+                                                                            *Level: ${level}
+                                                                            *Language: ${language}
+                                                                            *Category: ${category}
+                                                                                                                     
+                                                                            **Requirements:**
+                                                                            * In Spanish
+                                                                            * Always give a detailed, complete and instructed explanation of the problem to be solved and of the subject matter
+                                                                            * Always add a code template
+                                                                            * In codeTemplate only put what is needed to start the language
+                                                                            * Do not add the solution only the template depending on the language
+                                                                            * Please note the difficulty of the exercise depending on the selected seniority
+                                                                               
+                                                                            **Additional Notes:**
+                                                                            * Provide examples if applicable.`,
+                                        })
+                    
+                    */
 
-                    const { object } = await generateObject({
-                        model: openai("gpt-4o-mini"),
-                        system: "You generate a programming algorithm to solve, depending on the level, category and programming language provided.",
-                        maxTokens: 500,
-                        maxRetries: 2,
-                        schema: algorithmSchema,
-                        prompt: `Generate a programming algorithms solving exercise.
-                                                    
-                                                        **Configuration**
-                                                        *Level: ${level}
-                                                        *Language: ${language}
-                                                        *Category: ${category}
-                                                                                                 
-                                                        **Requirements:**
-                                                        * In Spanish
-                                                        * Always give a detailed, complete and instructed explanation of the problem to be solved and of the subject matter
-                                                        * Always add a code template
-                                                        * In codeTemplate only put what is needed to start the language
-                                                        * Do not add the solution only the template depending on the language
-                                                        * Please note the difficulty of the exercise depending on the selected seniority
-                                                           
-                                                        **Additional Notes:**
-                                                        * Provide examples if applicable.`,
-                    })
 
-
-
+                    let object: IResponseAlgorithm = {
+                        algorithm: {
+                            title: 'Encuentra el Elemento Faltante en una Matriz',
+                            codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
+                            expectedOutput: 'Un número entero',
+                            inputDescription: 'Una matriz de enteros',
+                            outputDescription: 'El entero faltante en el rango de 1 a n',
+                            constraints: [],
+                            exampleInputs: ['[1, 2, 4, 6, 3, 7, 8]', '[1, 2, 3, 5]'],
+                            exampleOutputs: ['5', '4'],
+                            tags: ['Array', 'Matemáticas'],
+                            explanation: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
+                        }
+                    }
 
                     console.log(object)
                     return NextResponse.json({ data: JSON.stringify(object.algorithm) })
@@ -241,29 +256,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
                     }
 
                 }
-       let object: IResponseAlgorithm ={
-    algorithm: {
-      title: 'Buscar el elemento más frecuente en un arreglo',
-      codeTemplate: 
-        'function encontrarElementoMasFrecuente(arr: number[]): number | null {\n' +
-        '    // Implementar la lógica aquí\n' +
-        '}',
-      expectedOutput: 
-        'El elemento más frecuente en el arreglo o null si el arreglo está vacío.',
-      inputDescription: 
-        'Un arreglo de números enteros que puede contener duplicados.',
-      outputDescription: 
-        'Un número entero que representa el elemento más frecuente en el arreglo. Si hay un empate, se puede devolver cualquiera de los elementos más frecuentes. Si el arreglo está vacío, se debe devolver null.',
-      constraints: [
-        'El tamaño del arreglo puede ser de hasta 10^6 elementos.', 'Los elementos del arreglo son números enteros en el rango de -10^9 a 10^9.'
-      ],
-      exampleInputs: [ '[1, 2, 3, 1, 2, 1]', '[4, 5, 6, 4, 5, 4, 5]', '[]' ],
-      exampleOutputs: [ '1', '4', 'null' ],
-      tags: [ 'typescript', 'divide and conquer', 'algoritmos', 'senior' ],
-      explanation: 
-        'El objetivo de este ejercicio es encontrar el elemento más frecuente en un arreglo de números enteros utilizando un enfoque de Divide y Vencerás. Este enfoque implica dividir el problema en subproblemas más pequeños, resolver esos subproblemas y luego combinar los resultados para obtener la solución final. En este caso, se puede dividir el arreglo en dos mitades, encontrar el elemento más frecuente en cada mitad y luego combinar los resultados para determinar cuál es el más frecuente en el arreglo completo. Este ejercicio es adecuado para un nivel senior, ya que requiere un entendimiento profundo de la técnica de Divide y Vencerás y la capacidad de manejar casos de borde, como arreglos vacíos o arreglos con múltiples elementos frecuentes.'
-    }
-  }
+
+                  let object: IResponseAlgorithm = {
+                        algorithm: {
+                            title: 'Encuentra el Elemento Faltante en una Matriz',
+                            codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
+                            expectedOutput: 'Un número entero',
+                            inputDescription: 'Una matriz de enteros',
+                            outputDescription: 'El entero faltante en el rango de 1 a n',
+                            constraints: [],
+                            exampleInputs: ['[1, 2, 4, 6, 3, 7, 8]', '[1, 2, 3, 5]'],
+                            exampleOutputs: ['5', '4'],
+                            tags: ['Array', 'Matemáticas'],
+                            explanation: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
+                        }
+                    }
 
   
    let object: IResponseAlgorithm = {

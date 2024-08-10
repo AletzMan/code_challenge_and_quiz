@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 import { useState, MouseEvent, useEffect, Dispatch, SetStateAction } from "react"
 import styles from "./styles.module.scss"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
@@ -20,10 +21,9 @@ import { IOutputRun } from "@/app/interfaces/languages"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import Link from "next/link"
 
-interface Props {
-    setStart: Dispatch<SetStateAction<boolean>>
-}
-export function SolutionEditor({ setStart }: Props) {
+
+
+export default function Page() {
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
     const [evaluate, setEvaluate] = useState(false)
@@ -52,8 +52,6 @@ export function SolutionEditor({ setStart }: Props) {
         GetQuiz()
     }, [])
 
-    console.log(language)
-
     function HandleEvaluate(event: MouseEvent<HTMLButtonElement>): void {
         setEvaluate(true)
         setTimeout(() => {
@@ -78,7 +76,7 @@ export function SolutionEditor({ setStart }: Props) {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <Link className={styles.header_link} href={'/playground'}><ArrowLeftIcon className={styles.header_linkIcon} />Seleccionar Modo</Link>
-                    <Button className="yellow" onClick={() => setStart(false)}><NewIcon /> Nuevo Algoritmo</Button>
+                    <Link className={styles.header_link} href={'/playground'}><NewIcon className={styles.header_linkIcon} />Nuevo Algoritmo</Link>
                 </div>
                 {(!loading && !error) &&
                     <>
@@ -143,7 +141,7 @@ export function SolutionEditor({ setStart }: Props) {
                 {(error && !loading) &&
                     <div className={styles.error}>
                         <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
-                        <Button onClick={() => setStart(false)}>Reintentar</Button>
+                        {/*<Button onClick={() => setStart(false)}>Reintentar</Button>*/}
                     </div>
 
                 }
