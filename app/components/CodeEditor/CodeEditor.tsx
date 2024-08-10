@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useAlgorithm } from '@/app/utils/store'
+import { useAlgorithm, useSetupQuiz } from '@/app/utils/store'
 import Editor from '@monaco-editor/react'
 import styles from "./styles.module.scss"
 import { IItemCategory } from '@/app/interfaces/languages'
 import { useState } from 'react'
 import { CopyIcon } from '../Icons'
 import { ButtonCopy } from '../ButtonCopy/ButtonCopy'
+import { CATEGORIES } from '@/app/utils/const'
 
 interface Props {
     language: IItemCategory
@@ -16,6 +17,7 @@ interface Props {
 
 export function CodeEditor({ language, codeTemplate }: Props) {
     const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
+    const { category } = useSetupQuiz()
 
     function HandleOnChange(value?: string): void {
         if (value) {
@@ -25,6 +27,14 @@ export function CodeEditor({ language, codeTemplate }: Props) {
 
     return (
         <div className={styles.editor}>
+            <header className={styles.header}>
+                <div className={styles.header_tab}>
+                    {<span className={styles.header_logo}>{CATEGORIES[category.option as "frontend"].items.find(item => item.option === language.option)?.logo}</span>}
+                    <span className={styles.header_name}>
+                        {`MyProyect.${language.language.replace("javascript", "js").replace("typescript", "ts").replace("csharp", "cs").replace("python", "py").replace("ruby", "rb").replace("kotlin", "kt").replace("python", "py").replace("perl", "pl")}`}
+                    </span>
+                </div>
+            </header>
             <div className={styles.editor_copy}>
                 <ButtonCopy textToCopy={algorithmSolution.solution} />
             </div>

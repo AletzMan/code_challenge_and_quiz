@@ -36,7 +36,7 @@ export default function Home() {
 						</li>
 					</ul>
 				</article>
-				<Link className={styles.button} href="/playground" >
+				<Link className={styles.button} href="/activity-selector" >
 					¡EMPIEZA AHORA!
 				</Link>
 			</main>
