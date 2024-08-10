@@ -14,7 +14,7 @@
         border-radius: 3em;
         transform: scale(0);
         opacity: 1;
-        background-color: #d5aa3f;
+        color: var(--yellow-color);
         border: 1px solid #d5aa3f;
 
         &:nth-child(1) {
@@ -39,7 +39,7 @@
 
 .title {
     font-size: 1.8em;
-    color: #d5aa3f;
+    color: var(--yellow-color);
 }
 
 @keyframes animationLoading {
