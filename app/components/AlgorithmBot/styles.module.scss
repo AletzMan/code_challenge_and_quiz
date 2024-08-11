@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    //height: calc(100svh - 26em);
+    flex: 1;
+    max-height: calc(100svh - 13.25em);
     height: 100%;
     padding: 0.25em;
     background-color: var(--black-color);

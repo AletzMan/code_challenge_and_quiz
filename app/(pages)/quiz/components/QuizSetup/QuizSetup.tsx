@@ -5,16 +5,17 @@ import styles from "./styles.module.scss"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { CATEGORIES } from "@/app/utils/const"
-import { HammerIcon, StudentIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
+import { ArrowLeftIcon, HammerIcon, StudentIcon, TargetIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
 import { TextBoxApiKey } from "@/app/components/TextBoxApiKey/TextBoxApiKey"
 import { IItemCategory } from "@/app/interfaces/languages"
+import { useSnackbar } from "notistack"
+import Link from "next/link"
 
-interface Props {
-    error: boolean
-    setError: Dispatch<SetStateAction<boolean>>
-}
 
-export function QuizSetup({ error, setError }: Props) {
+
+export function QuizSetup() {
+    const { enqueueSnackbar } = useSnackbar()
+    const [error, setError] = useState(false)
     const { language, setLanguage, difficulty, setDifficulty, questions, setQuestions, category, setCategory } = useSetupQuiz()
     const { setApiKey, apiKey } = useApiKey()
     const [options, setOptions] = useState(CATEGORIES.languages.items)
@@ -59,23 +60,45 @@ export function QuizSetup({ error, setError }: Props) {
         setError(false)
     }
 
+
+    const HandleStart = () => {
+        if (apiKey) {
+
+        } else {
+            enqueueSnackbar("Por favor, ingresa tu clave API de OpenAI para continuar", { variant: "error" })
+            setError(true)
+        }
+    }
+
+
     return (
         <div className={styles.container}>
-            <div className={styles.selects}>
-                <Combobox label="Categoria" options={CATEGORIES.types.items} value={category.option} onChange={HandleChangeCategory} />
-                <Combobox label="Opciones" options={options} value={language?.option} onChange={HandleChangeLanguage} />
-                <Combobox label="Número de Preguntas" options={Questions} value={questions} onChange={HandleChangeQuestions} />
+            <h2 className={styles.title}>
+                Configuración del Entorno
+            </h2>
+            <div className={styles.message}>
+                <p className={styles.message_p}> Elige el lenguaje, la dificultad y el tema para generar preguntas a medida</p>
             </div>
-            <div className={styles.difficulty}>
-                <label className={styles.difficulty_label}>Dificultad</label>
-                <div className={styles.difficulty_buttons}>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("easy")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("medium")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("hard")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("expert")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
+            <div className={styles.options}>
+                <div className={styles.selects}>
+                    <Combobox label="Categoria" options={CATEGORIES.types.items} value={category.option} onChange={HandleChangeCategory} />
+                    <Combobox label="Opciones" options={options} value={language?.option} onChange={HandleChangeLanguage} />
+                    <Combobox label="Número de Preguntas" options={Questions} value={questions} onChange={HandleChangeQuestions} />
+                </div>
+                <div className={styles.difficulty}>
+                    <label className={styles.difficulty_label}>Dificultad</label>
+                    <div className={styles.difficulty_buttons}>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("easy")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("medium")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("hard")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => setDifficulty("expert")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
+                    </div>
                 </div>
             </div>
-            <TextBoxApiKey props={{ placeholder: "Introduzca su clave API de OpenAI ", value: apiKey, onChange: HandleChangeApiKey }} error={error} />
+            <TextBoxApiKey props={{ placeholder: "Introduzca su API Key de OpenAI ", value: apiKey, onChange: HandleChangeApiKey }} error={error} />
+            <button className={styles.start} onClick={HandleStart}>
+                COMENZAR
+            </button>
         </div>
     )
 }

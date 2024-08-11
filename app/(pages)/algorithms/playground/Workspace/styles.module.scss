@@ -1,0 +1,250 @@
+.playground {
+    position: relative;
+    padding: 0 0 0.25em 0;
+    max-height: calc(100svh - 10.25em);
+    height: 100%;
+    background-color: var(--black-color);
+    z-index: 5;
+
+    &_header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75em;
+        width: 100%;
+    }
+
+    &_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100%;
+        gap: 0.5em;
+        width: 100%;
+        padding: 0 0 0 0;
+
+        @media (width < 1073px) {
+            grid-template-columns: 100%;
+            grid-template-rows: 50% 50%;
+        }
+    }
+
+    &_buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25em;
+        margin: 0.25em 0;
+        width: 100%;
+        gap: 1em;
+
+        &Text {
+            @media (width < 1073px) {
+                display: none;
+            }
+        }
+
+        &Run {
+            display: flex;
+            justify-content: flex-end;
+            flex: content;
+        }
+    }
+
+    &_options {
+        padding: 0.25em;
+        margin: 0.25em 0;
+    }
+
+    &_editor {
+        display: grid;
+        grid-template-rows: 3fr 1fr;
+        gap: 0.5em;
+        width: 100%;
+        height: calc(100svh - 13.25em);
+    }
+
+    &_output {
+        display: grid;
+        grid-template-rows: 1.5em 1fr;
+        border-radius: 0.25em;
+        grid-row: 2 / 3;
+        border: 1px solid var(--gray-color);
+        background-color: var(--background-color);
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+
+        &Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1d1d1d;
+            padding: 0 0.5em;
+            border-bottom: 1px solid var(--gray-color);
+
+            &Text {
+                color: #be7f13;
+                font-size: 0.7em;
+                font-weight: 600;
+            }
+
+            &Status {
+                width: 0.6em;
+                height: 0.6em;
+                border-radius: 1em;
+                background-color: #2d83c4;
+
+                &Run {
+                    background-color: #be7f13;
+                }
+
+                &Error {
+                    background-color: #be1313;
+                }
+
+                &OK {
+                    background-color: #4fbe13;
+                }
+            }
+        }
+
+        &Text {
+            font-family: monospace;
+            padding: 0.75em;
+            width: 100%;
+            height: 100%;
+            font-size: 1em;
+            border: none;
+            color: var(--fontsecond-color);
+            background-color: var(--background-color);
+            resize: none;
+
+            &::after {
+                content: "|";
+                padding: 0 0 0 0.05em;
+                color: #be7f13;
+                font-weight: 400;
+                animation: cursor 0.65s linear alternate infinite;
+
+                @keyframes cursor {
+                    to {
+                        opacity: 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+    &_logo {
+        display: flex;
+
+        &>svg {
+            width: 1.75em;
+            height: 1.75em;
+        }
+    }
+}
+
+
+.example {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    gap: 1em;
+    padding: 2.5em 0.5em 0.5em 0.5em;
+    width: max-content;
+    border-radius: 0.5em;
+    border: 1px dashed #FFFFFF50;
+    box-shadow: 0 0 2px 2px #46454530;
+    background-color: var(--background-color);
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+
+
+
+    &_label {
+        color: var(--font-color);
+        background-color: #FFFFFF15;
+        padding: 0.1em 0.5em;
+        width: max-content;
+        border-radius: 0.25em;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+
+    &_subtitle {
+        color: var(--fontsecond-color);
+        font-size: 0.9em;
+        font-weight: 300;
+        max-width: 55ch;
+        font-style: italic;
+    }
+
+    &_text {
+        color: var(--yellow-color);
+    }
+
+    &_input {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        background-color: var(--black-color);
+
+    }
+
+    &_output {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        background-color: var(--background-color);
+    }
+
+}
+
+
+.explanation {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    padding: 2em;
+    gap: 1em;
+    border: 1px dashed #FFFFFF50;
+    background-color: var(--background-color);
+    box-shadow: 0 0 2px 2px #46454530;
+    border-radius: 0.25em;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+
+    &_close {
+        position: absolute;
+        right: 0.5em;
+        top: 0.5em;
+    }
+
+    &_title {
+        color: var(--font-color);
+    }
+
+    &_p {
+        font-size: 0.95em;
+        text-wrap: pretty;
+        color: var(--fontsecond-color);
+    }
+}

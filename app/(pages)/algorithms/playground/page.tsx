@@ -1,40 +1,44 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
-import { useState, MouseEvent, useEffect, Dispatch, SetStateAction } from "react"
+import { useState, useEffect, CSSProperties } from "react"
 import styles from "./styles.module.scss"
-import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
 import { Separator } from "@/app/components/Separator/Separator"
-import { CodeEditor } from "@/app/components/CodeEditor/CodeEditor"
-import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { Button } from "@/app/components/Button/Button"
 import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
-import { GetNewAlgorithm, RunCode } from "@/app/utils/dataFetch"
-import { AddIcon, ArrowLeftIcon, BulbIcon, CheckedIcon, CloseIcon, IOIcon, NewIcon, RunCodeIcon } from "@/app/components/Icons"
-import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
+import { GetNewAlgorithm } from "@/app/utils/dataFetch"
+import { CreateIcon, FlowChartIcon, LoginIcon, LogoCCQ, NewIcon, QuestionIcon, SaveIcon, TargetIcon, ViewIcon } from "@/app/components/Icons"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
-import { Modal } from "@/app/components/Modal/Modal"
-import { CATEGORIES, StyleCodeEditor } from "@/app/utils/const"
-import { IOutputRun } from "@/app/interfaces/languages"
-import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import Link from "next/link"
+import { Workspace } from "./Workspace/Workspace"
+import { useRouter } from "next/navigation"
+import { Resizable } from "re-resizable"
 
-
+const style: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    margin: "0.5em 0.5em 0.5em 0",
+    //overflow: "hidden",
+    borderRadius: "0.5em",
+    zIndex: "5",
+    border: "solid 1px #dddddd15",
+    background: "var(--black-color)"
+}
 
 export default function Page() {
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
-    const [evaluate, setEvaluate] = useState(false)
-    const { language, difficulty, categoryAlgorithm, category } = useSetupQuiz()
-    const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
+    const { language, difficulty, categoryAlgorithm } = useSetupQuiz()
+    const { setAlgorithmSolution } = useAlgorithm()
     const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
     const [loading, setLaoding] = useState(true)
-    const [openExplanation, setOpenExplanation] = useState(false)
-    const [openExample, setOpenExample] = useState(false)
     const [error, setError] = useState(false)
-    const [output, setOutput] = useState<IOutputRun>({ code: 0, output: "Suerte 🍀", signal: "", stderr: "", stdout: "" })
+    const router = useRouter()
+
 
     useEffect(() => {
         const GetQuiz = async () => {
@@ -52,32 +56,21 @@ export default function Page() {
         GetQuiz()
     }, [])
 
-    function HandleEvaluate(event: MouseEvent<HTMLButtonElement>): void {
-        setEvaluate(true)
-        setTimeout(() => {
-            setEvaluate(false)
-        }, 500)
+
+
+    function HandleRestart(): void {
+        router.push("/algorithms")
     }
 
-    const HandleRunCode = async () => {
-        setOutput({ code: -135, output: "[RUN] Ejecutando código...", signal: "", stderr: "", stdout: "" })
-        const response = await RunCode(language.language, algorithmSolution.solution, language.version)
 
-        if (response.response?.run.code === 1 && response.response?.run.stderr) {
-            setOutput(response.response?.run)
-        } else {
-            if (response.response)
-                setOutput(response.response?.run)
-        }
-    }
 
     return (
-        <>
+        <section className={styles.section}>
+
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <Link className={styles.header_link} href={'/playground'}><ArrowLeftIcon className={styles.header_linkIcon} />Seleccionar Modo</Link>
-                    <Link className={styles.header_link} href={'/playground'}><NewIcon className={styles.header_linkIcon} />Nuevo Algoritmo</Link>
-                </div>
+
+
+
                 {(!loading && !error) &&
                     <>
                         <article className={styles.instructions}>
@@ -89,102 +82,44 @@ export default function Page() {
                                     ))
                                     }
                                 </div>
-                                {/*<textarea className={`${styles.instructions_description} scrollBarStyle`} spellCheck readOnly value={algorithm.explanation.replaceAll('\\n', '\n')} />*/}
                                 <Levels difficulty={difficulty} />
                             </div>
-                        </article>
-                        <article className={styles.playground}>
-                            <div className={styles.playground_header}>
-                                <div className={styles.playground_buttons}>
-                                    <Button className="yellow" attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>
-                                        <span className={styles.playground_buttonsText} >Explicación</span>
-                                        <BulbIcon />
-                                    </Button>
-                                    <Button className={"blue"} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>
-                                        <span className={styles.playground_buttonsText} >Ejemplo</span>
-                                        <IOIcon />
-                                    </Button>
+                            <Link className={`${styles.link} ${styles.link_algorithm}`} href={'/algorithms'} title="Crear un nuevo algoritmo" ><CreateIcon className={styles.link_icon} />Crear nuevo algoritmo</Link>
 
-                                    <div className={styles.playground_buttonsRun}>
-                                        <Button onClick={HandleRunCode} >
-                                            <span className={styles.playground_buttonsText} >RUN</span>
-                                            <RunCodeIcon />
-                                        </Button>
-                                    </div>
-                                </div>
-                                <div className={styles.playground_options}>
-                                    <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
-                                </div>
-                            </div>
-                            <div className={styles.playground_container}>
-                                <div className={styles.playground_editor}>
-                                    <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
-                                    <div className={styles.playground_output}>
-                                        <header className={styles.playground_outputHeader}>
-                                            <span className={styles.playground_outputHeaderText}>OUTPUT</span>
-                                            <span className={`${styles.playground_outputHeaderStatus} 
-                                            ${output.code === -135 && styles.playground_outputHeaderStatusRun}
-                                            ${output.code > 0 && styles.playground_outputHeaderStatusError}
-                                            ${output.code === 0 && styles.playground_outputHeaderStatusOK}`}></span>
-                                        </header>
-                                        <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} spellCheck={false} readOnly />
-                                    </div>
-                                </div>
-                                <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
-                            </div>
                         </article>
+                        <Workspace algorithm={algorithm} />
                     </>
                 }
+
+
                 {(loading && !error) &&
                     <Loading title="Generando algoritmo..." />
                 }
+
                 {(error && !loading) &&
                     <div className={styles.error}>
                         <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
-                        {/*<Button onClick={() => setStart(false)}>Reintentar</Button>*/}
+                        {<Button onClick={HandleRestart}>Reintentar</Button>}
                     </div>
-
                 }
+
+
             </div>
-            {openExplanation &&
-                <Modal onClick={() => setOpenExplanation(false)} allowBackground>
-                    <article className={styles.explanation}>
-                        <div className={styles.explanation_close}>
-                            <ButtonClose onClick={() => setOpenExplanation(false)} />
-                        </div>
-                        <h3 className={styles.explanation_title}>{algorithm.title}</h3>
-                        <p className={styles.explanation_p}>{parseTextToJSX(algorithm.explanation.replaceAll('\\n', '\n'))}</p>
-                    </article>
-                </Modal>
-            }
-            {
-                openExample &&
-                <Modal onClick={() => setOpenExample(false)} allowBackground>
-                    <div className={styles.instructions_example}>
-                        <div className={styles.explanation_close}>
-                            <ButtonClose onClick={() => setOpenExample(false)} />
-                        </div>
-                        <span className={styles.instructions_text}>Ejemplo:</span>
-                        <div className={styles.instructions_input}>
-                            <span className={styles.instructions_label}>Datos de entrada</span>
-                            <span className={styles.instructions_subtitle}>{algorithm.inputDescription}</span>
-                            <CodeBlock language={language.language}
-                                text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                theme={atomOneDark}
-                                customStyle={{ ...StyleCodeEditor }} />
-                        </div>
-                        <Separator />
-                        <div className={styles.instructions_output}>
-                            <span className={styles.instructions_label}>Resultado esperado</span>
-                            <span className={styles.instructions_subtitle}>{algorithm.outputDescription}</span>
-                            <CodeBlock language={language.language}
-                                text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
-                                theme={atomOneDark}
-                                customStyle={{ ...StyleCodeEditor }} />
-                        </div>
+            <Resizable defaultSize={{ height: "calc(100svh - 20em)", width: "60" }} maxWidth={60} maxHeight={"calc(100svh - 1em)"} minWidth={60} style={style}  >
+                <Link className={styles.logo} href={"/"} title="Ir a la página de inicio">
+                    <LogoCCQ className={styles.logo_icon} />
+                    <span className={styles.logo_text} >Code Challenge & Quiz</span>
+                </Link>
+                <Separator />
+                <div className={styles.options}>
+                    <div className={styles.header}>
+                        <Link className={styles.link} href={'/activity-selector'} title="Elegir desafío" attr-label="Elegir desafío"><TargetIcon className={styles.link_icon} />  </Link>
+                        <Link className={styles.link} href={'/activity-selector'} title="Guardar algoritmo" attr-label="Guardar algoritmo"><SaveIcon className={styles.link_icon} /></Link>
+                        <Link className={styles.link} href={'/activity-selector'} title="Ver algoritmos guardados" attr-label="Ver algoritmos guardados"><ViewIcon className={styles.link_icon} /></Link>
                     </div>
-                </Modal>
-            }
-        </>
+                    <Link className={`${styles.link} ${styles.link_login}`} href={'/playground'} title="Iniciar sesion" attr-label="Iniciar sesion"><LoginIcon className={styles.link_icon} /> </Link>
+                </div>
+            </Resizable>
+        </section>
     )
 }

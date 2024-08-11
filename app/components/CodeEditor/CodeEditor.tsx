@@ -2,10 +2,10 @@
 "use client"
 
 import { useAlgorithm, useSetupQuiz } from '@/app/utils/store'
-import Editor from '@monaco-editor/react'
+import Editor, { loader } from '@monaco-editor/react'
 import styles from "./styles.module.scss"
 import { IItemCategory } from '@/app/interfaces/languages'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CopyIcon } from '../Icons'
 import { ButtonCopy } from '../ButtonCopy/ButtonCopy'
 import { CATEGORIES } from '@/app/utils/const'
@@ -18,6 +18,19 @@ interface Props {
 export function CodeEditor({ language, codeTemplate }: Props) {
     const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
     const { category } = useSetupQuiz()
+
+    useEffect(() => {
+        loader.init().then((monaco) => {
+            monaco.editor.defineTheme('myTheme', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [],
+                colors: {
+                    'editor.background': '#161516',
+                },
+            })
+        })
+    }, [])
 
     function HandleOnChange(value?: string): void {
         if (value) {
@@ -40,8 +53,9 @@ export function CodeEditor({ language, codeTemplate }: Props) {
             </div>
             <Editor
                 defaultLanguage={language.language}
+                language={language.language}
                 value={codeTemplate}
-                theme='vs-dark'
+                theme='myTheme'
                 width={"99.99%"}
                 height={"99.99%"}
                 options={{
