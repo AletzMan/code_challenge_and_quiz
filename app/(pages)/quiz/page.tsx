@@ -1,21 +1,21 @@
 
-import { ArrowLeftIcon } from "@/app/components/Icons"
-import { PlaygroundQuiz } from "./components/PlaygroundQuiz/PlaygroundQuiz"
 import styles from "./styles.module.scss"
-import Link from "next/link"
 import { SnackProvider } from "@/app/components/SnackProvider/SnackProvider"
+import { Footer } from "@/app/components/Footer/Footer"
+import { QuizSetup } from "./components/QuizSetup/QuizSetup"
+import Link from "next/link"
+import { TargetIcon } from "@/app/components/Icons"
+import { ButtonBack } from "@/app/components/ButtonBack/ButtonBack"
 
 
 export default function Page() {
     return (
         <main className={`${styles.main}`}>
-            <h2 className={styles.main_title}>
-                <Link className={styles.link} href={'/activity-selector'}><ArrowLeftIcon className={styles.link_icon} />Seleccionar Modo</Link>
-                Reto de conocimientos
-            </h2>
+            <ButtonBack text="Elegir desafío" href="/activity-selector" />
             <SnackProvider>
-                <PlaygroundQuiz />
+                <QuizSetup />
             </SnackProvider>
+            <Footer />
         </main>
     )
 }

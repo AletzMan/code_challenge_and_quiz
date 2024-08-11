@@ -9,6 +9,7 @@ import { IQuiz } from "@/app/interfaces/quiz"
 import { GetCodeBlock, parseTextToJSX } from "../QuizBot/ParseTextToJSX"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
 import { StyleCodeEditor } from "@/app/utils/const"
+import { GetCurrentDay } from "@/app/utils/helpers"
 
 
 interface Props {
@@ -63,6 +64,8 @@ export function AlgorithmBot({ algorithm, evaluate }: Props) {
             append(prevMessages)
         }
     }, [evaluate])
+
+
 
     return (
         <section className={styles.section}>

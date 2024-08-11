@@ -3,6 +3,7 @@ import { Jost } from "next/font/google"
 import "./globals.css"
 import { Header } from "./components/Header/Header"
 import { Footer } from "./components/Footer/Footer"
+import BouncingBall from "./components/Ballon/Ballon"
 
 const font = Jost({ subsets: ["latin"] })
 
@@ -19,13 +20,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={font.className} id="containerBalls">
-				<div className="imageContainer">
+
+				<div className="imageContainer" >
 
 				</div>
 				{/*<Header />*/}
 				{children}
 				{/*<Footer />*/}
 				<dialog id="modal_root" open></dialog>
+				{<BouncingBall nameIdContainer="containerBalls" />}
 			</body>
 		</html>
 	)

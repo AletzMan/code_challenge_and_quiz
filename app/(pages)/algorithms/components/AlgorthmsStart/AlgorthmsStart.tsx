@@ -28,9 +28,8 @@ export const AlgorthmsStart = () => {
     return (
         <section className={styles.section}>
             <article className={styles.container}>
-                <h2 className={styles.container_title}>Configuración de Algoritmo</h2>
-                <p className={styles.container_setupMessage}>Selecciona la categoría del algoritmo, el lenguaje de programación que deseas utilizar y el nivel de dificultad que prefieres.</p>
-                <p className={styles.container_setupMessage}>Luego, ingresa tu clave API para generar el algoritmo</p>
+                <h2 className={styles.container_title}>Configuración del Entorno</h2>
+                <p className={styles.container_setupMessage}>Selecciona el lenguaje, la dificultad y el tema para crear desafíos que se adapten a tus objetivos</p>
                 <AlgorthmsSetUp error={error} setError={setError} />
                 <button className={styles.start} onClick={HandleStart}>
                     COMENZAR

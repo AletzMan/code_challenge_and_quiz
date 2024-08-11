@@ -1,15 +1,16 @@
 .dialog {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100svw;
+    width: 100%;
     min-width: 320px;
-    height: 100svh;
+    height: max-content;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: transparent;
-    background-color: #FFFFFF00;
+    background-color: #FFFFFF;
     z-index: 20;
     border: none;
     transform-origin: center center;

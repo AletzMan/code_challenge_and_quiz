@@ -39,17 +39,48 @@ body {
 body {
   position: relative;
   background: radial-gradient(ellipse at bottom, var(--grayblack-color), var(--black-color)),
-    radial-gradient(ellipse at top, var(--grayblack-color), var(--black-color));
+    radial-gradient(ellipse at top, var(--black-color), var(--black-color));
   /*background-image: url("/grid.png");
   background-size: cover;
   background-repeat: no-repeat;
   */
 
-
-
-
-
 }
+
+.tag__move {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  font-size: 1rem;
+  /*transform: translate(0px);*/
+  transition: left 0.1 linear;
+  border-radius: 5em;
+  padding: 0.5em 0.75em;
+  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 65%;
+  font-size: 0.85em;
+  opacity: 0.15;
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: -10px -10px 20px 7px #FFFFFF30 inset;
+
+  z-index: 0;
+}
+
+.tag__moveDisabled {
+  display: none;
+  visibility: collapse;
+  position: relative;
+}
+
+.tag__move:hover {
+  cursor: pointer;
+  opacity: 1;
+  backdrop-filter: bright(150%);
+}
+
 
 
 .scrollBarStyle {
@@ -91,13 +122,36 @@ body {
   background-color: var(--terciaryColor);
 }
 
+.explotion {
+  position: absolute;
+  top: 3em;
+  left: 3em;
+  width: 1px;
+  height: 1px;
+  background-color: transparent;
+  border-radius: 5em;
+  transform: scale(0);
+}
+
+.explotion_active {
+  background-color: transparent;
+  animation: explotion 0.2s ease-in-out;
+  box-shadow: 0 0 15px 6px #ef3400cc;
+}
+
+@keyframes explotion {
+  to {
+    transform: scale(1);
+  }
+}
+
 .imageContainer {
   z-index: -1;
   position: fixed;
   top: -0.5em;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100svw;
+  height: 100svh;
   /*background-color: red;
   --_g: #0000 90deg, var(--c1) 0;
   background:
@@ -106,6 +160,7 @@ body {
     var(--c2);
   background-size: var(--s) var(--s), calc(var(--s)/5) calc(var(--s)/5);
   */
+
   background-image: url("/grid.png");
   background-size: cover;
   opacity: 0.03;

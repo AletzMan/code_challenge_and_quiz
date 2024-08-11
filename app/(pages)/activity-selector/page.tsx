@@ -1,29 +1,62 @@
 "use client"
 import Link from "next/link"
-import { FlowChartIcon, QuestionIcon } from "../../components/Icons"
+import { AnimationIcon, FlowChartIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
 import { Footer } from "@/app/components/Footer/Footer"
+import BouncingBall from "@/app/components/Ballon/Ballon"
+import { useRef, useState } from "react"
+import { Button } from "@/app/components/Button/Button"
 
 
 export default function Page() {
+    const explotionRef = useRef<HTMLDivElement | null>(null)
+
+    const HandleClickMain = () => {
+        if (explotionRef.current) {
+            explotionRef.current.classList.toggle("explotion_active")
+            setTimeout(() => {
+                if (explotionRef.current)
+                    explotionRef.current.classList.toggle("explotion_active")
+
+            }, 200)
+        }
+    }
+
+    /*
+    La IA creará problemas de programación adaptados a tu nivel.
+    
+    ¡Resuélvelos y crece como programador!
+    */
+
     return (
-        <main className={styles.main}>
+        <main className={styles.main} onClick={HandleClickMain}>
             <section className={`${styles.section}`}>
                 <h2 className={styles.main_title}>¡Mejora tus habilidades de programación divirtiéndote!</h2>
-                <p className={styles.message}>Elige el tipo de actividad que te interesa para comenzar.</p>
+                <p className={styles.message}>Elige el tipo de  desafío que te interesa para comenzar.</p>
                 <p className={styles.message}>Actualmente, puedes seleccionar entre las opciones disponibles, pero pronto agregaremos más categorías para ofrecerte una experiencia más completa.</p>
                 <article className={styles.categories}>
                     <Link className={`${styles.article} ${styles.article_algorithms}`} href="/algorithms">
-                        <h3 className={styles.subtitle}>Reto de Algoritmos</h3>
+                        <h3 className={styles.subtitle}>Potencia tu lógica</h3>
+                        <div className={`${styles.article_messages}`}>
+                            <p className={styles.article_message}>La IA creará problemas de programación adaptados a tu nivel.</p>
+                            <p className={styles.article_message}>¡Resuélvelos y crece como programador!</p>
+                        </div>
                         <FlowChartIcon className={`${styles.icon} ${styles.icon_two}`} />
                     </Link>
                     <Link className={`${styles.article} ${styles.article_quiz}`} href="/quiz">
-                        <h3 className={styles.subtitle}>Reto de Conocimientos</h3>
+                        <h3 className={styles.subtitle}>¡Prueba tus Conocimientos!</h3>
+                        <div className={`${styles.article_messages}`}>
+                            <p className={styles.article_message}>Genera quizzes aleatorios y desafía tus conocimientos.</p>
+                            <p className={styles.article_message}>¡Perfecto para estudiar o simplemente por diversión!</p>
+                        </div>
                         <QuestionIcon className={`${styles.icon} ${styles.icon_one}`} />
                     </Link>
                 </article>
             </section>
+
+
             <Footer />
+            <div className="explotion" ref={explotionRef}></div>
         </main>
     )
 }
