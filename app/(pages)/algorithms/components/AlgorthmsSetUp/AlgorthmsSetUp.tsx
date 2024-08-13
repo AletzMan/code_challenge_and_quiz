@@ -54,18 +54,20 @@ export function AlgorthmsSetUp({ error, setError }: Props) {
 
 
     return (
-        <div className={styles.container}>
-            <div className={styles.selects}>
-                <Combobox label="Categoria" options={AlgorithmsCategories} value={categoryAlgorithm?.option} onChange={HandleChangeCategory} />
-                <Combobox label="Lenguaje" options={CATEGORIES.languages.items} value={language?.option} onChange={HandleChangeLanguage} />
-            </div>
-            <div className={styles.difficulty}>
-                <label className={styles.difficulty_label}>Dificultad</label>
-                <div className={styles.difficulty_buttons}>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("easy")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("medium")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("hard")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
-                    <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("expert")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
+        <div className={`${styles.container}`}>
+            <div className={styles.options}>
+                <div className={styles.selects}>
+                    <Combobox label="Categoria" options={AlgorithmsCategories} value={categoryAlgorithm?.option} onChange={HandleChangeCategory} />
+                    <Combobox label="Lenguaje" options={CATEGORIES.languages.items} value={language?.option} onChange={HandleChangeLanguage} />
+                </div>
+                <div className={styles.difficulty}>
+                    <label className={styles.difficulty_label}>Dificultad</label>
+                    <div className={styles.difficulty_buttons}>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonEasy} ${difficulty === "easy" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("easy")}><StudentIcon className={styles.difficulty_icon} />Trainee</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonMedium} ${difficulty === "medium" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("medium")}><HammerIcon className={styles.difficulty_icon} />Junior</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonHard} ${difficulty === "hard" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("hard")}><ToolsIcon className={styles.difficulty_icon} />Semi-Senior</button>
+                        <button className={`${styles.difficulty_button} ${styles.difficulty_buttonExpert} ${difficulty === "expert" && styles.difficulty_buttonActive}`} onClick={() => HandleChangeDifficulty("expert")}><TrophyIcon className={styles.difficulty_icon} />Senior</button>
+                    </div>
                 </div>
             </div>
             <TextBoxApiKey props={{ placeholder: "Introduzca su clave API de OpenAI ", value: apiKey, onChange: HandleChangeApiKey }} error={error} />

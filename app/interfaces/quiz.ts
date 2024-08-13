@@ -1,29 +1,35 @@
 export interface IResponseQuiz {
-    quiz: IQuiz | null
+    quiz: IQuestion | null
 }
 
-export interface IQuiz {
+export interface IQuestion {
     question: string,
     codeSnippet: string | null,
     options: string[] | null,
+    matchingOptions: string[] | null,
+    numberOfCorrectAnswers: number,
     rightAnswer: string[],
-    type: 'multiple choice' | 'true false' | 'blank space',
+    rightAnswerMatching: string[] | null,
+    type: 'multiple choice' | 'true false' | 'blank space' | 'multiple select' | 'matching',
     explanation: string
     codeSnippetExplanation: string | null
 }
 
 export interface IQuizResult {
-    questions: IQuestion[]
+    questions: IAnswer[]
     correctAnswers: number
 }
 
-export interface IQuestion {
+export interface IAnswer {
     question: string
+    codeSnippet: string | null,
     answer: string
     isRight: boolean
     explanation: string
     codeSnippetExplanation: string | null
     rightAnswer: string[]
+    rightAnswerMatching?: string[][]
+    answerMatching?: string[][]
 }
 
 export interface IQuestionCategory {

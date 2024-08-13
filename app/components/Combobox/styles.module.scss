@@ -30,7 +30,7 @@
 
 .label {
     font-size: 0.8em;
-    color: var(--fontsecond-color);
+    color: #3298d0;
 }
 
 .select {
@@ -41,4 +41,10 @@
     background-color: var(--black-color);
     color: var(--font-color);
     border-radius: 0.25em;
+
+
+    &:focus {
+        outline: 1px solid var(--purple-color);
+    }
+
 }

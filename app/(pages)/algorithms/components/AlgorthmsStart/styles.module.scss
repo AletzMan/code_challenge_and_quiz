@@ -8,10 +8,8 @@
     max-width: 1980px;
     height: 100%;
     padding: 3em 0 0 0;
-    border: 1px solid #2b2b2b;
     border-radius: 0.5em;
-    overflow: hidden;
-    z-index: 5;
+    //overflow: hidden;
 
 }
 
@@ -23,9 +21,16 @@
     gap: 0.5em;
     width: max-content;
     padding: 2em;
+    border-radius: 0.25em;
     background-color: transparent;
+    border: 1px solid var(--grayblack-color);
     backdrop-filter: blur(5px);
+    z-index: 5;
 
+    @media (width < 600px) {
+        padding: 0.5em;
+        width: calc(100svw - 1em);
+    }
 
     &_title {
         position: relative;
@@ -35,6 +40,11 @@
         margin: 0 0 1em 0;
         text-align: center;
         color: var(--yellow-color);
+
+        @media (width < 600px) {
+            margin: 0;
+            font-size: 1.2em;
+        }
     }
 
 
@@ -45,9 +55,11 @@
         padding: 1em;
         margin: 1em auto;
         border-radius: 0.25em;
-        //background: radial-gradient(ellipse, var(--grayblack-color), var(--background-color));
-        //border: 1px solid var(--gray-color);
         width: max-content;
+
+        @media (width < 600px) {
+            padding: 0.5em;
+        }
 
         &Message {
             color: var(--font-color);
@@ -57,6 +69,11 @@
             font-weight: 300;
             font-size: 1.1em;
             text-wrap: balance;
+
+            @media (width < 600px) {
+                text-wrap: pretty;
+                font-size: 0.95em;
+            }
         }
     }
 
@@ -67,19 +84,31 @@
 .start {
     align-self: center;
     width: 8em;
-    height: 4em;
+    //height: 4em;
+    padding: 0.5em 1em;
     margin: 2em 0;
-    border-radius: 0.75em;
-    color: var(--font-color);
-    font-weight: 800;
-    border: 1px solid #046a8f;
-    background: #014760;
-    text-shadow: 0 0 2px #000000;
+    border-radius: 0.25em;
+    font-size: 1.1em;
+    font-weight: 700;
     font-family: var(--font-family);
+    color: var(--font-color);
+    //background: #014760;
+    // border: 1px solid #046a8f;
+    // text-shadow: 0 0 2px #000000;
+    background: var(--purple-color);
+    border: none;
+    filter: brightness(100%);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
+    @media (width < 600px) {
+        margin: 0;
+    }
+
     &:hover {
-        box-shadow: 0 0 3px 3px #02b6f899;
+        border-color: var(--purple-color);
+        color: var(--font-color);
+        filter: brightness(100%);
+        box-shadow: 0 0 4px 2px var(--purple-color);
     }
 }

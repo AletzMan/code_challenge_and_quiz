@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 0 auto;
+    margin: 0.5em auto;
     max-width: 900px;
     padding: 0.5em;
     border-radius: 0.25em;
@@ -18,7 +18,7 @@
     }
 
     &_number {
-        color: var(--blue-color);
+        color: var(--purple-color);
         font-weight: 600;
     }
 
@@ -43,7 +43,6 @@
 
     &_text {
         color: var(--font-color);
-        background-color: var(--grayblack-color);
         font-weight: 300;
         border-radius: 0.25em;
         list-style: none;
@@ -65,7 +64,8 @@
         filter: brightness(110%);
 
         & .details_summary {
-            background-color: #272d30;
+            background-color: var(--grayblack-color);
+            filter: brightness(130%);
 
 
         }
@@ -81,6 +81,11 @@
         border-left: 4px solid #ff1414;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
+
+        &:hover {
+            background-color: var(--grayblack-color);
+            filter: brightness(130%);
+        }
 
         &Right {
             border-left: 4px solid #219625;
@@ -167,7 +172,7 @@
             height: 100%;
             background-color: transparent;
             border: none;
-            color: var(--blue-color);
+            color: var(--purple-color);
             opacity: 0.6;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
@@ -205,10 +210,74 @@
         flex-direction: column;
         gap: 0.5em;
         padding: 0.5em;
-        background-color: var(--black-color);
+        background-color: var(--background-color);
     }
 
     &[open] .details_arrow {
         transform: rotate(180deg);
+    }
+}
+
+.answerMatching {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    max-height: 20em;
+    gap: 0.5em;
+
+    &_results {
+        display: grid;
+        grid-template-columns: 0.7fr 0.7fr;
+        gap: 0.5em;
+
+    }
+
+    &_tag {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.9em;
+        color: var(--fontsecond-color);
+        font-weight: 300;
+        padding: 0.35em;
+        border-radius: 0 0.25em 0.25em 0;
+        background-color: var(--gray-color);
+        border: 1px solid #FFFFFF15;
+        border-left: 3px solid #219625;
+
+        &OK {
+            border-top: 1px solid #FFFFFF15;
+            border-bottom: 1px solid #FFFFFF15;
+            border-right: 1px solid #FFFFFF15;
+            border-left: 3px solid #219625;
+        }
+
+        &FAIL {
+            border-top: 1px solid #FFFFFF15;
+            border-bottom: 1px solid #FFFFFF15;
+            border-right: 1px solid #FFFFFF15;
+            border-left: 3px solid #ff1414;
+        }
+
+        &Match {
+            font-weight: 400;
+            border-left: 1px solid #FFFFFF15;
+
+            &Normal {
+                color: #38c93d;
+            }
+
+            &OK {
+                color: #38c93d;
+            }
+
+            &FAIL {
+                color: #ff1414;
+            }
+
+        }
+
+
+
     }
 }

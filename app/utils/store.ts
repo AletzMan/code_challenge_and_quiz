@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { IQuizResult } from "../interfaces/quiz"
+import { IQuestion, IQuizResult } from "../interfaces/quiz"
 import { IAlgorithmProperty, IAlgorithmSolution } from "../interfaces/algorithm"
 import { DefaultCategory, DefaultLanguage } from "./const"
 import { IItemCategory } from "../interfaces/languages"
@@ -18,8 +18,6 @@ interface ISetupQuiz {
     defaultDifficulty: string
     questions: number
     setQuestions: (value: number) => void
-    completeQuiz: IQuizResult
-    setCompleteQuiz: (value: IQuizResult) => void
 }
 
 
@@ -36,11 +34,6 @@ export const useSetupQuiz = create(
             setCategoryAlgorith: (value: IAlgorithmProperty) =>
                 set((state) => ({
                     categoryAlgorithm: value,
-                })),
-            completeQuiz: { questions: [], correctAnswers: 0 },
-            setCompleteQuiz: (value: IQuizResult) =>
-                set((state) => ({
-                    completeQuiz: value,
                 })),
             language: DefaultLanguage,
             setLanguage: (value: IItemCategory) =>
@@ -62,6 +55,82 @@ export const useSetupQuiz = create(
         }),
 
         { name: "quizsetupccq" }
+    )
+)
+
+
+
+export interface IClassNameOptions {
+    name: string
+    value: string
+}
+
+
+interface ICurrentQuiz {
+    completeQuiz: IQuizResult
+    setCompleteQuiz: (value: IQuizResult) => void
+    selectedAnswer: string
+    setSelectedAnwer: (value: string) => void
+    currentQuestion: IQuestion
+    setCurrentQuestion: (value: IQuestion) => void
+    emptyCurrentQuestion: IQuestion
+    currentQuestionNumber: number
+    setCurrentQuestionNumber: (value: number) => void
+    quizInProgress: boolean
+    setQuizInProgress: (value: boolean) => void
+    resetCurrentQuiz: () => void
+    classNameOrder: IClassNameOptions[]
+    setClassNameOrder: (value: IClassNameOptions[]) => void
+}
+
+
+
+export const useCurrentQuiz = create(
+    persist<ICurrentQuiz>(
+        (set) => ({
+            completeQuiz: { questions: [], correctAnswers: 0 },
+            setCompleteQuiz: (value: IQuizResult) =>
+                set((state) => ({
+                    completeQuiz: value,
+                })),
+            selectedAnswer: "",
+            setSelectedAnwer: (value: string) =>
+                set((state) => ({
+                    selectedAnswer: value,
+                })),
+            currentQuestion: { codeSnippet: "", codeSnippetExplanation: "", explanation: "", options: [], question: "", rightAnswer: [], type: "multiple choice", numberOfCorrectAnswers: 0, rightAnswerMatching: [], matchingOptions: [] },
+            setCurrentQuestion: (value: IQuestion) =>
+                set((state) => ({
+                    currentQuestion: value,
+                })),
+            emptyCurrentQuestion: { codeSnippet: "", codeSnippetExplanation: "", explanation: "", options: [], question: "", rightAnswer: [], type: "multiple choice", numberOfCorrectAnswers: 0, rightAnswerMatching: [], matchingOptions: [] },
+            currentQuestionNumber: 1,
+            setCurrentQuestionNumber: (value) =>
+                set((state) => ({
+                    currentQuestionNumber: value,
+                })),
+            quizInProgress: false,
+            setQuizInProgress: (value: boolean) =>
+                set((state) => ({
+                    quizInProgress: value,
+                })),
+            resetCurrentQuiz: () =>
+                set((state) => ({
+                    completeQuiz: { questions: [], correctAnswers: 0 },
+                    selectedAnswer: "",
+                    currentQuestion: state.emptyCurrentQuestion,
+                    currentQuestionNumber: 1,
+                    quizInProgress: false,
+                    classNameOrder: []
+                })),
+            classNameOrder: [],
+            setClassNameOrder: (value: IClassNameOptions[]) =>
+                set((state) => ({
+                    classNameOrder: value
+                }))
+        }),
+
+        { name: "currentquizccq" }
     )
 )
 

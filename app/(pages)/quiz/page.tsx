@@ -10,8 +10,15 @@ import { ButtonBack } from "@/app/components/ButtonBack/ButtonBack"
 
 export default function Page() {
     return (
-        <main className={`${styles.main}`}>
-            <ButtonBack text="Elegir desafío" href="/activity-selector" />
+        <main className={`${styles.main} scrollBarStyle`}>
+            <header className={styles.header}>
+                <ButtonBack href="/activity-selector" >
+                    <>
+                        <TargetIcon />
+                        {"Elegir desafío"}
+                    </>
+                </ButtonBack>
+            </header>
             <SnackProvider>
                 <QuizSetup />
             </SnackProvider>

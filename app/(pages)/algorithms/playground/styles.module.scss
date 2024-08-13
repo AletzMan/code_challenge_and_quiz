@@ -25,7 +25,7 @@
     }
 
     &_text {
-        color: var(--blue-color);
+        color: var(--purple-color);
         font-size: 1em;
         text-wrap: nowrap;
         //overflow: hidden;
@@ -68,9 +68,9 @@
     padding: 0.35em 0.5em 0.35em 0.5em;
     text-decoration: none;
     text-shadow: 0 0 2px #000000;
-    border: 1px solid var(--blue-color);
+    border: 1px solid var(--purple-color);
     background-color: #00AEEF10;
-    color: var(--blue-color);
+    color: var(--purple-color);
     transition: all 0.3s ease-in-out;
     text-wrap: nowrap;
     width: 100%;
@@ -83,9 +83,9 @@
     }
 
     &:hover:not(:disabled) {
-        color: var(--blue-color);
-        border-color: var(--blue-color);
-        box-shadow: 0 0 3px 1px var(--blue-color);
+        color: var(--purple-color);
+        border-color: var(--purple-color);
+        box-shadow: 0 0 3px 1px var(--purple-color);
     }
 
     &_login {
@@ -177,7 +177,7 @@
 
 
     &_title {
-        color: var(--blue-color);
+        color: var(--purple-color);
         text-wrap: nowrap;
         max-width: 20em;
         font-size: 1.3em;

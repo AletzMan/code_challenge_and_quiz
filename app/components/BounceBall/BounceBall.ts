@@ -259,7 +259,6 @@ export const animationLoop = (timeStamp: number, section: HTMLElement): number =
     const velocidadMaxima = 10
 
     for (let i = 0; i < bubblesContainer.length; i++) {
-        console.log(bubblesContainer[3].speedX)
         bubblesContainer[i].updatePosition(timeElapsed)
         const velocidadActual = Math.sqrt(bubblesContainer[i].speedX * bubblesContainer[i].speedX + bubblesContainer[i].speedY * bubblesContainer[i].speedY)
         if (velocidadActual > velocidadMaxima) {

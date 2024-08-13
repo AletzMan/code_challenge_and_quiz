@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: calc(100svw - 1em);
 }
 
 .code {
@@ -59,7 +60,7 @@
 }
 
 .title {
-  background: linear-gradient(90deg, var(--green-color), var(--blue-color));
+  background: linear-gradient(90deg, var(--yellow-color), var(--purple-color));
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -73,7 +74,6 @@
   flex-direction: column;
   border-radius: 0.5em;
   padding: 1em;
-  width: max-content;
   background: transparent;
   backdrop-filter: blur(3px);
   padding: 2em;
@@ -81,11 +81,17 @@
   z-index: 3;
 }
 
+.challenges {
+  display: flex;
+  background-color: red;
+  width: 100%;
+}
+
 .message {
   color: var(--font-color);
-  font-weight: 500;
-  font-size: 1.1em;
-  margin: 0.5em 0 1.25em 0;
+  font-weight: 400;
+  font-size: 1.2em;
+  margin: 0.5em 0 1.5em 0;
   text-align: center;
 }
 
@@ -94,6 +100,7 @@
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
   list-style-type: none;
   gap: 1em;
+  margin: 2em 0 0 0;
 }
 
 .li {
@@ -109,8 +116,10 @@
   border-radius: 0.5em;
   text-align: center;
   text-wrap: balance;
+  border: 1px solid var(--grayblack-color);
+  background-color: var(--background-color);
   color: var(--font-color);
-
+  /*
   &:nth-child(1) {
     background: linear-gradient(120deg, #2b3025, #3d4334);
     border: 1px solid #efe82020;
@@ -124,21 +133,24 @@
   &:nth-child(3) {
     background: linear-gradient(120deg, #1c2c32, #253b43);
     border: 1px solid #00AEEF20;
-  }
+  }*/
 }
 
 .li_icon {
   width: 1.5em;
   height: 1.5em;
   animation: animationRotate 4s linear infinite;
+  color: var(--purple-color);
 }
 
 .li_image {
   width: 3.5em;
   height: 3.5em;
   opacity: 0.5;
+  color: var(--fontsecond-color);
 }
 
+/*
 .li_imageOne {
   color: #efe82060;
 }
@@ -150,28 +162,28 @@
 .li_imageThree {
   color: #00AEEF60;
 }
-
+*/
 .button {
   padding: 0.25em 1em;
-  border: 2px solid var(--font-color);
-  border-radius: 0.25em;
-  background-color: var(--grayblack-color);
-  color: var(--font-color);
-  text-decoration: none;
+  margin: 3em 0;
   align-self: center;
-  font-family: var(--font-family);
-  transition: all 0.3s ease-in-out;
-  font-size: 1.25em;
   width: max-content;
-  margin: 1em 0;
+  font-size: 1.25em;
+  text-decoration: none;
+  font-family: var(--font-family);
+  border-radius: 0.25em;
+  border: 2px solid var(--purple-color);
+  background-color: var(--purple-color);
+  color: var(--font-color);
+  transition: all 0.3s ease-in-out;
   filter: brightness(75%);
   cursor: pointer;
 
   &:hover {
-    border-color: var(--font-color);
+    border-color: var(--purple-color);
     color: var(--font-color);
     filter: brightness(100%);
-    box-shadow: 0 0 3px 1px var(--font-color);
+    box-shadow: 0 0 3px 1px var(--purple-color);
   }
 }
 

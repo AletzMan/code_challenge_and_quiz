@@ -10,15 +10,24 @@
     }
 
     &_input {
-        background-color: var(--background-color);
         padding: 0.75em 1em;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif;
-        border: 1px solid var(--gray-color);
         font-size: 1em;
         width: 90%;
         max-width: 32em;
         color: var(--font-color);
         border-radius: 0.5em;
+        border: 1px solid var(--gray-color);
+        background-color: var(--black-color);
+
+
+        @media (width < 600px) {
+            width: calc(100svw - 2em);
+        }
+
+        &:focus {
+            outline: 1px solid var(--purple-color);
+        }
 
         &Error {
             border: 1px dashed #FF2020;

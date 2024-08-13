@@ -2,12 +2,12 @@
 
 import { IAlgorithm } from "../interfaces/algorithm"
 import { IOutputRunCode, IResponseOutputRunCode } from "../interfaces/languages"
-import { IQuiz } from "../interfaces/quiz"
+import { IQuestion } from "../interfaces/quiz"
 
 interface IResponseFetchQuiz {
     error: boolean
     message: string
-    data: IQuiz | null
+    data: IQuestion | null
 }
 
 interface IResponseFetchAlgorithm {
@@ -19,11 +19,19 @@ interface IResponseFetchAlgorithm {
 const URL = process.env.URL_API
 
 export const GetNewQuiz = async (category: string, language: string, level: string, apiKey: string): Promise<IResponseFetchQuiz> => {
-    const type = (Math.random() * 10).toFixed(0)
+
+    const type = (Math.random() * 25).toFixed(0)
     try {
-        const response = await fetch(`${URL}/api/quiz?category=${category}&language=${language}&level=${level}&type=${type}&apiKey=${apiKey}`, {
+        const response = await fetch(`${URL}/api/quiz`, {
             cache: "no-cache",
-            method: "POST"
+            method: "POST",
+            body: JSON.stringify({
+                category,
+                language,
+                level,
+                type,
+                apiKey
+            })
         })
         const data = await response.json()
 

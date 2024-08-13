@@ -10,6 +10,11 @@
     border: 1px solid var(--gray-color);
     border-radius: 0.25em;
     background-color: #10101010;
+}
 
-
+.header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5em;
+    width: 100%;
 }
