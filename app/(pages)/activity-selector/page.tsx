@@ -1,35 +1,42 @@
 "use client"
 import Link from "next/link"
-import { AnimationIcon, FlowChartIcon, QuestionIcon } from "../../components/Icons"
+import { FlowChartIcon, HomeIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
 import { Footer } from "@/app/components/Footer/Footer"
-import BouncingBall from "@/app/components/Ballon/Ballon"
-import { useRef, useState } from "react"
-import { Button } from "@/app/components/Button/Button"
+import { useRef, MouseEvent } from "react"
+import { ButtonBack } from "@/app/components/ButtonBack/ButtonBack"
 
 
 export default function Page() {
     const explotionRef = useRef<HTMLDivElement | null>(null)
 
-    const HandleClickMain = () => {
+    const HandleClickMain = (e: MouseEvent<HTMLElement>) => {
         if (explotionRef.current) {
             explotionRef.current.classList.toggle("explotion_active")
+            const posX = e.clientX
+            const posY = e.clientY
+            explotionRef.current.style.top = `${posY}px`
+            explotionRef.current.style.left = `${posX}px`
             setTimeout(() => {
-                if (explotionRef.current)
+                if (explotionRef.current) {
                     explotionRef.current.classList.toggle("explotion_active")
+                }
 
             }, 200)
         }
     }
 
-    /*
-    La IA creará problemas de programación adaptados a tu nivel.
-    
-    ¡Resuélvelos y crece como programador!
-    */
 
     return (
-        <main className={styles.main} onClick={HandleClickMain}>
+        <main className={`${styles.main} scrollBarStyle`} onClick={HandleClickMain}>
+            <header className={styles.header}>
+                <ButtonBack href="/" >
+                    <>
+                        <HomeIcon />
+                        {""}
+                    </>
+                </ButtonBack>
+            </header>
             <section className={`${styles.section}`}>
                 <h2 className={styles.main_title}>¡Mejora tus habilidades de programación divirtiéndote!</h2>
                 <p className={styles.message}>Elige el tipo de  desafío que te interesa para comenzar.</p>

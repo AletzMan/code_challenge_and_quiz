@@ -4,15 +4,15 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  --background-color: #111111;
-  --black-color: #161516;
-  --grayblack-color: #1e2025;
+  --background-color: #090909;
+  --black-color: #111111;
+  --grayblack-color: #1e1f20;
   --gray-color: #2c3136;
   --green-color: #39FF14;
-  --blue-color: #00AEEF;
-  --yellow-color: #efe820;
+  --purple-color: #532eb2;
+  --yellow-color: #f6994d;
   --font-color: #eeeeee;
-  --fontsecond-color: #9b9b9b;
+  --fontsecond-color: #bfbfbf;
   --s: 100px;
   /* control the size*/
   --c1: #343A4015;
@@ -38,7 +38,7 @@ body {
 
 body {
   position: relative;
-  background: radial-gradient(ellipse at bottom, var(--grayblack-color), var(--black-color)),
+  background: radial-gradient(ellipse at bottom, var(--background-color), var(--black-color)),
     radial-gradient(ellipse at top, var(--black-color), var(--black-color));
   /*background-image: url("/grid.png");
   background-size: cover;

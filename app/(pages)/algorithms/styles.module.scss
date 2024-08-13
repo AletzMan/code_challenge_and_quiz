@@ -5,7 +5,16 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.5em;
+    margin: 0.5em;
+    height: calc(100svh - 1em);
+    border-radius: 0.25em;
+    border: 1px solid var(--grayblack-color);
+}
+
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
     padding: 0.5em;
-    height: calc(100svh);
-    z-index: 5;
 }

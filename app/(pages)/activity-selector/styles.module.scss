@@ -2,22 +2,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 2em;
     margin: 0.5em;
     border-radius: 0.25em;
     border: 1px solid var(--gray-color);
-    justify-content: space-between;
-    overflow: hidden;
     height: calc(100svh - 1em);
 
     &_title {
         font-size: 1.75em;
         color: var(--font-color);
         text-align: center;
-        background: linear-gradient(45deg, var(--blue-color), var(--yellow-color));
+        background: linear-gradient(45deg, var(--purple-color), var(--yellow-color));
         background-clip: text;
         -webkit-text-fill-color: transparent;
+
+        @media (width < 600px) {
+            font-size: 1.5em;
+        }
     }
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5em;
+    width: 100%;
 }
 
 .section {
@@ -31,6 +41,13 @@
     backdrop-filter: blur(7px);
     padding: 2em;
     border-radius: 0.5em;
+
+    @media (width < 600px) {
+        margin: 0;
+        width: calc(100svw - 1em);
+        padding: 0.5em;
+        gap: 1em;
+    }
 }
 
 .message {
@@ -38,6 +55,11 @@
     max-width: 60ch;
     text-align: center;
     text-wrap: balance;
+
+    @media (width < 600px) {
+        font-size: 0.9em;
+        text-wrap: pretty;
+    }
 }
 
 .categories {
@@ -81,8 +103,10 @@
     }
 
     &_quiz {
-        background: linear-gradient(120deg, #2b3025, #3d4334);
-        border: 1px solid #efe82020;
+        //background: linear-gradient(120deg, #2b3025, #3d4334);
+        //border: 1px solid #efe82020;
+        background-color: var(--background-color);
+        border: 1px solid var(--grayblack-color);
 
         &:hover {
             border-color: #efe82060;
@@ -91,8 +115,10 @@
     }
 
     &_algorithms {
-        background: linear-gradient(120deg, #203124, #293e2e);
-        border: 1px solid #39FF1420;
+        //background: linear-gradient(120deg, #203124, #293e2e);
+        // border: 1px solid #39FF1420;
+        background-color: var(--background-color);
+        border: 1px solid var(--grayblack-color);
 
         &:hover {
             border-color: #39FF1460;

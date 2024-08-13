@@ -1,34 +1,105 @@
-.section {
+.quiz {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    background: radial-gradient(ellipse at top, var(--grayblack-color), var(--black-color)),
-        radial-gradient(ellipse at bottom, var(--background-color), transparent);
-    width: 100%;
-    //height: calc(100svh - 9.5em);
-    max-width: 1440px;
-    border: 1px solid var(--grayblack-color);
-    //padding: 0.5em;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 0.5em;
+    width: calc(100svw - 1em);
+    height: calc(100svh - 1em);
+    background-color: var(--background-color);
+    margin: 0.5em;
+    z-index: 5;
+}
+
+.newQuiz {
+    width: 100%;
+    text-wrap: nowrap;
+
+    @media (width < 600px) {
+        display: none;
+    }
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    max-height: calc(100svh - 10em);
+    border-radius: 0.25em;
+    width: 100%;
+    max-width: 1150px;
+    background-color: transparent;
+    border: 1px solid var(--grayblack-color);
 }
 
 
-.start {
-    align-self: center;
-    width: 8em;
-    height: 4em;
-    margin: 2em 0;
-    border-radius: 0.75em;
-    color: var(--font-color);
-    font-weight: 800;
-    border: 1px solid #046a8f;
-    background: #014760;
-    text-shadow: 0 0 2px #000000;
-    font-family: var(--font-family);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    width: 100%;
+    border-radius: 0.35em;
+    background-color: var(--grayblack-color);
+    z-index: 6;
 
-    &:hover {
-        box-shadow: 0 0 3px 3px #02b6f899;
+    &_options {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        gap: 1em;
+
+        &>a {
+            top: 0.5em;
+            left: 0.5em;
+        }
+    }
+
+
+}
+
+.type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    max-width: 12em;
+
+    &_category {
+        color: var(--font-color);
+    }
+
+    &_language {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75em;
+        padding: 0.2em 1em 0.2em 0.35em;
+        border: 3px double;
+        height: 100%;
+        border-radius: 0.25em;
+        opacity: 0.7;
+
+        &>svg {
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+}
+
+.number {
+    font-size: 1em;
+    padding: 0.2em 0.75em;
+    border-radius: 0.5em;
+    margin: 0 0 0 12em;
+    font-weight: 600;
+    align-self: center;
+    color: var(--fontsecond-color);
+
+    @media (width < 600px) {
+        margin: 0 0 0 3em;
     }
 }

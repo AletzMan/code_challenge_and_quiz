@@ -49,7 +49,7 @@ export function Modal({ children, onClick, allowBackground }: Props) {
 		<>
 			{!allowBackground &&
 				<dialog open className={`${styles.dialog} ${click && styles.dialog_click}`} onClick={HandleClickDialog} onKeyDown={handleKeyDown} >
-					<Draggable onStart={handleStart} positionOffset={{ x: "-50%", y: "-50%" }}
+					<Draggable onStart={handleStart} positionOffset={{ x: "-50%", y: "-50%" }} defaultPosition={{ y: 350, x: 0 }}
 						bounds={bounds} >
 						{children}
 					</Draggable>

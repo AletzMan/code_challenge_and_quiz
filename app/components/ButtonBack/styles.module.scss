@@ -1,20 +1,25 @@
 .link {
-    position: absolute;
-    left: 1em;
-    top: 1em;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5em;
-    color: var(--blue-color);
+    color: var(--purple-color);
     background-color: #00AEEF10;
-    border: 1px solid #00AEEF;
+    border: 1px solid var(--purple-color);
     border-radius: 0.25em;
-    padding: 0.15em 0.5em 0.15em 0;
+    height: 2.5em;
+    width: max-content;
+    padding: 0.15em 0.5em 0.15em 0.5em;
+    transition: all 0.3s ease-in-out;
     text-decoration: none;
     font-size: 1em;
+    z-index: 5;
 
-    &:not(:active):not(:hover) {
+    &:hover {
+        box-shadow: 0 0 3px 1px var(--purple-color);
+    }
+
+    &:not(:active) {
         animation: click 6s linear infinite;
     }
 
@@ -44,8 +49,14 @@
         }
     }
 
-    &_icon {
+    &>svg {
         width: 2em;
         height: 2em;
+
+
+        @media (width < 600px) {
+            width: 1.75em;
+            height: 1.5em;
+        }
     }
 }

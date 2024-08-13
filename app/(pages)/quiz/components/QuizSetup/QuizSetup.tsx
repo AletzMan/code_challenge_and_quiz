@@ -3,13 +3,14 @@
 import { Combobox } from "@/app/components/Combobox/Combobox"
 import styles from "./styles.module.scss"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
-import { useApiKey, useSetupQuiz } from "@/app/utils/store"
+import { useApiKey, useCurrentQuiz, useSetupQuiz } from "@/app/utils/store"
 import { CATEGORIES } from "@/app/utils/const"
 import { ArrowLeftIcon, HammerIcon, StudentIcon, TargetIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
 import { TextBoxApiKey } from "@/app/components/TextBoxApiKey/TextBoxApiKey"
 import { IItemCategory } from "@/app/interfaces/languages"
 import { useSnackbar } from "notistack"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 
 
@@ -17,8 +18,14 @@ export function QuizSetup() {
     const { enqueueSnackbar } = useSnackbar()
     const [error, setError] = useState(false)
     const { language, setLanguage, difficulty, setDifficulty, questions, setQuestions, category, setCategory } = useSetupQuiz()
+    const { resetCurrentQuiz } = useCurrentQuiz()
     const { setApiKey, apiKey } = useApiKey()
     const [options, setOptions] = useState(CATEGORIES.languages.items)
+    const router = useRouter()
+
+    useEffect(() => {
+        resetCurrentQuiz()
+    }, [])
 
     useEffect(() => {
         const selectCategory = category.option
@@ -63,7 +70,7 @@ export function QuizSetup() {
 
     const HandleStart = () => {
         if (apiKey) {
-
+            router.push("/quiz/playground")
         } else {
             enqueueSnackbar("Por favor, ingresa tu clave API de OpenAI para continuar", { variant: "error" })
             setError(true)
@@ -74,7 +81,7 @@ export function QuizSetup() {
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>
-                Configuración del Entorno
+                Configura y comienza
             </h2>
             <div className={styles.message}>
                 <p className={styles.message_p}> Elige el lenguaje, la dificultad y el tema para generar preguntas a medida</p>

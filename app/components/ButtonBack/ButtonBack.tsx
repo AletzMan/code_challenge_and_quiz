@@ -4,11 +4,11 @@ import styles from "./styles.module.scss"
 
 
 interface Props {
-    text: string
     href: string
+    children: JSX.Element
 }
-export const ButtonBack = ({ text, href }: Props) => {
+export const ButtonBack = ({ href, children }: Props) => {
     return (
-        <Link className={styles.link} href={`${href}`}><TargetIcon className={styles.link_icon} />{text}</Link>
+        <Link className={styles.link} href={`${href}`}>{children}</Link>
     )
 }

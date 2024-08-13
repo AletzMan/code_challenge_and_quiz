@@ -48,8 +48,6 @@ const BouncingBall: React.FC<Props> = ({ nameIdContainer, animationDisabled }: P
 
 
 	useEffect(() => {
-
-		console.log("RENDER")
 		if (animation)
 			initAnimation() // Llama a la función para iniciar la animación
 		else

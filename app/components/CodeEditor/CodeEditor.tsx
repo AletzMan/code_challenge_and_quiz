@@ -26,7 +26,7 @@ export function CodeEditor({ language, codeTemplate }: Props) {
                 inherit: true,
                 rules: [],
                 colors: {
-                    'editor.background': '#161516',
+                    'editor.background': '#121212',
                 },
             })
         })

@@ -2,10 +2,11 @@
     display: flex;
     align-items: center;
     gap: 0.75em;
-    padding: 0.25em 0.5em;
+    padding: 0.5em 0.75em;
     border: 1px solid var(--font-color);
+    border: none;
     border-radius: 0.25em;
-    background-color: #FFFFFF10;
+    background-color: var(--purple-color);
     color: var(--font-color);
     font-family: var(--font-family);
     transition: all 0.3s ease-in-out;
@@ -18,44 +19,12 @@
         border-color: var(--font-color);
         color: var(--font-color);
         filter: brightness(100%);
-        box-shadow: 0 0 3px 1px var(--font-color);
+        box-shadow: 0 0 4px 1px var(--purple-color);
     }
 
-    &_green {
-        color: var(--green-color);
-        border-color: var(--green-color);
-        background-color: #0c300650;
-
-        &:hover:not(:disabled) {
-            color: var(--green-color);
-            border-color: var(--green-color);
-            box-shadow: 0 0 3px 1px var(--green-color);
-        }
-    }
-
-    &_blue {
-        color: var(--blue-color);
-        border-color: var(--blue-color);
-        background-color: #01324450;
-
-
-        &:hover:not(:disabled) {
-            color: var(--blue-color);
-            border-color: var(--blue-color);
-            box-shadow: 0 0 3px 1px var(--blue-color);
-        }
-    }
-
-    &_yellow {
-        color: var(--yellow-color);
-        border-color: var(--yellow-color);
-        background-color: #36340650;
-
-        &:hover:not(:disabled) {
-            color: var(--yellow-color);
-            border-color: var(--yellow-color);
-            box-shadow: 0 0 3px 1px var(--yellow-color);
-        }
+    &_secondary {
+        background-color: var(--font-color);
+        color: var(--purple-color);
     }
 
     &:disabled {
@@ -75,7 +44,7 @@
             box-shadow: 0 0 2px 2px #FFFFFF40;
 
             &.button_blue {
-                box-shadow: 0 0 3px 1px var(--blue-color);
+                box-shadow: 0 0 3px 1px var(--purple-color);
             }
 
             &.button_green {
