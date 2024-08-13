@@ -160,12 +160,12 @@ export function Matching({ run, setRun }: Props) {
                 <div className={styles.buttons}>
                     {run &&
                         <div className={styles.buttons_reset}>
-                            <Button onClick={HandleResetResults} className="yellow">
+                            <Button onClick={HandleResetResults}>
                                 <RefreshIcon />
                             </Button>
                         </div>
                     }
-                    {
+                    {run && (classNameOrder.length / 2 === currentQuestion.options?.length) &&
                         <Button onClick={SetResults} disabled={!(classNameOrder.length / 2 === currentQuestion.options?.length)} >
                             <ReviewIcon />
                             Validar Respuestas

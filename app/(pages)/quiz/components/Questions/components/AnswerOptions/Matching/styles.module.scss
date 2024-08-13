@@ -132,7 +132,7 @@
 
     &_reset {
         position: absolute;
-        top: -3.1em;
+        top: -8.5em;
         left: 0.5em;
 
         &>button>svg {
@@ -142,7 +142,7 @@
     }
 
     &:nth-child(2)>button {
-        font-size: 1.1em;
+        font-size: 0.9em;
     }
 }
 
@@ -151,19 +151,19 @@
     position: absolute;
     top: -0.5em;
     left: -1.125em;
-    color: #167916;
     width: 2.25em;
     height: 2.25em;
     padding: 0.25em;
     border-radius: 8em;
+    color: #22a222;
     background-color: #031903;
-    border: 2px solid #167916;
+    border: 2px solid #22a222;
     animation: animationIn 0.3s ease-in-out both;
 
     &_fail {
-        color: #e31b2c;
+        color: #f52b3c;
         background-color: #2c0105;
-        border-color: #e31b2c;
+        border-color: #f52b3c;
     }
 
 
@@ -173,7 +173,7 @@
         }
 
         50% {
-            transform: scale(1.1);
+            transform: scale(1.25);
         }
 
         100% {
