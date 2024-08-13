@@ -1,9 +1,9 @@
 .button {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.75em;
     padding: 0.5em 0.75em;
-    border: 1px solid var(--font-color);
     border: none;
     border-radius: 0.25em;
     background-color: var(--purple-color);
@@ -11,21 +11,47 @@
     font-family: var(--font-family);
     transition: all 0.3s ease-in-out;
     width: max-content;
+    font-size: 0.825em;
     font-weight: 500;
+    text-decoration: none;
     //backdrop-filter: drop-shadow(0 0 5px #000000);
     cursor: pointer;
 
     &:hover:not(:disabled) {
         border-color: var(--font-color);
         color: var(--font-color);
-        filter: brightness(100%);
-        box-shadow: 0 0 4px 1px var(--purple-color);
+        filter: brightness(110%);
+        box-shadow: 0 0 6px 1px var(--purple-color);
+
+        &>svg {
+            animation: click 0.3s linear;
+        }
     }
 
     &_secondary {
-        background-color: var(--font-color);
-        color: var(--purple-color);
+        background-color: var(--gray-color);
+        color: var(--font-color);
+        border: 1px solid #3f454caa;
+
+        &:hover:not(:disabled) {
+            border: 1px solid #3f454caa;
+            box-shadow: 0 0 6px 1px var(--gray-color);
+
+            &>svg {
+                animation: click 0.3s linear;
+            }
+        }
     }
+
+
+    &>svg {
+        width: 1.75em;
+        height: 1.75em;
+
+
+    }
+
+
 
     &:disabled {
         opacity: 0.7;
@@ -33,29 +59,42 @@
     }
 
 
-    &>svg {
-        width: 1.75em;
-        height: 1.75em;
-    }
-
     &[attr-active="active"] {
         &:not(:disabled) {
             filter: brightness(120%);
-            box-shadow: 0 0 2px 2px #FFFFFF40;
+            box-shadow: 0 0 3px 1px var(--purple-color);
 
-            &.button_blue {
-                box-shadow: 0 0 3px 1px var(--purple-color);
-            }
 
-            &.button_green {
-                box-shadow: 0 0 3px 1px var(--green-color);
-            }
-
-            &.button_yellow {
-                box-shadow: 0 0 3px 1px var(--yellow-color);
+            &.button_secondary {
+                box-shadow: 0 0 3px 1px var(--gray-color);
 
             }
+
+
         }
     }
 
+}
+
+
+@keyframes click {
+    0% {
+        transform: rotateZ(-5deg);
+    }
+
+    25% {
+        transform: rotateZ(0deg) scale(.8);
+    }
+
+    50% {
+        transform: rotateZ(5deg);
+    }
+
+    75% {
+        transform: rotateZ(0deg) scale(.8);
+    }
+
+    100% {
+        transform: rotateZ(0deg) scale(1);
+    }
 }
