@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { IQuestion, IQuizResult } from "../interfaces/quiz"
-import { IAlgorithmProperty, IAlgorithmSolution } from "../interfaces/algorithm"
+import { IAlgorithm, IAlgorithmProperty, IAlgorithmSolution } from "../interfaces/algorithm"
 import { DefaultCategory, DefaultLanguage } from "./const"
 import { IItemCategory } from "../interfaces/languages"
 
@@ -135,19 +135,49 @@ export const useCurrentQuiz = create(
 )
 
 
-interface IAlgorithm {
+const EmptyAlgorithm: IAlgorithm = {
+    codeTemplate: "",
+    constraints: [],
+    exampleInputs: [],
+    exampleOutputs: [],
+    expectedOutput: "",
+    explanation: "",
+    inputDescription: "",
+    outputDescription: "",
+    tags: [],
+    title: ""
+}
+
+
+interface IAlgorithmStore {
     algorithmSolution: IAlgorithmSolution
     setAlgorithmSolution: (value: IAlgorithmSolution) => void
+    algorithmInProgress: boolean
+    setAlgorithmInProgress: (value: boolean) => void
+    currentAlgorithm: IAlgorithm
+    setCurrentAlgorithm: (value: IAlgorithm) => void
+    emptyAlgorith: IAlgorithm
 }
 
 export const useAlgorithm = create(
-    persist<IAlgorithm>(
+    persist<IAlgorithmStore>(
         (set) => ({
+            emptyAlgorith: EmptyAlgorithm,
             algorithmSolution: { solution: "" },
             setAlgorithmSolution: (value: IAlgorithmSolution) =>
                 set((state) => ({
                     algorithmSolution: value,
-                }))
+                })),
+            algorithmInProgress: false,
+            setAlgorithmInProgress: (value: boolean) =>
+                set((state) => ({
+                    algorithmInProgress: value
+                })),
+            currentAlgorithm: EmptyAlgorithm,
+            setCurrentAlgorithm: (value: IAlgorithm) =>
+                set((state) => ({
+                    currentAlgorithm: value
+                })),
         }),
 
         { name: "algorithmccq" }

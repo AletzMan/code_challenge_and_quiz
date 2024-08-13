@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Message, useChat } from "ai/react"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef } from "react"
 import styles from "./styles.module.scss"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
 import { BotIcon, LogoCCQ, SendIcon, StopIcon, UserIcon } from "../Icons"
-import { IQuiz } from "@/app/interfaces/quiz"
 import { GetCodeBlock, parseTextToJSX } from "../QuizBot/ParseTextToJSX"
 import { IAlgorithm } from "@/app/interfaces/algorithm"
 import { StyleCodeEditor } from "@/app/utils/const"
-import { GetCurrentDay } from "@/app/utils/helpers"
 
 
 interface Props {

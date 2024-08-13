@@ -164,27 +164,8 @@
 }
 */
 .button {
-  padding: 0.25em 1em;
   margin: 3em 0;
   align-self: center;
-  width: max-content;
-  font-size: 1.25em;
-  text-decoration: none;
-  font-family: var(--font-family);
-  border-radius: 0.25em;
-  border: 2px solid var(--purple-color);
-  background-color: var(--purple-color);
-  color: var(--font-color);
-  transition: all 0.3s ease-in-out;
-  filter: brightness(75%);
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--purple-color);
-    color: var(--font-color);
-    filter: brightness(100%);
-    box-shadow: 0 0 3px 1px var(--purple-color);
-  }
 }
 
 @keyframes animationRotate {

@@ -86,7 +86,7 @@
     display: flex;
     justify-content: center;
     gap: 1em;
-    padding: 0 0.5em 0.5em 0.5em;
+    //padding: 0 0.5em 0.5em 0.5em;
 }
 
 
@@ -156,11 +156,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
     padding: 2em 0;
+
+    &_icon {
+        width: 7em;
+        height: 7em;
+        color: #630808;
+    }
 
     &_p {
         color: var(--font-color);
+        font-size: 1.1em;
+        margin: 0 0 1em 0;
+        text-align: center;
     }
 
 }

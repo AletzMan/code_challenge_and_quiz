@@ -18,17 +18,18 @@
     }
 
     &_number {
-        color: var(--purple-color);
+        color: var(--yellow-color);
         font-weight: 600;
     }
 
     &_subtitle {
         display: flex;
         gap: 0.5em;
+        margin: 0 0 1em 0;
     }
 
     &_title {
-        color: var(--yellow-color);
+        color: var(--purple-color);
         font-size: 1.2em;
     }
 }

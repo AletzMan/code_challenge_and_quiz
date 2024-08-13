@@ -177,7 +177,7 @@
 
 
     &_title {
-        color: var(--purple-color);
+        color: var(--yellow-color);
         text-wrap: nowrap;
         max-width: 20em;
         font-size: 1.3em;
@@ -203,15 +203,35 @@
 }
 
 
+
 .error {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
     padding: 2em 0;
+    z-index: 100;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+
+    &_icon {
+        width: 7em;
+        height: 7em;
+        color: #630808;
+    }
 
     &_p {
         color: var(--font-color);
+        font-size: 1.1em;
+        margin: 0 0 1em 0;
+        text-align: center;
+    }
+
+    &_buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
     }
 
 }

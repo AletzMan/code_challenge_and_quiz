@@ -3,12 +3,18 @@ import Link from "next/link"
 import { FlowChartIcon, HomeIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
 import { Footer } from "@/app/components/Footer/Footer"
-import { useRef, MouseEvent } from "react"
+import { useRef, MouseEvent, useEffect } from "react"
 import { ButtonBack } from "@/app/components/ButtonBack/ButtonBack"
 
 
 export default function Page() {
     const explotionRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        localStorage.removeItem("quizsetupccq")
+        localStorage.removeItem("currentquizccq")
+        localStorage.removeItem("algorithmccq")
+    }, [])
 
     const HandleClickMain = (e: MouseEvent<HTMLElement>) => {
         if (explotionRef.current) {
@@ -25,7 +31,6 @@ export default function Page() {
             }, 200)
         }
     }
-
 
     return (
         <main className={`${styles.main} scrollBarStyle`} onClick={HandleClickMain}>

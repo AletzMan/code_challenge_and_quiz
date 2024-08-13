@@ -5,12 +5,13 @@ import styles from "./styles.module.scss"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useApiKey, useCurrentQuiz, useSetupQuiz } from "@/app/utils/store"
 import { CATEGORIES } from "@/app/utils/const"
-import { ArrowLeftIcon, HammerIcon, StudentIcon, TargetIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
+import { ArrowLeftIcon, HammerIcon, PlayIcon, StudentIcon, TargetIcon, ToolsIcon, TrophyIcon } from "@/app/components/Icons"
 import { TextBoxApiKey } from "@/app/components/TextBoxApiKey/TextBoxApiKey"
 import { IItemCategory } from "@/app/interfaces/languages"
 import { useSnackbar } from "notistack"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { Button } from "@/app/components/Button/Button"
 
 
 
@@ -103,9 +104,10 @@ export function QuizSetup() {
                 </div>
             </div>
             <TextBoxApiKey props={{ placeholder: "Introduzca su API Key de OpenAI ", value: apiKey, onChange: HandleChangeApiKey }} error={error} />
-            <button className={styles.start} onClick={HandleStart}>
-                COMENZAR
-            </button>
+            <Button className={styles.start} onClick={HandleStart}>
+                Comenzar
+                <PlayIcon />
+            </Button>
         </div>
     )
 }

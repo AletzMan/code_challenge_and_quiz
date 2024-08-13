@@ -2,7 +2,7 @@
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import styles from "./styles.module.scss"
 import { Separator } from "@/app/components/Separator/Separator"
-import { BookIcon, BotIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, SendIcon } from "@/app/components/Icons"
+import { BookIcon, BotIcon, BotSadIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, RefreshIcon, SendIcon } from "@/app/components/Icons"
 import { Button } from "@/app/components/Button/Button"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useApiKey, useCurrentQuiz, useSetupQuiz } from "@/app/utils/store"
@@ -53,11 +53,6 @@ export function Questions() {
             setQuizInProgress(true)
             setRun(true)
         }
-        if (!loadingResponse && (quizInProgress && !run)) {
-            //SetQuizResult(false, "No respondida")
-            //setRun(false)
-        }
-        //setIsRightAnswer(false)
     }, [loading, quizInProgress, loadingResponse])
 
 
@@ -121,6 +116,18 @@ export function Questions() {
                         </div>
                     </header>
                     <Separator />
+                    {(!loading && !loadingResponse) &&
+                        <div
+                            className={`${styles.time}  
+                                            ${((time * TIME_PERCENTAGE) > 60 && (time * TIME_PERCENTAGE) <= 80) && styles.time_alert} 
+                                            ${(time * TIME_PERCENTAGE) > 80 && styles.time_danger}`}>
+                            <CircularProgressBar
+                                percentage={100 - (time * TIME_PERCENTAGE)}
+                                props={{ className: `${styles.time_bar}` }}
+                                colorFill={getColorFill(time)} />
+                            <span className={styles.time_number}>{(TOTAL_TIME - time).toString().padStart(2, "0")}</span>
+                        </div>
+                    }
                     <article className={styles.element}>
                         <div className={styles.question}>
                             <h4 className={styles.question_text}>{currentQuestion.question.replaceAll('\\', '')}</h4>
@@ -140,23 +147,10 @@ export function Questions() {
                         }
                     </article>
                     <>
-                        {(!loading && !loadingResponse) &&
-                            <div
-                                className={`${styles.time}  
-                                            ${((time * TIME_PERCENTAGE) > 60 && (time * TIME_PERCENTAGE) <= 80) && styles.time_alert} 
-                                            ${(time * TIME_PERCENTAGE) > 80 && styles.time_danger}`}>
-                                <CircularProgressBar
-                                    percentage={100 - (time * TIME_PERCENTAGE)}
-                                    props={{ className: `${styles.time_bar}` }}
-                                    colorFill={getColorFill(time)} />
-                                <span className={styles.time_number}>{(TOTAL_TIME - time).toString().padStart(2, "0")}</span>
-                            </div>
-                        }
-                        <Separator />
                         {!run && (!loading && !loadingResponse) &&
-                            <article className={styles.send}>
-                                <Button onClick={() => setViewExplanation(prev => !prev)} title="Ver la explicación detallada de esta respuesta."><BotIcon />EXPLICACIÓN</Button>
-                                <Button className="green" onClick={HandleNextQuestion} title="Ir a siguiente pregunta">{currentQuestionNumber === questions ? 'RESULTADOS' : 'SIGUIENTE'}<NextIcon /></Button>
+                            <article className={styles.send} >
+                                <Button onClick={() => setViewExplanation(prev => !prev)} title="Ver la explicación detallada de esta respuesta." className="secondary"  ><BotIcon />EXPLICACIÓN</Button>
+                                <Button onClick={HandleNextQuestion} title="Ir a siguiente pregunta">{currentQuestionNumber === questions ? 'RESULTADOS' : 'SIGUIENTE'}<NextIcon /></Button>
                             </article>
                         }
                     </>
@@ -166,8 +160,13 @@ export function Questions() {
             }
             {((!loading || !loadingResponse) && error) &&
                 <div className={styles.error}>
-                    <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
-                    <Button onClick={() => HandleReset()} title="Volver a generar la pregunta">Reintentar</Button>
+                    <BotSadIcon className={styles.error_icon} />
+                    <div className={styles.error_message}>
+                        <p className={styles.error_p}>¡Vaya! </p>
+                        <p className={styles.error_p}>Mi circuito se ha cruzado, no pude generar la pregunta</p>
+                        <p className={styles.error_p}>¿Podemos intentarlo de nuevo?</p>
+                    </div>
+                    <Button onClick={() => HandleReset()} title="Volver a generar la pregunta">Reintentar<RefreshIcon /></Button>
                 </div>
             }
             {viewExplanation &&

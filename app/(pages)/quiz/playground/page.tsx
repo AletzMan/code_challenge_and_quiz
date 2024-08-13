@@ -31,7 +31,7 @@ export default function Page() {
                         </ButtonBack>
                         <div className={styles.header_options}>
                             <div className={styles.type}>
-                                <div style={{ "color": language.color, backgroundColor: `${language.color}30`, borderColor: `${language.color}` }}
+                                <div style={{ "color": language.color, backgroundColor: `${language.color}35`, borderColor: `${language.color}30` }}
                                     className={`${styles.type_language} `}>
                                     {CATEGORIES[category.option as "frontend"].items.find(item => item.option === language.option)?.logo}
                                     {language.value}
