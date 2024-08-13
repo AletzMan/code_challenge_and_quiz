@@ -42,10 +42,58 @@
             }
         }
 
+        &Explication {
+            background-color: var(--gray-color);
+            color: var(--yellow-color);
+            border: 1px solid #3f454caa;
+
+            &:hover:not(:disabled) {
+                border: 1px solid #3f454caa;
+                color: var(--yellow-color);
+                box-shadow: 0 0 6px 1px var(--gray-color);
+                filter: brightness(130%);
+            }
+
+            &[attr-active="active"] {
+                &:not(:disabled) {
+                    filter: brightness(130%);
+                    box-shadow: 0 0 3px 1px var(--gray-color);
+                }
+            }
+        }
+
+        &Example {
+            background-color: var(--gray-color);
+            color: #4bbae9;
+            border: 1px solid #3f454caa;
+
+            &:hover:not(:disabled) {
+                border: 1px solid #3f454caa;
+                color: #4bbae9;
+                box-shadow: 0 0 6px 1px var(--gray-color);
+                filter: brightness(130%);
+            }
+
+            &[attr-active="active"] {
+                &:not(:disabled) {
+                    filter: brightness(130%);
+                    box-shadow: 0 0 3px 1px var(--gray-color);
+                }
+            }
+        }
+
         &Run {
             display: flex;
             justify-content: flex-end;
             flex: content;
+
+            &Button {
+                background-color: #35671a;
+
+                &:hover {
+                    box-shadow: 0 0 6px 1px #35671a !important;
+                }
+            }
         }
     }
 

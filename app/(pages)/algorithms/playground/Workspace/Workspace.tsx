@@ -5,7 +5,7 @@ import { CodeEditor } from "@/app/components/CodeEditor/CodeEditor"
 import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
 import { IOutputRun } from "@/app/interfaces/languages"
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, ChangeEvent } from "react"
 import { RunCode } from "@/app/utils/dataFetch"
 import { Modal } from "@/app/components/Modal/Modal"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
@@ -54,24 +54,24 @@ export function Workspace({ algorithm }: Props) {
             <article className={styles.playground}>
                 <div className={styles.playground_header}>
                     <div className={styles.playground_buttons}>
-                        <Button className="yellow" attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>
+                        <Button className={`${styles.playground_buttonsExplication}`} attr-active={openExplanation ? "active" : undefined} onClick={() => setOpenExplanation(prev => !prev)}>
                             <span className={styles.playground_buttonsText} >Explicación</span>
                             <BulbIcon />
                         </Button>
-                        <Button className={"blue"} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>
+                        <Button className={`${styles.playground_buttonsExample}`} attr-active={openExample ? "active" : undefined} onClick={() => setOpenExample(prev => !prev)}>
                             <span className={styles.playground_buttonsText} >Ejemplo</span>
                             <IOIcon />
                         </Button>
 
                         <div className={styles.playground_buttonsRun}>
-                            <Button onClick={HandleRunCode} >
+                            <Button className={styles.playground_buttonsRunButton} onClick={HandleRunCode} >
                                 <span className={styles.playground_buttonsText} >RUN</span>
                                 <RunCodeIcon />
                             </Button>
                         </div>
                     </div>
                     <div className={styles.playground_options}>
-                        <Button className="green" onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
+                        <Button onClick={HandleEvaluate} >Evaluar Solución<CheckedIcon /></Button>
                     </div>
                 </div>
                 <div className={styles.playground_container}>
@@ -85,7 +85,7 @@ export function Workspace({ algorithm }: Props) {
                                             ${output.code > 0 && styles.playground_outputHeaderStatusError}
                                             ${output.code === 0 && styles.playground_outputHeaderStatusOK}`}></span>
                             </header>
-                            <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output} spellCheck={false} readOnly />
+                            <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output.replaceAll(/\/piston\/jobs\/[a-f0-9\-]{36}\/file0./g, "")} spellCheck={false} readOnly />
                         </div>
                     </div>
                     <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
