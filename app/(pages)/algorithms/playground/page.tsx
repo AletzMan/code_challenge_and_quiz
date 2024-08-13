@@ -7,7 +7,7 @@ import { Separator } from "@/app/components/Separator/Separator"
 import { Button } from "@/app/components/Button/Button"
 import { useAlgorithm, useApiKey, useSetupQuiz } from "@/app/utils/store"
 import { GetNewAlgorithm } from "@/app/utils/dataFetch"
-import { CreateIcon, FlowChartIcon, LoginIcon, LogoCCQ, NewIcon, QuestionIcon, SaveIcon, TargetIcon, ViewIcon } from "@/app/components/Icons"
+import { BotSadIcon, ConfigIcon, CreateIcon, FlowChartIcon, LoginIcon, LogoCCQ, NewIcon, QuestionIcon, RefreshIcon, SaveIcon, TargetIcon, ViewIcon } from "@/app/components/Icons"
 import { Loading } from "@/app/components/Loading/Loading"
 import { Levels } from "@/app/components/Levels/Levels"
 import { useSnackbar } from "notistack"
@@ -15,6 +15,7 @@ import Link from "next/link"
 import { Workspace } from "./Workspace/Workspace"
 import { useRouter } from "next/navigation"
 import { Resizable } from "re-resizable"
+import { ButtonLink } from "@/app/components/Button/ButtonLink"
 
 const style: CSSProperties = {
     display: "flex",
@@ -33,35 +34,45 @@ export default function Page() {
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
     const { language, difficulty, categoryAlgorithm } = useSetupQuiz()
-    const { setAlgorithmSolution } = useAlgorithm()
-    const [algorithm, setAlgorithm] = useState<IAlgorithm>({} as IAlgorithm)
-    const [loading, setLaoding] = useState(true)
+    const { setAlgorithmSolution, algorithmInProgress, setAlgorithmInProgress, currentAlgorithm, setCurrentAlgorithm } = useAlgorithm()
+    const [loadingResponse, setLoadingResponse] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const router = useRouter()
 
+    useEffect(() => {
+        // Una vez que el estado esté cargado, cambia el valor de loading a false
+        if (algorithmInProgress !== undefined) {
+            setLoading(false)
+        }
+    }, [algorithmInProgress])
 
     useEffect(() => {
-        const GetQuiz = async () => {
-            setLaoding(true)
-            const response = await GetNewAlgorithm(language.option, difficulty, categoryAlgorithm.option, apiKey)
-            if (!response.error && response.data) {
-                setAlgorithm(response.data)
-                setAlgorithmSolution({ solution: response.data.codeTemplate })
-            } else {
-                enqueueSnackbar({ message: response.message, variant: "error" })
-                setError(true)
-            }
-            setLaoding(false)
+        if (!loading && !algorithmInProgress) {
+            GetAlgorithm()
+            setAlgorithmInProgress(true)
         }
-        GetQuiz()
-    }, [])
+    }, [loading, algorithmInProgress, loadingResponse])
 
 
-
-    function HandleRestart(): void {
-        router.push("/algorithms")
+    const GetAlgorithm = async () => {
+        setLoadingResponse(true)
+        const response = await GetNewAlgorithm(language.option, difficulty, categoryAlgorithm.option, apiKey)
+        console.log("NEW")
+        if (!response.error && response.data) {
+            setCurrentAlgorithm(response.data)
+            setAlgorithmSolution({ solution: response.data.codeTemplate })
+        } else {
+            enqueueSnackbar({ message: response.message, variant: "error" })
+            setError(true)
+        }
+        setLoadingResponse(false)
     }
 
+    function HandleRestart(): void {
+        setAlgorithmInProgress(false)
+        setError(false)
+    }
 
 
     return (
@@ -71,35 +82,52 @@ export default function Page() {
 
 
 
-                {(!loading && !error) &&
+                {((!loadingResponse || loading) && !error) &&
                     <>
                         <article className={styles.instructions}>
                             <div className={styles.instructions_container}>
-                                <h2 className={styles.instructions_title}>{algorithm.title}</h2>
+                                <h2 className={styles.instructions_title}>{currentAlgorithm.title}</h2>
                                 <div className={styles.tags}>
-                                    {algorithm.tags.map(tag => (
+                                    {currentAlgorithm.tags.map(tag => (
                                         <span className={styles.tags_tag} key={tag}>{tag}</span>
                                     ))
                                     }
                                 </div>
                                 <Levels difficulty={difficulty} />
                             </div>
-                            <Link className={`${styles.link} ${styles.link_algorithm}`} href={'/algorithms'} title="Crear un nuevo algoritmo" ><CreateIcon className={styles.link_icon} />Crear nuevo algoritmo</Link>
+                            <ButtonLink className={`${styles.link} ${styles.link_algorithm}`} href={'/algorithms'} title="Crear un nuevo algoritmo" >
+                                <>
+                                    <CreateIcon className={styles.link_icon} />Crear nuevo algoritmo
+                                </>
+                            </ButtonLink>
 
                         </article>
-                        <Workspace algorithm={algorithm} />
+                        <Workspace algorithm={currentAlgorithm} />
                     </>
                 }
 
 
-                {(loading && !error) &&
+                {(loadingResponse && !error) &&
                     <Loading title="Generando algoritmo..." />
                 }
 
-                {(error && !loading) &&
+                {(error && !loadingResponse) &&
                     <div className={styles.error}>
-                        <p className={styles.error_p}>Error al generar la pregunta intentelo de nuevo</p>
-                        {<Button onClick={HandleRestart}>Reintentar</Button>}
+                        <BotSadIcon className={styles.error_icon} />
+                        <div className={styles.error_message}>
+                            <p className={styles.error_p}>¡Vaya! </p>
+                            <p className={styles.error_p}>Mi lógica se enredó y no pude crear el algoritmo.</p>
+                            <p className={styles.error_p}>¿Reintentamos?</p>
+                        </div>
+                        <div className={styles.error_buttons}>
+                            <Button onClick={HandleRestart} title="Volver a generar la pregunta">Reintentar<RefreshIcon /></Button>
+                            <ButtonLink href="/algorithms" isSecondary title="">
+                                <>
+                                    {"Cambiar Configuración"}
+                                    <ConfigIcon />
+                                </>
+                            </ButtonLink>
+                        </div>
                     </div>
                 }
 

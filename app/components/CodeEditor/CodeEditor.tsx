@@ -19,6 +19,8 @@ export function CodeEditor({ language, codeTemplate }: Props) {
     const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
     const { category } = useSetupQuiz()
 
+
+
     useEffect(() => {
         loader.init().then((monaco) => {
             monaco.editor.defineTheme('myTheme', {
@@ -30,6 +32,7 @@ export function CodeEditor({ language, codeTemplate }: Props) {
                 },
             })
         })
+        // setAlgorithmSolution({ solution: codeTemplate })
     }, [])
 
     function HandleOnChange(value?: string): void {
@@ -54,7 +57,7 @@ export function CodeEditor({ language, codeTemplate }: Props) {
             <Editor
                 defaultLanguage={language.language}
                 language={language.language}
-                value={codeTemplate}
+                value={algorithmSolution.solution}
                 theme='myTheme'
                 width={"99.99%"}
                 height={"99.99%"}

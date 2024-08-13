@@ -3,6 +3,8 @@ import { Button } from "./components/Button/Button"
 import { FlowChartIcon, QuestionIcon, SkillIcon, StarIcon } from "./components/Icons"
 import styles from "./page.module.css"
 import { Footer } from "./components/Footer/Footer"
+import { SnackProvider } from "./components/SnackProvider/SnackProvider"
+import { ButtonLink } from "./components/Button/ButtonLink"
 
 export default function Home() {
 	return (
@@ -36,11 +38,13 @@ export default function Home() {
 								<SkillIcon className={`${styles.li_image} ${styles.li_imageThree}`} />
 							</li>
 						</ul>
-						<Link className={styles.button} href="/activity-selector" >
-							¡EMPIEZA AHORA!
-						</Link>
-					</article>					<p className={styles.message}>Crea una cuenta y personaliza tu experiencia de aprendizaje.  Guarda tus avances, revisa tus errores y continúa aprendiendo donde lo dejaste.</p>
-
+						<ButtonLink className={styles.button} href="/activity-selector" title="Elegir desafio">
+							<>
+								{"¡EMPIEZA AHORA!"}
+							</>
+						</ButtonLink>
+					</article>
+					<p className={styles.message}>Crea una cuenta y personaliza tu experiencia de aprendizaje.  Guarda tus avances, revisa tus errores y continúa aprendiendo donde lo dejaste.</p>
 				</section>
 				<Footer />
 			</main>

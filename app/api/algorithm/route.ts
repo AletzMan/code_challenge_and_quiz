@@ -3,7 +3,7 @@ import { google } from '@ai-sdk/google'
 import { createOpenAI, openai } from "@ai-sdk/openai"
 import { APICallError, JSONParseError, RetryError, TypeValidationError, generateObject, NoObjectGeneratedError, UnsupportedJSONSchemaError, InvalidResponseDataError } from 'ai'
 import { z } from "zod"
-import { IQuiz, IResponseQuiz } from "@/app/interfaces/quiz"
+import { IResponseQuiz } from "@/app/interfaces/quiz"
 import { IResponseAlgorithm } from "@/app/interfaces/algorithm"
 import { ManyRequestError, NotAuthorizedError, ServerError } from "../_services/errors"
 
@@ -90,6 +90,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                     console.log(object)
                     return NextResponse.json({ data: JSON.stringify(object.algorithm) })
+                    return ServerError()
                 } catch (error) {
 
                     if (APICallError.isAPICallError(error)) {

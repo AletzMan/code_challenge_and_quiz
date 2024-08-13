@@ -12,15 +12,11 @@ export function Results() {
     const { completeQuiz } = useCurrentQuiz()
     const [currentAnswer, setCurrentAnswer] = useState<boolean[]>([])
 
-
-
     function HandleViewAnswer(index: number): void {
         const newAnswer = { ...currentAnswer }
         newAnswer[index] = !currentAnswer[index]
         setCurrentAnswer(newAnswer)
     }
-
-    console.log(completeQuiz.questions)
 
     return (
         <article className={`${styles.results}`}>
@@ -32,7 +28,7 @@ export function Results() {
             <ol className={styles.question}>
                 {completeQuiz.questions.map((question, index) => (
                     <li key={index} className={styles.question_text}>
-                        <details className={styles.details} name="explication" open>
+                        <details className={styles.details} name="explication" >
                             <summary className={`${styles.details_summary} ${question.isRight && styles.details_summaryRight}`}>
                                 <span className={styles.details_title} >
                                     <span className={styles.details_titleContainer}>

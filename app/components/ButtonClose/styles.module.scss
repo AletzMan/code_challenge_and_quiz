@@ -8,7 +8,7 @@
     color: var(--font-color);
     font-family: var(--font-family);
     border: 2px solid #FF0000;
-    background-color: #FF000020;
+    background-color: #FF0000;
     transition: all 0.3s ease-in-out;
     filter: brightness(75%);
     cursor: pointer;
@@ -28,7 +28,7 @@
     &_close {
         width: 1.75em;
         height: 1.75em;
-        color: #FF0000;
+        color: var(--font-color);
     }
 
 

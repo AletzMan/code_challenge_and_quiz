@@ -137,12 +137,13 @@
         border: 1px solid #494b4900;
         border-radius: 0.75em;
         color: var(--font-color);
-        background-color: #5a5f2188;
+        background-color: var(--purple-color);
         transition: all 0.3s ease-in-out;
         cursor: pointer;
 
         &:hover {
-            background-color: #b5b81688;
+            background-color: var(--purple-color);
+            box-shadow: 0 0 4px 1px var(--purple-color);
         }
 
         &Icon {

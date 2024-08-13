@@ -9,6 +9,8 @@
     height: calc(100svh - 1em);
     border-radius: 0.25em;
     border: 1px solid var(--grayblack-color);
+    background-color: var(--background-color);
+    z-index: 50;
 }
 
 
