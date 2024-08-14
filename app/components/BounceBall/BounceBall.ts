@@ -183,36 +183,6 @@ export class TagBubble {
             this.isFollowingMouse = false
         })
 
-        /*
-        newBubble.addEventListener('mousedown', (e) => {
-            this.initPosMouseX = e.clientX
-            this.initPosMouseY = e.clientY
-        })
-
-
-        bodySection.addEventListener('mouseup', (e) => {
-            if (this.initPosMouseX != 0) {
-                if (this.initPosMouseX - e.clientX > 0) {
-                    directionX = -4
-                } else {
-                    directionX = +4
-                }
-                if (this.initPosMouseY - e.clientY > 0) {
-                    directionY = -4
-                } else {
-                    directionY = +4
-                }
-                for (let index = 0; index < 20; index++) {
-                    setTimeout(() => {
-                        this.speedX += directionX
-                        this.speedY += directionY
-                    }, 50)
-                }
-                this.initPosMouseX = 0
-                this.initPosMouseY = 0
-            }
-        })
-        */
     }
 
     updatePosition(timeElapsedCurrent: number) {
@@ -253,7 +223,7 @@ export const createBubbleTags = (numberBubbles: number, section: HTMLElement, si
 export const animationLoop = (timeStamp: number, section: HTMLElement): number => {
     timeElapsed = 0
     oldTimeStamp = 0
-    timeElapsed = (timeStamp - oldTimeStamp) / 1000000
+    timeElapsed = (timeStamp - oldTimeStamp) / 100000
     oldTimeStamp = timeStamp
 
     const velocidadMaxima = 10
