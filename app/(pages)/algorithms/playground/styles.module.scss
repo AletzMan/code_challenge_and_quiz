@@ -101,18 +101,9 @@
 
 
     &_algorithm {
-        color: var(--green-color);
-        border-color: var(--green-color);
-        max-width: max-content;
-        max-height: 3.5em;
+        //max-height: 3.5em;
         align-self: flex-start;
         justify-self: flex-end;
-
-        &:hover:not(:disabled) {
-            color: var(--green-color);
-            border-color: var(--green-color);
-            box-shadow: 0 0 3px 1px var(--green-color);
-        }
     }
 
     &_quiz {

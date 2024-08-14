@@ -93,11 +93,13 @@ export default function Page() {
                                     </div>
                                     <Levels difficulty={difficulty} />
                                 </div>
-                                <ButtonLink className={`${styles.link} ${styles.link_algorithm}`} href={'/algorithms'} title="Crear un nuevo algoritmo" >
-                                    <>
-                                        <CreateIcon className={styles.link_icon} />Crear nuevo algoritmo
-                                    </>
-                                </ButtonLink>
+                                <div className={`  ${styles.link_algorithm}`} >
+                                    <ButtonLink href={'/algorithms'} title="Crear un nuevo algoritmo" >
+                                        <>
+                                            <CreateIcon className={styles.link_icon} />Crear nuevo algoritmo
+                                        </>
+                                    </ButtonLink>
+                                </div>
 
                             </article>
                             <Workspace />
