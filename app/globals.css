@@ -94,7 +94,7 @@ body {
 }
 
 .scrollBarStyle::-webkit-scrollbar-thumb {
-  background-color: var(--fontsecond-color);
+  background-color: var(--purple-color);
 }
 
 .scrollBarStyle::-webkit-scrollbar-track {

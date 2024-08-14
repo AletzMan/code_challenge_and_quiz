@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { CheckIcon, CloseIcon, SendIcon } from "@/app/components/Icons"
+import { CheckIcon, CheckedIcon, CloseIcon, ReviewIcon, SendIcon } from "@/app/components/Icons"
 import styles from "./styles.module.scss"
 import { Button } from "@/app/components/Button/Button"
 import { useCurrentQuiz } from "@/app/utils/store"
@@ -25,6 +25,11 @@ interface Props {
 export function AnswerOptions({ run, setRun }: Props) {
     const { currentQuestion, selectedAnswer, setSelectedAnwer, completeQuiz, setCompleteQuiz, currentQuestionNumber } = useCurrentQuiz()
     const [isRightAnswer, setIsRightAnswer] = useState(false)
+
+    useEffect(() => {
+        if (completeQuiz.questions[currentQuestionNumber - 1]?.question && completeQuiz.questions[currentQuestionNumber - 1].answerMatching?.length === 0)
+            SetQuizResult(false, "Sin respuesta")
+    }, [])
 
 
     const HandleSelectAnswer = (option: string): void => {
@@ -50,7 +55,6 @@ export function AnswerOptions({ run, setRun }: Props) {
     }
 
 
-
     function HandleKeyPress(event: KeyboardEvent<HTMLInputElement>): void {
         if (event.key === "Enter") {
             setRun(false)
@@ -73,7 +77,7 @@ export function AnswerOptions({ run, setRun }: Props) {
             rightAnswer: currentQuestion.rightAnswer
         }
         if (isRight) {
-            newQuizResult.correctAnswers += 1
+            newQuizResult.correctAnswers++
         }
         newQuizResult.questions[currentQuestionNumber - 1] = newQuestion
         setCompleteQuiz(newQuizResult)
@@ -82,20 +86,22 @@ export function AnswerOptions({ run, setRun }: Props) {
 
     return (
         <div className={styles.options}>
-            {(currentQuestion?.options && currentQuestion.type === "multiple choice") &&
-                currentQuestion?.options?.map((option, index) => (
-                    <button
-                        key={option}
-                        className={`${styles.option} 
-                                    ${(selectedAnswer === option && currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.option_select} 
-                                    ${(selectedAnswer === option && !currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.option_incorrect}`}
-                        disabled={!run}
-                        onClick={() => HandleSelectAnswer(option)}>
-                        <span className={styles.option_letter}>{OptionsSymbol[index]}</span>
-                        <span className={styles.option_text}>{option.replaceAll(`\\\\`, "")}</span>
-                    </button>
-                ))
-            }
+            <div className={styles.choice}>
+                {(currentQuestion?.options && currentQuestion.type === "multiple choice") &&
+                    currentQuestion?.options?.map((option, index) => (
+                        <button
+                            key={option}
+                            className={`${styles.choice_option} 
+                                    ${(selectedAnswer === option && currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.choice_optionSelect} 
+                                    ${(selectedAnswer === option && !currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.choice_optionIncorrect}`}
+                            disabled={!run}
+                            onClick={() => HandleSelectAnswer(option)}>
+                            <span className={styles.choice_optionLetter}>{OptionsSymbol[index]}</span>
+                            <span className={styles.choice_optionText}>{option.replaceAll(`\\\\`, "")}</span>
+                        </button>
+                    ))
+                }
+            </div>
             {currentQuestion?.type === "true false" &&
                 <div className={styles.dichotomous}>
                     <button
@@ -132,7 +138,7 @@ export function AnswerOptions({ run, setRun }: Props) {
                     {!isRightAnswer && !run && <CloseIcon className={`${styles.blankspace_icon} ${styles.blankspace_iconWrong}`} />}
                     {isRightAnswer && !run && <CheckIcon className={`${styles.blankspace_icon} ${styles.blankspace_iconRight}`} />}
                     <input className={`${styles.blankspace_input} ${isRightAnswer && styles.blankspace_inputRight} ${(!isRightAnswer && !run) && styles.blankspace_inputWrong}`} autoFocus disabled={!run} onKeyDown={HandleKeyPress} onChange={HandleChangeOpenAnswer} />
-                    <Button className="green" disabled={!run} onClick={HandleValidateAnswer}>Enviar<SendIcon /></Button>
+                    {run && <Button disabled={!run} onClick={HandleValidateAnswer}>VALIDAR<ReviewIcon /></Button>}
                 </div>
             }
         </div>

@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { FlowChartIcon, HomeIcon, QuestionIcon } from "../../components/Icons"
+import { FlowChartIcon, HomeIcon, PuzzleIcon, QuestionIcon } from "../../components/Icons"
 import styles from "./styles.module.scss"
 import { Footer } from "@/app/components/Footer/Footer"
 import { useRef, MouseEvent, useEffect } from "react"
@@ -63,6 +63,16 @@ export default function Page() {
                         </div>
                         <QuestionIcon className={`${styles.icon} ${styles.icon_one}`} />
                     </Link>
+                    <div className={`${styles.article} ${styles.article_games}`}>
+                        <h3 className={styles.subtitle}>Juegos y Retos de Lógica</h3>
+                        <div className={`${styles.article_messages}`}>
+                            <p className={styles.article_message}>Mejora tu lógica y habilidades con juegos diseñados para programadores.</p>
+                        </div>
+                        <PuzzleIcon className={`${styles.icon} ${styles.icon_three}`} />
+                        <span className={styles.article_cooming}>
+                            Próximamente
+                        </span>
+                    </div>
                 </article>
             </section>
 

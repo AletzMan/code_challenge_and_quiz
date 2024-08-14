@@ -5,25 +5,19 @@ import { CodeEditor } from "@/app/components/CodeEditor/CodeEditor"
 import { AlgorithmBot } from "@/app/components/AlgorithmBot/AlgorithmBot"
 import { useAlgorithm, useSetupQuiz } from "@/app/utils/store"
 import { IOutputRun } from "@/app/interfaces/languages"
-import { useState, MouseEvent, ChangeEvent } from "react"
+import { useState, MouseEvent } from "react"
 import { RunCode } from "@/app/utils/dataFetch"
 import { Modal } from "@/app/components/Modal/Modal"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import { parseTextToJSX } from "@/app/components/QuizBot/ParseTextToJSX"
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import { StyleCodeEditor } from "@/app/utils/const"
-import { IAlgorithm } from "@/app/interfaces/algorithm"
 import { Separator } from "@/app/components/Separator/Separator"
-import { Resizer } from "re-resizable/lib/resizer"
-import { Resizable } from "re-resizable"
 
-interface Props {
-    algorithm: IAlgorithm
-}
 
-export function Workspace({ algorithm }: Props) {
+export function Workspace() {
     const { language } = useSetupQuiz()
-    const { algorithmSolution } = useAlgorithm()
+    const { algorithmSolution, currentAlgorithm } = useAlgorithm()
     const [evaluate, setEvaluate] = useState(false)
     const [openExplanation, setOpenExplanation] = useState(false)
     const [openExample, setOpenExample] = useState(false)
@@ -76,7 +70,7 @@ export function Workspace({ algorithm }: Props) {
                 </div>
                 <div className={styles.playground_container}>
                     <div className={styles.playground_editor}>
-                        <CodeEditor language={language} codeTemplate={algorithm.codeTemplate.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')} />
+                        <CodeEditor language={language} />
                         <div className={styles.playground_output}>
                             <header className={styles.playground_outputHeader}>
                                 <span className={styles.playground_outputHeaderText}>OUTPUT</span>
@@ -88,7 +82,7 @@ export function Workspace({ algorithm }: Props) {
                             <textarea className={`${styles.playground_outputText} scrollBarStyle`} value={output.output.replaceAll(/\/piston\/jobs\/[a-f0-9\-]{36}\/file0./g, "")} spellCheck={false} readOnly />
                         </div>
                     </div>
-                    <AlgorithmBot algorithm={algorithm} evaluate={evaluate} />
+                    <AlgorithmBot algorithm={currentAlgorithm} evaluate={evaluate} />
                 </div>
             </article>
 
@@ -98,8 +92,8 @@ export function Workspace({ algorithm }: Props) {
                         <div className={styles.explanation_close}>
                             <ButtonClose onClick={() => setOpenExplanation(false)} />
                         </div>
-                        <h3 className={styles.explanation_title}>{algorithm.title}</h3>
-                        <p className={styles.explanation_p}>{parseTextToJSX(algorithm.explanation.replaceAll('\\n', '\n'))}</p>
+                        <h3 className={styles.explanation_title}>{currentAlgorithm.title}</h3>
+                        <p className={styles.explanation_p}>{parseTextToJSX(currentAlgorithm.explanation.replaceAll('\\n', '\n'))}</p>
                     </article>
                 </Modal>
 
@@ -114,18 +108,18 @@ export function Workspace({ algorithm }: Props) {
                         <span className={styles.example_text}>Ejemplo:</span>
                         <div className={styles.example_input}>
                             <span className={styles.example_label}>Datos de entrada</span>
-                            <span className={styles.example_subtitle}>{algorithm.inputDescription}</span>
+                            <span className={styles.example_subtitle}>{currentAlgorithm.inputDescription}</span>
                             <CodeBlock language={language.language}
-                                text={algorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                text={currentAlgorithm.exampleInputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                 theme={atomOneDark}
                                 customStyle={{ ...StyleCodeEditor }} />
                         </div>
                         <Separator />
                         <div className={styles.example_output}>
                             <span className={styles.example_label}>Resultado esperado</span>
-                            <span className={styles.example_subtitle}>{algorithm.outputDescription}</span>
+                            <span className={styles.example_subtitle}>{currentAlgorithm.outputDescription}</span>
                             <CodeBlock language={language.language}
-                                text={algorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
+                                text={currentAlgorithm.exampleOutputs.join("\\n").replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                 theme={atomOneDark}
                                 customStyle={{ ...StyleCodeEditor }} />
                         </div>

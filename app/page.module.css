@@ -64,7 +64,7 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  font-size: 2.5em;
+  font-size: 2.75em;
   margin: 1em 0 1.5em 0;
   z-index: 2;
 }
@@ -88,11 +88,13 @@
 }
 
 .message {
-  color: var(--font-color);
+  color: var(--fontsecond-color);
   font-weight: 400;
-  font-size: 1.2em;
-  margin: 0.5em 0 1.5em 0;
+  width: 100%;
+  max-width: 80ch;
   text-align: center;
+  font-size: 1em;
+  margin: 0.5em 0 1.5em 0;
 }
 
 .ul {
@@ -116,8 +118,9 @@
   border-radius: 0.5em;
   text-align: center;
   text-wrap: balance;
-  border: 1px solid var(--grayblack-color);
-  background-color: var(--background-color);
+  border: 1px solid var(--gray-color);
+  background: radial-gradient(ellipse at top, var(--grayblack-color), transparent),
+    radial-gradient(ellipse at bottom, var(--background-color), transparent);
   color: var(--font-color);
   /*
   &:nth-child(1) {
@@ -166,10 +169,41 @@
 .button {
   margin: 3em 0;
   align-self: center;
+  font-size: 1.2em !important;
 }
 
 @keyframes animationRotate {
   to {
     transform: rotate(359deg);
   }
+}
+
+.picture {
+  position: relative;
+  width: calc(100svw - 2em);
+  max-width: 880px;
+  min-height: 620px;
+  background: linear-gradient(45deg, var(--purple-color, var(--yellow-color)));
+  box-shadow: 0 0 20px 1px #190c2e inset, 0 0 30px 1px #190c2e;
+  border-radius: 0.25em;
+  margin: 3em 0;
+
+}
+
+
+.picture_quiz {
+  position: relative;
+  width: calc(100svw - 2em);
+  max-width: 530px;
+  min-height: 620px;
+  background: linear-gradient(45deg, var(--purple-color, var(--yellow-color)));
+  box-shadow: 0 0 20px 1px #190c2e inset, 0 0 30px 1px #190c2e;
+  border-radius: 0.25em;
+  margin: 3em 0;
+}
+
+.imageFrame {
+  z-index: 5;
+  object-fit: contain;
+  border-radius: 0.25em;
 }

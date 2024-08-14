@@ -18,8 +18,7 @@ export function Matching({ run, setRun }: Props) {
     const [orderOptions, setOrderOptions] = useState<string[]>([])
     const [orderMatches, setOrderMatches] = useState<string[]>([])
     const [disabledButtons, setDisabledButtons] = useState({ options: false, optionsMatches: true })
-    const { currentQuestion, classNameOrder, setClassNameOrder, completeQuiz, setCompleteQuiz, currentQuestionNumber } = useCurrentQuiz()
-    const [rightAnswers, setRightAnswers] = useState([["", false], ["", false], ["", false], ["", false]])
+    const { currentQuestion, classNameOrder, setClassNameOrder, completeQuiz, setCompleteQuiz, currentQuestionNumber, rightAnswers, setRightAnswers } = useCurrentQuiz()
 
 
     useEffect(() => {
@@ -31,18 +30,44 @@ export function Matching({ run, setRun }: Props) {
             const newOrder = [...currentQuestion?.matchingOptions.slice().sort(() => Math.random() - 0.5)]
             setOrderMatches(newOrder)
         }
+        if (completeQuiz.questions[currentQuestionNumber - 1]?.question) {
+            SetCurrentQuestionDefault()
+        }
     }, [currentQuestion])
+
+
+    const SetCurrentQuestionDefault = () => {
+        const newResults: IQuizResult = { ...completeQuiz }
+        newResults.questions[currentQuestionNumber - 1] = {
+            question: currentQuestion.question,
+            codeSnippet: currentQuestion.codeSnippet,
+            isRight: completeQuiz.questions[currentQuestionNumber - 1].isRight,
+            answer: completeQuiz.questions[currentQuestionNumber - 1].answer,
+            rightAnswer: completeQuiz.questions[currentQuestionNumber - 1].rightAnswer,
+            rightAnswerMatching: completeQuiz.questions[currentQuestionNumber - 1].rightAnswerMatching,
+            answerMatching: completeQuiz.questions[currentQuestionNumber - 1].answerMatching,
+            codeSnippetExplanation: completeQuiz.questions[currentQuestionNumber - 1].codeSnippetExplanation,
+            explanation: completeQuiz.questions[currentQuestionNumber - 1].explanation
+        }
+        setCompleteQuiz(newResults)
+    }
 
 
     const SetResults = () => {
         if (classNameOrder.length > (currentQuestion?.options!.length * 2) - 1) {
             const newAnswerStatus = [...rightAnswers]
-            if (currentQuestion.options && currentQuestion.rightAnswerMatching && orderOptions.length > 0) {
+            if (currentQuestion.options && currentQuestion.rightAnswerMatching && currentQuestion?.matchingOptions && orderOptions.length > 0) {
+
+                //Validar si el orden de las respuestas no viene invertido, en caso de estar invertido, invertir las respuestas
+                const verifyCurrentAnswers = currentQuestion.rightAnswer.includes(currentQuestion.options[0]) ? currentQuestion.rightAnswer : currentQuestion.rightAnswerMatching
+                const verfyCurrentAnswerMatching = currentQuestion.rightAnswerMatching.includes(currentQuestion?.matchingOptions[0]) ? currentQuestion.rightAnswerMatching : currentQuestion.rightAnswer
+
+                //Validar si las combinaciones son correctas
                 for (let index = 0; index < currentQuestion.options.length; index++) {
-                    const indexAnswer = classNameOrder.findIndex(item => item.name === currentQuestion.rightAnswer?.[index])
+                    const indexAnswer = classNameOrder.findIndex(item => item.name === verifyCurrentAnswers?.[index])
                     const indexResponse = orderOptions.findIndex(item => item === classNameOrder[indexAnswer]?.name || "")
 
-                    if (classNameOrder[indexAnswer]?.name === currentQuestion.rightAnswer[index] && classNameOrder[indexAnswer + 1].name === currentQuestion.rightAnswerMatching[index]) {
+                    if (classNameOrder[indexAnswer]?.name === verifyCurrentAnswers[index] && classNameOrder[indexAnswer + 1].name === verfyCurrentAnswerMatching[index]) {
                         newAnswerStatus[indexResponse] = [classNameOrder[indexAnswer].name, true]
                     } else {
                         newAnswerStatus[indexResponse] = [classNameOrder[indexAnswer]?.name, false]
@@ -73,7 +98,7 @@ export function Matching({ run, setRun }: Props) {
             if (isRight)
                 newResults.correctAnswers++
 
-            newResults.questions.push({
+            newResults.questions[currentQuestionNumber - 1] = {
                 question: currentQuestion.question,
                 codeSnippet: currentQuestion.codeSnippet,
                 isRight: isRight,
@@ -83,12 +108,11 @@ export function Matching({ run, setRun }: Props) {
                 answerMatching: currentAnswers,
                 codeSnippetExplanation: currentQuestion.codeSnippetExplanation,
                 explanation: currentQuestion.explanation
-            })
-
-
-            if ((completeQuiz.questions.length === currentQuestionNumber) && (classNameOrder.length === (currentQuestion!.options!.length * 2))) {
-                setCompleteQuiz(newResults)
             }
+
+
+            setCompleteQuiz(newResults)
+            //}
 
             if (classNameOrder.length >= (currentQuestion!.options!.length * 2) - 1) {
                 setDisabledButtons({ options: false, optionsMatches: false })
@@ -97,6 +121,7 @@ export function Matching({ run, setRun }: Props) {
 
         }
     }
+
 
     const HandleResetResults = () => {
         setClassNameOrder([])
@@ -124,7 +149,6 @@ export function Matching({ run, setRun }: Props) {
                 newOrderClassName.push({ name: value, value: styles.matching_buttonFourth })
             }
             setClassNameOrder(newOrderClassName)
-
         }
 
     }
@@ -141,8 +165,8 @@ export function Matching({ run, setRun }: Props) {
                                 onClick={() => HandleMatchAttemps("options", option)}
                                 disabled={disabledButtons.options || !run}
                             >{option}
-                                {rightAnswers[index][1] && <CheckIcon className={styles.check} />}
-                                {(!rightAnswers[index][1] && !run) && <CloseIcon className={`${styles.check} ${styles.check_fail}`} />}
+                                {rightAnswers.length > 0 && rightAnswers[index][1] && <CheckIcon className={styles.check} />}
+                                {(rightAnswers.length > 0 && !rightAnswers[index][1] && !run) && <CloseIcon className={`${styles.check} ${styles.check_fail}`} />}
                             </button>
                         ))
                         }

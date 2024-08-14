@@ -1,4 +1,6 @@
 .footer {
+    position: sticky;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7,6 +9,7 @@
     padding: 0 1em;
     border-top: 2px solid var(--grayblack-color);
     background-color: var(--black-color);
+    z-index: 10;
 
     &_logo {
         width: 3em;

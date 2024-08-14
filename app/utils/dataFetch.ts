@@ -20,7 +20,7 @@ const URL = process.env.URL_API
 
 export const GetNewQuiz = async (category: string, language: string, level: string, apiKey: string): Promise<IResponseFetchQuiz> => {
 
-    const type = (Math.random() * 25).toFixed(0)
+    const type = (Math.random() * 15).toFixed(0)
     try {
         const response = await fetch(`${URL}/api/quiz`, {
             cache: "no-cache",
@@ -108,6 +108,13 @@ export const GetNewAlgorithm = async (language: string, level: string, category:
                 data: null
             }
             return newResponse
+        } else if (response.status === 422) {
+            const newResponse: IResponseFetchAlgorithm = {
+                error: true,
+                message: "Error al analizar JSON: El servidor ha devuelto una respuesta JSON no válida.",
+                data: null
+            }
+            return newResponse
         }
         else {
             const newResponse: IResponseFetchAlgorithm = {
@@ -132,7 +139,7 @@ export const GetNewAlgorithm = async (language: string, level: string, category:
 
 
 export const RunCode = async (language: string, sourceCode: string, version: string): Promise<IResponseOutputRunCode> => {
-    console.log(sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll("\n", ""))
+
     try {
         const response = await fetch(`${URL}/api/runcode?language=${language}&sourceCode=${sourceCode.replaceAll('\\n', '').replaceAll('\\t', '').replaceAll('\\', '').replaceAll("\n", "")}&version=${version}`, {
             method: "POST"

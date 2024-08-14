@@ -65,6 +65,9 @@ export interface IClassNameOptions {
     value: string
 }
 
+interface IRightAnswers {
+
+}
 
 interface ICurrentQuiz {
     completeQuiz: IQuizResult
@@ -81,6 +84,8 @@ interface ICurrentQuiz {
     resetCurrentQuiz: () => void
     classNameOrder: IClassNameOptions[]
     setClassNameOrder: (value: IClassNameOptions[]) => void
+    rightAnswers: [string, boolean][]
+    setRightAnswers: (value: [string, boolean][]) => void
 }
 
 
@@ -121,12 +126,18 @@ export const useCurrentQuiz = create(
                     currentQuestion: state.emptyCurrentQuestion,
                     currentQuestionNumber: 1,
                     quizInProgress: false,
-                    classNameOrder: []
+                    classNameOrder: [],
+                    rightAnswers: []
                 })),
             classNameOrder: [],
             setClassNameOrder: (value: IClassNameOptions[]) =>
                 set((state) => ({
                     classNameOrder: value
+                })),
+            rightAnswers: [],
+            setRightAnswers: (value: [string, boolean][]) =>
+                set((state) => ({
+                    rightAnswers: value
                 }))
         }),
 
