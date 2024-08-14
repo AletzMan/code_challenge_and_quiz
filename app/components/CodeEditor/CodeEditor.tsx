@@ -12,11 +12,10 @@ import { CATEGORIES } from '@/app/utils/const'
 
 interface Props {
     language: IItemCategory
-    codeTemplate: string
 }
 
-export function CodeEditor({ language, codeTemplate }: Props) {
-    const { setAlgorithmSolution, algorithmSolution } = useAlgorithm()
+export function CodeEditor({ language }: Props) {
+    const { setAlgorithmSolution, algorithmSolution, currentAlgorithm } = useAlgorithm()
     const { category } = useSetupQuiz()
 
 
@@ -32,12 +31,13 @@ export function CodeEditor({ language, codeTemplate }: Props) {
                 },
             })
         })
-        // setAlgorithmSolution({ solution: codeTemplate })
-    }, [])
+
+        //setAlgorithmSolution({ solution: `${currentAlgorithm.codeTemplate}` })
+    }, [currentAlgorithm])
 
     function HandleOnChange(value?: string): void {
         if (value) {
-            setAlgorithmSolution({ solution: value })
+            setAlgorithmSolution({ solution: `${value}` })
         }
     }
 

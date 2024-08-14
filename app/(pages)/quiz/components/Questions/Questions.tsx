@@ -2,7 +2,7 @@
 import { CodeBlock, atomOneDark } from "react-code-blocks"
 import styles from "./styles.module.scss"
 import { Separator } from "@/app/components/Separator/Separator"
-import { BookIcon, BotIcon, BotSadIcon, CheckIcon, CloseIcon, InterrogationIcon, NextIcon, RefreshIcon, SendIcon } from "@/app/components/Icons"
+import { BookIcon, BotIcon, BotSadIcon, CheckIcon, CloseIcon, ConfigIcon, InterrogationIcon, NextIcon, RefreshIcon, SendIcon } from "@/app/components/Icons"
 import { Button } from "@/app/components/Button/Button"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useApiKey, useCurrentQuiz, useSetupQuiz } from "@/app/utils/store"
@@ -18,6 +18,7 @@ import { StyleCodeEditor } from "@/app/utils/const"
 import { ButtonClose } from "@/app/components/ButtonClose/ButtonClose"
 import { Results } from "../Results/Results"
 import { AnswerOptions } from "./components/AnswerOptions/AnswerOptions"
+import { ButtonLink } from "@/app/components/Button/ButtonLink"
 
 
 const TOTAL_TIME = 90
@@ -25,10 +26,9 @@ const TIME_PERCENTAGE = 100 / TOTAL_TIME
 
 
 
-
 export function Questions() {
     const { language, difficulty, questions, category } = useSetupQuiz()
-    const { setCurrentQuestion, currentQuestion, setCurrentQuestionNumber, currentQuestionNumber, selectedAnswer, setSelectedAnwer, quizInProgress, setQuizInProgress, setClassNameOrder } = useCurrentQuiz()
+    const { setCurrentQuestion, currentQuestion, setCurrentQuestionNumber, currentQuestionNumber, completeQuiz, setCompleteQuiz, setSelectedAnwer, quizInProgress, setQuizInProgress, setClassNameOrder, setRightAnswers } = useCurrentQuiz()
     const { apiKey } = useApiKey()
     const { enqueueSnackbar } = useSnackbar()
     const [time, setTime] = useState(0)
@@ -98,9 +98,40 @@ export function Questions() {
             setSelectedAnwer("")
             setRun(true)
             setClassNameOrder([])
+            setRightAnswers([])
         } else {
+            FillNullQuestions()
             setViewResults(true)
         }
+    }
+
+    const FillNullQuestions = () => {
+        const emptyQuestion = {
+            answer: "No respondida",
+            codeSnippet: null,
+            codeSnippetExplanation: null,
+            explanation: currentQuestion.explanation,
+            isRight: false,
+            question: currentQuestion.question,
+            rightAnswer: currentQuestion.rightAnswer,
+            rightAnswerMatching: [],
+            answerMatching: []
+        }
+
+        const newCompleteQuiz = { ...completeQuiz }
+
+        for (let index = 0; index < currentQuestionNumber; index++) {
+            if (!newCompleteQuiz.questions[index]) {
+                newCompleteQuiz.questions[index] = emptyQuestion
+            }
+        }
+
+        if (newCompleteQuiz.questions.length === 0) {
+            for (let index = 0; index < currentQuestionNumber; index++) {
+                newCompleteQuiz.questions.push(emptyQuestion)
+            }
+        }
+        setCompleteQuiz(newCompleteQuiz)
     }
 
 
@@ -167,6 +198,12 @@ export function Questions() {
                         <p className={styles.error_p}>¿Podemos intentarlo de nuevo?</p>
                     </div>
                     <Button onClick={() => HandleReset()} title="Volver a generar la pregunta">Reintentar<RefreshIcon /></Button>
+                    <ButtonLink href="/algorithms" isSecondary title="">
+                        <>
+                            {"Cambiar Configuración"}
+                            <ConfigIcon />
+                        </>
+                    </ButtonLink>
                 </div>
             }
             {viewExplanation &&

@@ -452,6 +452,10 @@ export const AlgorithmsCategories: Array<IAlgorithmProperty> = [
         value: "Greedy (Avaro)"
     },
     {
+        option: "Graph Theory",
+        value: "Teoría de Grafos"
+    },
+    {
         option: "Dynamic Programming",
         value: "Programación Dinámica"
     },
@@ -462,10 +466,6 @@ export const AlgorithmsCategories: Array<IAlgorithmProperty> = [
     {
         option: "Divide and Conquer",
         value: "División y Conquista"
-    },
-    {
-        option: "Graphs",
-        value: "Grafos"
     },
     {
         option: "Optimization",
@@ -518,8 +518,37 @@ export const AlgorithmsCategories: Array<IAlgorithmProperty> = [
     {
         option: "String Manipulation",
         value: "Manipulación de Cadenas"
+    },
+    {
+        option: "Heuristics",
+        value: "Heurística"
+    },
+    {
+        option: "Game Theory",
+        value: "Teoría de Juegos"
+    },
+    {
+        option: "Approximation Algorithms",
+        value: "Algoritmos de Aproximación"
+    },
+    {
+        option: "Monte Carlo Algorithms",
+        value: "Algoritmos de Monte Carlo"
+    },
+    {
+        option: "Simulated Annealing",
+        value: "Recocido Simulado"
+    },
+    {
+        option: "Network Flow Algorithms",
+        value: "Algoritmos de Flujo de Redes"
+    },
+    {
+        option: "Probabilistic Algorithms",
+        value: "Algoritmos Probabilísticos"
     }
 ]
+
 
 /*
 export const ProgrammingCategories: Array<IQuestionCategory> = [

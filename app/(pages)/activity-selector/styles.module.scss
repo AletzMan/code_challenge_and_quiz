@@ -24,6 +24,8 @@
 }
 
 .header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: flex-start;
     padding: 0.5em;
@@ -51,7 +53,7 @@
 }
 
 .message {
-    color: var(--font-color);
+    color: var(--fontsecond-color);
     max-width: 60ch;
     text-align: center;
     text-wrap: balance;
@@ -64,7 +66,7 @@
 
 .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
     gap: 1.5em;
     width: 100%;
     max-width: 1000px;
@@ -83,8 +85,11 @@
     gap: 1em;
     border-radius: 0.25em;
     padding: 0.5em;
+    min-height: 12.5em;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
+    background-color: var(--background-color);
+    border: 1px solid var(--grayblack-color);
 
     &_messages {
         display: flex;
@@ -94,19 +99,23 @@
 
     &_message {
         color: var(--fontsecond-color);
+        text-align: center;
     }
 
     &:hover {
+        border-color: #efe82060;
+        box-shadow: 0 0 4px 2px var(--purple-color);
+
         & .icon {
             transform: scale(1.2);
         }
+
+
     }
 
-    &_quiz {
+    /* &_quiz {
         //background: linear-gradient(120deg, #2b3025, #3d4334);
         //border: 1px solid #efe82020;
-        background-color: var(--background-color);
-        border: 1px solid var(--grayblack-color);
 
         &:hover {
             border-color: #efe82060;
@@ -124,9 +133,65 @@
             border-color: #39FF1460;
             box-shadow: 0 0 4px 2px #39FF1430;
         }
+    }*/
+
+    &_games {
+        position: relative;
+        opacity: 0.8;
+        pointer-events: stroke;
+        cursor: not-allowed;
+
+        &:hover>.article_cooming {
+            animation: click 0.3s linear;
+        }
+
+
+    }
+
+    &_cooming {
+        position: absolute;
+        top: calc(50% - 1.5em);
+        display: flex;
+        align-items: center;
+        height: 3em;
+        justify-content: center;
+        width: 60%;
+        font-weight: 600;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        color: #FFC107;
+        background-color: #FFC10715;
+        backdrop-filter: blur(2px);
+        border-bottom: 3px solid #FFC107;
+        border-top: 3px solid #FFC107;
+        transform: rotateZ(8deg);
+        z-index: 5;
     }
 
 
+}
+
+
+@keyframes click {
+    0% {
+        transform: rotateZ(7deg);
+    }
+
+    25% {
+        transform: rotateZ(8deg) scale(.8);
+    }
+
+    50% {
+        transform: rotateZ(1deg);
+    }
+
+    75% {
+        transform: rotateZ(8deg) scale(.8);
+    }
+
+    100% {
+        transform: rotateZ(8deg) scale(1);
+    }
 }
 
 .icon {
@@ -140,6 +205,10 @@
 
     &_two {
         color: #39FF1450;
+    }
+
+    &_three {
+        color: #14b1ff50;
     }
 }
 

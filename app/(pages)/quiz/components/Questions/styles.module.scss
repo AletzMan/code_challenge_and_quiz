@@ -1,175 +1,175 @@
-.question {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5em;
+ .question {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 0.5em;
 
-    &_text {
-        font-size: 1em;
-        max-width: 50ch;
-        text-wrap: pretty;
-        text-align: center;
-        color: var(--font-color);
-    }
-}
+     &_text {
+         font-size: 1em;
+         max-width: 50ch;
+         text-wrap: pretty;
+         text-align: center;
+         color: var(--font-color);
+     }
+ }
 
-.element {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5em 0;
-    gap: 0.5em;
-    width: 100%;
+ .element {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 0.5em 0;
+     gap: 0.5em;
+     width: 100%;
 
-}
+ }
 
-.config {
-    display: grid;
-    grid-template-columns: 3em 1fr 3em;
-    place-items: center center;
-    padding: 0.5em 0.5em 0 0.5em;
-    width: 100%;
+ .config {
+     display: grid;
+     grid-template-columns: 3em 1fr 3em;
+     place-items: center center;
+     padding: 0.5em 0.5em 0 0.5em;
+     width: 100%;
 
-    &_number {
-        color: var(--fontsecond-color);
-    }
+     &_number {
+         color: var(--fontsecond-color);
+     }
 
-    &_save {
-        margin: 0;
-    }
-}
-
-
-
-.time {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    color: #3fd544;
-    filter: drop-shadow(0 0px 5px #3fd54460);
-
-    &_number {
-        position: absolute;
-        font-size: 2em;
-        font-weight: 600;
-        transition: all 0.5s linear;
-    }
-
-    &_bar {
-        transition: all 1s linear;
-        //fill: #3fd544;
-    }
-
-    &_alert {
-        color: #ded009;
-        filter: drop-shadow(0 0 5px #ded00960);
-    }
-
-    &_danger {
-        color: #fb1d1d;
-        filter: drop-shadow(0 0 0 #fb1d1d00);
-        animation: animationTime 0.5s ease-in-out alternate infinite;
-    }
-
-    @keyframes animationTime {
-        to {
-            filter: drop-shadow(0 0 10px #fb1d1d99);
-        }
-    }
-}
-
-
-.send {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    //padding: 0 0.5em 0.5em 0.5em;
-}
-
-
-.explanation {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 0.25em;
-    gap: 0.5em;
-    padding: 1em;
-    width: 95svw;
-    max-width: 45em;
-    max-height: 90svh;
-    border: 1px dashed #FFFFFF35;
-    background-color: var(--black-color);
-    z-index: 6;
-    cursor: grab;
-
-    &:active {
-        cursor: grabbing;
-    }
-
-
-    &_button {
-        position: absolute;
-        right: 0.5em;
-        top: 0.5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.5s ease-in-out;
-        cursor: pointer;
-
-    }
-
-    &_icon {
-        color: var(--font-color);
-        margin: 0 0 0.5em 0;
-        width: 2.5em;
-        height: 2.5em;
-        opacity: 0.5;
-        color: var(--yellow-color);
-    }
-
-    &_question {
-        font-size: 0.9em;
-        padding: 0.2em 0.5em;
-        border-radius: 0.25em;
-        border: 1px solid var(--gray-color);
-        color: var(--font-color);
-        background-color: #FFFFFF15;
-    }
-
-    &_p {
-        text-wrap: balance;
-        width: 100%;
-        color: var(--fontsecond-color);
-    }
-}
+     &_save {
+         margin: 0;
+     }
+ }
 
 
 
-.error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-    padding: 2em 0;
+ .time {
+     position: relative;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     color: #3fd544;
+     filter: drop-shadow(0 0px 5px #3fd54460);
 
-    &_icon {
-        width: 7em;
-        height: 7em;
-        color: #630808;
-    }
+     &_number {
+         position: absolute;
+         font-size: 2em;
+         font-weight: 600;
+         transition: all 0.5s linear;
+     }
 
-    &_p {
-        color: var(--font-color);
-        font-size: 1.1em;
-        margin: 0 0 1em 0;
-        text-align: center;
-    }
+     &_bar {
+         transition: all 1s linear;
+         //fill: #3fd544;
+     }
 
-}
+     &_alert {
+         color: #ded009;
+         filter: drop-shadow(0 0 5px #ded00960);
+     }
+
+     &_danger {
+         color: #fb1d1d;
+         filter: drop-shadow(0 0 0 #fb1d1d00);
+         animation: animationTime 0.5s ease-in-out alternate infinite;
+     }
+
+     @keyframes animationTime {
+         to {
+             filter: drop-shadow(0 0 10px #fb1d1d99);
+         }
+     }
+ }
+
+
+ .send {
+     display: flex;
+     justify-content: center;
+     gap: 1em;
+     //padding: 0 0.5em 0.5em 0.5em;
+ }
+
+
+ .explanation {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     border-radius: 0.25em;
+     gap: 0.5em;
+     padding: 1em;
+     width: 95svw;
+     max-width: 45em;
+     max-height: 90svh;
+     border: 1px dashed #FFFFFF35;
+     background-color: var(--black-color);
+     z-index: 6;
+     cursor: grab;
+
+     &:active {
+         cursor: grabbing;
+     }
+
+
+     &_button {
+         position: absolute;
+         right: 0.5em;
+         top: 0.5em;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         transition: all 0.5s ease-in-out;
+         cursor: pointer;
+
+     }
+
+     &_icon {
+         color: var(--font-color);
+         margin: 0 0 0.5em 0;
+         width: 2.5em;
+         height: 2.5em;
+         opacity: 0.5;
+         color: var(--yellow-color);
+     }
+
+     &_question {
+         font-size: 0.9em;
+         padding: 0.2em 0.5em;
+         border-radius: 0.25em;
+         border: 1px solid var(--gray-color);
+         color: var(--font-color);
+         background-color: #FFFFFF15;
+     }
+
+     &_p {
+         text-wrap: balance;
+         width: 100%;
+         color: var(--fontsecond-color);
+     }
+ }
+
+
+
+ .error {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 1.5em;
+     padding: 2em 0;
+
+     &_icon {
+         width: 7em;
+         height: 7em;
+         color: #630808;
+     }
+
+     &_p {
+         color: var(--font-color);
+         font-size: 1.1em;
+         margin: 0 0 1em 0;
+         text-align: center;
+     }
+
+ }

@@ -7,7 +7,7 @@
     border-radius: 0.5em;
     width: calc(100svw - 1em);
     height: calc(100svh - 1em);
-    background-color: var(--background-color);
+    background: linear-gradient(-20deg, var(--background-color), var(--black-color));
     margin: 0.5em;
     z-index: 5;
 }
@@ -30,7 +30,7 @@
     border-radius: 0.25em;
     width: 100%;
     max-width: 1150px;
-    background-color: transparent;
+    background: radial-gradient(circle, var(--black-color), var(--background-color));
     border: 1px solid var(--grayblack-color);
 }
 

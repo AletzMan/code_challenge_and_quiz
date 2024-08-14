@@ -18,6 +18,8 @@ export function Results() {
         setCurrentAnswer(newAnswer)
     }
 
+
+
     return (
         <article className={`${styles.results}`}>
             <h4 className={styles.results_title}>Resultados</h4>
@@ -29,23 +31,23 @@ export function Results() {
                 {completeQuiz.questions.map((question, index) => (
                     <li key={index} className={styles.question_text}>
                         <details className={styles.details} name="explication" >
-                            <summary className={`${styles.details_summary} ${question.isRight && styles.details_summaryRight}`}>
+                            <summary className={`${styles.details_summary} ${question?.isRight && styles.details_summaryRight}`}>
                                 <span className={styles.details_title} >
                                     <span className={styles.details_titleContainer}>
-                                        {question.question}
+                                        {question?.question}
                                     </span>
                                     <ArrowUpIcon className={styles.details_arrow} />
                                 </span>
                             </summary>
                             <div className={styles.details_container}>
-                                {question.codeSnippet &&
+                                {question?.codeSnippet &&
                                     <CodeBlock theme={atomOneDark}
                                         text={question.codeSnippet.replaceAll('\\n', '\n').replaceAll('\\t', '\t').replaceAll('\\', '')}
                                         language={language.language}
                                         customStyle={{ ...StyleCodeEditor }} />
                                 }
                                 <div className={`${styles.details_answer} `}>
-                                    {!question.isRight ? <button className={styles.details_answerButton} title="Ver respuest correcta" onClick={() => HandleViewAnswer(index)}>{currentAnswer[index] ? <ViewHideIcon /> : <ViewIcon />} </button> : <CheckIcon />}
+                                    {!question?.isRight ? <button className={styles.details_answerButton} title="Ver respuest correcta" onClick={() => HandleViewAnswer(index)}>{currentAnswer[index] ? <ViewHideIcon /> : <ViewIcon />} </button> : <CheckIcon />}
                                     <span className={` ${styles.details_answerButtonText} ${(!currentAnswer[index] && !question.isRight) && styles.details_answerButtonTextFail} `}>
                                         {!currentAnswer[index] ? question.answer : question.rightAnswer[0]}
                                     </span>

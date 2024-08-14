@@ -44,57 +44,84 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                 try {
 
+
+                    const { object } = await generateObject({
+                        model: openai("gpt-4o-mini"),
+                        system: "You generate a programming algorithm to solve, depending on the level, category and programming language provided.",
+                        maxTokens: 800,
+                        maxRetries: 2,
+                        schema: algorithmSchema,
+                        prompt: `Generate a programming algorithms solving exercise.
+                                                                                            
+                                                                                                **Configuration**
+                                                                                                *Level: ${level}
+                                                                                                *Language: ${language}
+                                                                                                *Category: ${category}
+                                                                                                                                         
+                                                                                                **Requirements:**
+                                                                                                * In Spanish
+                                                                                                * Always give a detailed, complete and instructed explanation of the problem to be solved and of the subject matter
+                                                                                                * Always add a code template
+                                                                                                * In codeTemplate only put what is needed to start the language
+                                                                                                * Do not add the solution only the template depending on the language
+                                                                                                * Please note the difficulty of the exercise depending on the selected seniority
+                                                                                                   
+                                                                                                **Additional Notes:**
+                                                                                                * Provide examples if applicable.`,
+                    })
+
                     /*
-                                        const { object } = await generateObject({
-                                            model: openai("gpt-4o-mini"),
-                                            system: "You generate a programming algorithm to solve, depending on the level, category and programming language provided.",
-                                            maxTokens: 500,
-                                            maxRetries: 2,
-                                            schema: algorithmSchema,
-                                            prompt: `Generate a programming algorithms solving exercise.
-                                                                        
-                                                                            **Configuration**
-                                                                            *Level: ${level}
-                                                                            *Language: ${language}
-                                                                            *Category: ${category}
-                                                                                                                     
-                                                                            **Requirements:**
-                                                                            * In Spanish
-                                                                            * Always give a detailed, complete and instructed explanation of the problem to be solved and of the subject matter
-                                                                            * Always add a code template
-                                                                            * In codeTemplate only put what is needed to start the language
-                                                                            * Do not add the solution only the template depending on the language
-                                                                            * Please note the difficulty of the exercise depending on the selected seniority
-                                                                               
-                                                                            **Additional Notes:**
-                                                                            * Provide examples if applicable.`,
-                                        })
-                    
-                    */
-
-
                     let object: IResponseAlgorithm = {
                         algorithm: {
-                            title: 'Encuentra el Elemento Faltante en una Matriz',
-                            codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
-                            expectedOutput: 'Un número entero',
-                            inputDescription: 'Una matriz de enteros',
-                            outputDescription: 'El entero faltante en el rango de 1 a n',
-                            constraints: [],
-                            exampleInputs: ['[1, 2, 4, 6, 3, 7, 8]', '[1, 2, 3, 5]'],
-                            exampleOutputs: ['5', '4'],
-                            tags: ['Array', 'Matemáticas'],
-                            explanation: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
+                            title: 'Ordenamiento por mezcla (Merge Sort)',
+                            codeTemplate: 'using System;\n' +
+                                '\n' +
+                                'class Program\n' +
+                                '{\n' +
+                                '    static void Main(string[] args)\n' +
+                                '    {\n' +
+                                '        // Inicializa el arreglo a ordenar\n' +
+                                '        int[] arr = { }; // Agrega elementos aquí\n' +
+                                '        // Llama a la función de ordenamiento\n' +
+                                '        MergeSort(arr, 0, arr.Length - 1);\n' +
+                                '    }\n' +
+                                '\n' +
+                                '    static void MergeSort(int[] arr, int left, int right)\n' +
+                                '    {\n' +
+                                '        // Implementa el algoritmo aquí\n' +
+                                '    }\n' +
+                                '\n' +
+                                '    static void Merge(int[] arr, int left, int mid, int right)\n' +
+                                '    {\n' +
+                                '        // Implementa la combinación aquí\n' +
+                                '    }\n' +
+                                '}',
+                            expectedOutput: 'Un arreglo ordenado en orden ascendente.',
+                            inputDescription: 'Un arreglo de enteros desordenados.',
+                            outputDescription: 'Un arreglo de enteros ordenados en orden ascendente.',
+                            constraints: [
+                                'El tamaño del arreglo debe ser mayor que 0.', 'Los elementos del arreglo pueden ser negativos.'
+                            ],
+                            exampleInputs: ['[38, 27, 43, 3, 9, 82, 10]', '[5, 2, 9, 1, 5, 6]'],
+                            exampleOutputs: ['[3, 9, 10, 27, 38, 43, 82]', '[1, 2, 5, 5, 6, 9]'],
+                            tags: ['ordenamiento', 'divide y vencerás', 'algoritmos'],
+                            explanation: 'El ordenamiento por mezcla es un algoritmo eficiente que utiliza la técnica de divide y vencerás para ordenar un arreglo. Se divide el arreglo en mitades, se ordenan las mitades recursivamente y luego se combinan para formar un arreglo ordenado.',
+
+
                         }
                     }
+
+*/
 
                     console.log(object)
                     return NextResponse.json({ data: JSON.stringify(object.algorithm) })
                     return ServerError()
                 } catch (error) {
+                    console.log(error)
 
                     if (APICallError.isAPICallError(error)) {
                         if (error.statusCode === 401) {
+                            console.log(error)
                             return NotAuthorizedError()
                         } else if (error.statusCode === 500) {
                             return ServerError()
@@ -109,6 +136,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                     if (JSONParseError.isJSONParseError(error)) {
                         console.log(error)
                         console.log(error.text)
+                        return NextResponse.json({ Error: "" }, { status: 429 })
                     }
 
                     if (RetryError.isRetryError(error)) {
@@ -117,13 +145,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                     }
 
-                    console.log(typeof error)
-                    console.log(NoObjectGeneratedError.isNoObjectGeneratedError(error))
-                    console.log(InvalidResponseDataError.isInvalidResponseDataError(error))
-                    console.log(NoObjectGeneratedError.isNoObjectGeneratedError(error))
-                    console.log(JSONParseError.isJSONParseError(error))
-                    console.log(TypeValidationError.isTypeValidationError(error))
-                    console.log(error)
+                    return NextResponse.json({ Error: error }, { status: 422 })
+
                 }
 
 
@@ -258,10 +281,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
                 }
 
-                  let object: IResponseAlgorithm = {
+                
+
+
+
+                    let object: IResponseAlgorithm = {
                         algorithm: {
                             title: 'Encuentra el Elemento Faltante en una Matriz',
-                            codeTemplate: 'fun encontrarElElementoFaltante(arr: IntArray): Int {\\n    // Escribe tu código aquí\\n}',
+                            codeTemplate:
+                                `fun encontrarElElementoFaltante(arr: IntArray): Int {
+    // Escribe tu código aquí
+}`,
                             expectedOutput: 'Un número entero',
                             inputDescription: 'Una matriz de enteros',
                             outputDescription: 'El entero faltante en el rango de 1 a n',
@@ -272,6 +302,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
                             explanation: "Este problema puede resolverse de diferentes maneras, una de ellas es utilizando la suma de Gauss.  La suma de Gauss nos permite calcular la suma de los primeros 'n' números naturales con una fórmula: `suma = (n * (n + 1)) / 2`.  \\n\\nEn este caso, como falta un número en la secuencia, podemos calcular la suma de los números que sí están presentes en la matriz y restarle la suma de Gauss de los primeros 'n' números naturales.  La diferencia entre estas dos sumas nos dará el número faltante. \\n",
                         }
                     }
+
+
+
 
   
    let object: IResponseAlgorithm = {
@@ -300,3 +333,4 @@ export async function POST(req: NextRequest, res: NextResponse) {
                     }
 
 */
+
