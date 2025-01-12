@@ -102,7 +102,7 @@ export function Matching({ run, setRun }: Props) {
                 question: currentQuestion.question,
                 codeSnippet: currentQuestion.codeSnippet,
                 isRight: isRight,
-                answer: "",
+                answer: [],
                 rightAnswer: [],
                 rightAnswerMatching: setOrderArrayAnswers,
                 answerMatching: currentAnswers,

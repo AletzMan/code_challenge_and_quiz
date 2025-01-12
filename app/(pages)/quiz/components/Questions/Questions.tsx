@@ -72,7 +72,7 @@ export function Questions() {
     const GetQuiz = async () => {
         setLoadingResponse(true)
         const response = await GetNewQuiz(category.option, language.option, difficulty, apiKey)
-        setSelectedAnwer("No respondida")
+        setSelectedAnwer(["No respondida"])
         if (!response.error && response.data) {
             setCurrentQuestion(response.data)
         } else {
@@ -95,7 +95,7 @@ export function Questions() {
             GetQuiz()
             setCurrentQuestionNumber(currentQuestionNumber + 1)
             setTime(0)
-            setSelectedAnwer("")
+            setSelectedAnwer([])
             setRun(true)
             setClassNameOrder([])
             setRightAnswers([])
@@ -107,7 +107,7 @@ export function Questions() {
 
     const FillNullQuestions = () => {
         const emptyQuestion = {
-            answer: "No respondida",
+            answer: ["No respondida"],
             codeSnippet: null,
             codeSnippetExplanation: null,
             explanation: currentQuestion.explanation,
@@ -119,18 +119,22 @@ export function Questions() {
         }
 
         const newCompleteQuiz = { ...completeQuiz }
+        //console.log(newCompleteQuiz.questions)
 
         for (let index = 0; index < currentQuestionNumber; index++) {
             if (!newCompleteQuiz.questions[index]) {
+                console.log("AsIGNA", index)
                 newCompleteQuiz.questions[index] = emptyQuestion
             }
         }
 
         if (newCompleteQuiz.questions.length === 0) {
             for (let index = 0; index < currentQuestionNumber; index++) {
+                console.log("ASIGNA 2")
                 newCompleteQuiz.questions.push(emptyQuestion)
             }
         }
+        //console.log(newCompleteQuiz.questions)
         setCompleteQuiz(newCompleteQuiz)
     }
 

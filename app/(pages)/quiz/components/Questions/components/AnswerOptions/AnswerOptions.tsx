@@ -8,6 +8,7 @@ import { useCurrentQuiz } from "@/app/utils/store"
 import { ChangeEvent, MouseEvent, KeyboardEvent, Dispatch, SetStateAction, useState, useRef, useCallback, useEffect } from "react"
 import { IAnswer } from "@/app/interfaces/quiz"
 import { Matching } from "./Matching/Matching"
+import { MultipleSelect } from "./MultipleSelect/MultipleSelect"
 
 const OptionsSymbol = ["A", "B", "C", "D", "E", "F"]
 
@@ -28,12 +29,12 @@ export function AnswerOptions({ run, setRun }: Props) {
 
     useEffect(() => {
         if (completeQuiz.questions[currentQuestionNumber - 1]?.question && completeQuiz.questions[currentQuestionNumber - 1].answerMatching?.length === 0)
-            SetQuizResult(false, "Sin respuesta")
+            console.log("ENTRA")
     }, [])
 
 
     const HandleSelectAnswer = (option: string): void => {
-        setSelectedAnwer(option)
+        setSelectedAnwer(["option"])
         SetQuizResult(option.toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase(), option)
         setRun(false)
     }
@@ -42,26 +43,26 @@ export function AnswerOptions({ run, setRun }: Props) {
     function HandleChangeOpenAnswer(event: ChangeEvent<HTMLInputElement>): void {
         const value = event.currentTarget.value
         if (value) {
-            setSelectedAnwer(value)
+            setSelectedAnwer(["value"])
         }
     }
 
     function HandleValidateAnswer(event: MouseEvent<HTMLButtonElement>): void {
         setRun(false)
-        if (selectedAnswer.toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase()) {
+        if (selectedAnswer[0].toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase()) {
             setIsRightAnswer(true)
         }
-        SetQuizResult(selectedAnswer.toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase(), selectedAnswer)
+        SetQuizResult(selectedAnswer[0].toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase(), selectedAnswer[0])
     }
 
 
     function HandleKeyPress(event: KeyboardEvent<HTMLInputElement>): void {
         if (event.key === "Enter") {
             setRun(false)
-            if (selectedAnswer.toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase()) {
+            if (selectedAnswer[0].toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase()) {
                 setIsRightAnswer(true)
             }
-            SetQuizResult(selectedAnswer.toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase(), selectedAnswer)
+            SetQuizResult(selectedAnswer[0].toLowerCase() === currentQuestion.rightAnswer[0].toLowerCase(), selectedAnswer[0])
         }
     }
 
@@ -70,11 +71,13 @@ export function AnswerOptions({ run, setRun }: Props) {
         const newQuestion: IAnswer = {
             question: currentQuestion.question,
             codeSnippet: currentQuestion.codeSnippet,
-            answer: answer,
+            answer: [answer],
             isRight,
             explanation: currentQuestion.explanation,
             codeSnippetExplanation: currentQuestion.codeSnippetExplanation,
-            rightAnswer: currentQuestion.rightAnswer
+            rightAnswer: currentQuestion.rightAnswer,
+            answerMatching: [],
+            rightAnswerMatching: []
         }
         if (isRight) {
             newQuizResult.correctAnswers++
@@ -92,8 +95,8 @@ export function AnswerOptions({ run, setRun }: Props) {
                         <button
                             key={option}
                             className={`${styles.choice_option} 
-                                    ${(selectedAnswer === option && currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.choice_optionSelect} 
-                                    ${(selectedAnswer === option && !currentQuestion.rightAnswer.includes(selectedAnswer)) && styles.choice_optionIncorrect}`}
+                                    ${(selectedAnswer[0] === option && currentQuestion.rightAnswer.includes(selectedAnswer[0])) && styles.choice_optionSelect} 
+                                    ${(selectedAnswer[0] === option && !currentQuestion.rightAnswer.includes(selectedAnswer[0])) && styles.choice_optionIncorrect}`}
                             disabled={!run}
                             onClick={() => HandleSelectAnswer(option)}>
                             <span className={styles.choice_optionLetter}>{OptionsSymbol[index]}</span>
@@ -106,29 +109,32 @@ export function AnswerOptions({ run, setRun }: Props) {
                 <div className={styles.dichotomous}>
                     <button
                         className={`${styles.dichotomous_option} 
-                                    ${(selectedAnswer === "Verdadero" && currentQuestion.rightAnswer[0] === "Verdadero") && styles.dichotomous_optionTrue}  
-                                    ${(selectedAnswer === "Verdadero" && currentQuestion.rightAnswer[0] !== "Verdadero") && styles.dichotomous_optionFalse}`}
+                                    ${(selectedAnswer[0] === "Verdadero" && currentQuestion.rightAnswer[0] === "Verdadero") && styles.dichotomous_optionTrue}  
+                                    ${(selectedAnswer[0] === "Verdadero" && currentQuestion.rightAnswer[0] !== "Verdadero") && styles.dichotomous_optionFalse}`}
                         disabled={!run}
                         onClick={() => HandleSelectAnswer("Verdadero")}>
                         <span className={styles.dichotomous_optionText}>
-                            {(selectedAnswer === "Verdadero" && currentQuestion.rightAnswer[0] !== "Verdadero") && <CloseIcon className={styles.dichotomous_optionIcon} />}
-                            {(selectedAnswer === "Verdadero" && currentQuestion.rightAnswer[0] === "Verdadero") && <CheckIcon className={styles.dichotomous_optionIcon} />}
+                            {(selectedAnswer[0] === "Verdadero" && currentQuestion.rightAnswer[0] !== "Verdadero") && <CloseIcon className={styles.dichotomous_optionIcon} />}
+                            {(selectedAnswer[0] === "Verdadero" && currentQuestion.rightAnswer[0] === "Verdadero") && <CheckIcon className={styles.dichotomous_optionIcon} />}
                             Verdadero
                         </span>
                     </button>
                     <button
                         className={`${styles.dichotomous_option}
-                                    ${(selectedAnswer === "Falso" && currentQuestion.rightAnswer[0] === "Falso") && styles.dichotomous_optionTrue}  
-                                    ${(selectedAnswer === "Falso" && currentQuestion.rightAnswer[0] !== "Falso") && styles.dichotomous_optionFalse}`}
+                                    ${(selectedAnswer[0] === "Falso" && currentQuestion.rightAnswer[0] === "Falso") && styles.dichotomous_optionTrue}  
+                                    ${(selectedAnswer[0] === "Falso" && currentQuestion.rightAnswer[0] !== "Falso") && styles.dichotomous_optionFalse}`}
                         disabled={!run}
                         onClick={() => HandleSelectAnswer("Falso")}>
                         <span className={styles.dichotomous_optionText}>
-                            {(selectedAnswer === "Falso" && currentQuestion.rightAnswer[0] === "Falso") && <CheckIcon className={styles.dichotomous_optionIcon} />}
-                            {(selectedAnswer === "Falso" && currentQuestion.rightAnswer[0] !== "Falso") && <CloseIcon className={styles.dichotomous_optionIcon} />}
+                            {(selectedAnswer[0] === "Falso" && currentQuestion.rightAnswer[0] === "Falso") && <CheckIcon className={styles.dichotomous_optionIcon} />}
+                            {(selectedAnswer[0] === "Falso" && currentQuestion.rightAnswer[0] !== "Falso") && <CloseIcon className={styles.dichotomous_optionIcon} />}
                             Falso
                         </span>
                     </button>
                 </div>
+            }
+            {currentQuestion.type === "multiple select" &&
+                <MultipleSelect run={run} setRun={setRun} />
             }
             {currentQuestion?.type === "matching" &&
                 <Matching run={run} setRun={setRun} />

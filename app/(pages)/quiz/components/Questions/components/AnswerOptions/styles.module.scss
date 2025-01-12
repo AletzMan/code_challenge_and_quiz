@@ -66,6 +66,20 @@
         }
 
         &Select {
+            background-color: #063635;
+            border-color: #29ece580;
+            transform: translateX(0.5em);
+            opacity: 1 !important;
+            cursor: default;
+
+            & .choice_optionLetter {
+                background-color: #0c5855;
+                border-color: #29ece525;
+                color: var(--font-color);
+            }
+        }
+
+        &Correct {
             background-color: #1b7e04;
             border-color: #29ec3680;
             transform: translateX(0.5em);
