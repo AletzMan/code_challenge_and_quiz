@@ -21,7 +21,7 @@
 
 1. **Clona el repositorio:**
     ```sh
-    git clone https://github.com/tuusuario/CodeChallengeQuiz.git
+    git clone https://github.com/AletzMan/code_challenge_and_quiz.git
     cd CodeChallengeQuiz
     ```
 
