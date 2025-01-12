@@ -72,8 +72,8 @@ interface IRightAnswers {
 interface ICurrentQuiz {
     completeQuiz: IQuizResult
     setCompleteQuiz: (value: IQuizResult) => void
-    selectedAnswer: string
-    setSelectedAnwer: (value: string) => void
+    selectedAnswer: string[]
+    setSelectedAnwer: (value: string[]) => void
     currentQuestion: IQuestion
     setCurrentQuestion: (value: IQuestion) => void
     emptyCurrentQuestion: IQuestion
@@ -98,8 +98,8 @@ export const useCurrentQuiz = create(
                 set((state) => ({
                     completeQuiz: value,
                 })),
-            selectedAnswer: "",
-            setSelectedAnwer: (value: string) =>
+            selectedAnswer: [],
+            setSelectedAnwer: (value: string[]) =>
                 set((state) => ({
                     selectedAnswer: value,
                 })),
@@ -122,7 +122,7 @@ export const useCurrentQuiz = create(
             resetCurrentQuiz: () =>
                 set((state) => ({
                     completeQuiz: { questions: [], correctAnswers: 0 },
-                    selectedAnswer: "",
+                    selectedAnswer: [],
                     currentQuestion: state.emptyCurrentQuestion,
                     currentQuestionNumber: 1,
                     quizInProgress: false,
