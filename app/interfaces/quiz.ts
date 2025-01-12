@@ -23,7 +23,7 @@ export interface IQuizResult {
 export interface IAnswer {
     question: string
     codeSnippet: string | null,
-    answer: string
+    answer: string[]
     isRight: boolean
     explanation: string
     codeSnippetExplanation: string | null
